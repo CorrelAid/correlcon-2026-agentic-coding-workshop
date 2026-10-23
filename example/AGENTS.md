@@ -9,6 +9,19 @@ Data analysis for a non-profit organisation (NGO). Python, managed with `uv`.
 The code will be handed over to people without deep Python knowledge.
 Readability beats cleverness.
 
+## Data
+
+Babylotse survey 2024 (families with a baby in Frankfurt), CC BY 4.0 – attribution in README.
+Get it with `uv run python scripts/get_data.py` → `data/raw/babylotse_survey_2024.csv`.
+987 rows, UTF-8, German. Columns (you do not need to open the file to know them):
+
+- `ID`, `Date Created`, `Title` (a timestamp, not a title)
+- `Ich wohne im Stadtteil` – district; contains HTML entities (e.g. `&ouml;`)
+- `Das gefällt mir gut mit Baby in Frankfurt` – free text, positive
+- `Das gefällt mir nicht gut mit Baby in Frankfurt` – free text, negative
+
+Free text may contain contact details or names → pseudonymise first.
+
 ## Data protection (non-negotiable)
 
 - `data/raw/` holds raw data that may contain personal data. **Never read or print it.**

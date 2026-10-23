@@ -17,7 +17,9 @@ description: Categorise free text (e.g. survey comments) with an LLM in a reprod
 2. **Suggest categories**: give a sample (e.g. 100 comments) to the model and ask for
    8–12 categories with a short description. Save as `data/processed/categories_v1.json`
    and have a human review it.
-3. **Assign**: classify each comment into one or more categories.
+3. **Assign**: classify comments into one or more categories.
+   - Send ~20 comments per request (numbered), not one request per comment – the rate
+     limit (5 requests/s per model) is shared with everyone on the contract.
    - Enforce structured output (`response_format={"type": "json_object"}`) and validate
      with pydantic.
    - `temperature=0`; store model name and prompt version with every result.

@@ -2,7 +2,7 @@
 
     uv run python scripts/costs.py                        # workshop (20 people, 1.5 h)
     uv run python scripts/costs.py --people 12 --hours 2
-    uv run python scripts/costs.py --texts 1974           # LLM categorisation run
+    uv run python scripts/costs.py --texts 1974           # LLM categorisation run (1 text/request)
     uv run python scripts/costs.py --markdown             # table for docs
 
 Prices: list prices per 1M tokens, net, as of PRICES_AS_OF.
