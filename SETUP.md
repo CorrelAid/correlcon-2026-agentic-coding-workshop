@@ -52,7 +52,8 @@ uv sync
 uv run python scripts/check_setup.py
 ```
 
-All green? Then start the agent:
+All green? Then start the agent – **from inside `example/`**, otherwise OpenCode ignores the
+project config and shows all your other providers:
 
 ```bash
 uv run --env-file .env opencode
@@ -177,6 +178,7 @@ off – verify with `opencode models` inside `example/`.
 
 | Symptom | Fix |
 |---|---|
+| You see your own / other providers' models | OpenCode was started outside `example/` – the project config is only found from that folder. `cd example` first, then check with `opencode models` (only `ionos/…` should appear). Your global `~/.config/opencode` config can stay as it is. |
 | `401 Unauthorized` | Token expired (TTL) or you pasted the token ID (UUID) instead of the token (`eyJ…`). |
 | `Invalid URL` / no provider | OpenCode was started without the env: use `uv run --env-file .env opencode`. |
 | `429 Too Many Requests` | Rate limit (5 req/s per model, shared by everyone). OpenCode retries automatically after ~1 s. |
