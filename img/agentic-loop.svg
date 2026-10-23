@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" font-family="Inter, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1d2433"/>
+    </marker>
+    <marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0f7c8c"/>
+    </marker>
+  </defs>
+
+  <!-- harness frame -->
+  <rect x="215" y="62" width="715" height="448" rx="18" fill="#eef6f7" stroke="#0f7c8c" stroke-width="2.5" stroke-dasharray="8 6"/>
+  <text x="240" y="92" font-size="17" font-weight="800" fill="#0f7c8c" letter-spacing="2">HARNESS</text>
+  <text x="340" y="92" font-size="14" fill="#5b6577">= everything around the model</text>
+
+  <!-- human -->
+  <rect x="20" y="215" width="160" height="120" rx="14" fill="#fff" stroke="#1d2433" stroke-width="2"/>
+  <text x="100" y="255" text-anchor="middle" font-size="20" font-weight="800" fill="#1d2433">Human</text>
+  <text x="100" y="281" text-anchor="middle" font-size="14" fill="#5b6577">goal · spec</text>
+  <text x="100" y="301" text-anchor="middle" font-size="14" fill="#5b6577">review · feedback</text>
+
+  <!-- context -->
+  <rect x="250" y="110" width="280" height="180" rx="12" fill="#fff" stroke="#0f7c8c" stroke-width="2"/>
+  <text x="270" y="140" font-size="18" font-weight="800" fill="#1d2433">Context window</text>
+  <g font-size="15" fill="#1d2433">
+    <text x="272" y="170">• system prompt &amp; tool list</text>
+    <text x="272" y="195">• AGENTS.md / CLAUDE.md</text>
+    <text x="272" y="220">• skills (loaded on demand)</text>
+    <text x="272" y="245">• task + history so far</text>
+    <text x="272" y="270">• tool results</text>
+  </g>
+
+  <!-- model -->
+  <rect x="625" y="110" width="270" height="105" rx="12" fill="#1d2433"/>
+  <text x="760" y="152" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">Model (LLM)</text>
+  <text x="760" y="178" text-anchor="middle" font-size="14" fill="#cfd6e2">decides: answer</text>
+  <text x="760" y="198" text-anchor="middle" font-size="14" fill="#cfd6e2">or call a tool</text>
+
+  <!-- Gate -->
+  <rect x="625" y="258" width="270" height="70" rx="12" fill="#fff4ea" stroke="#e07a2f" stroke-width="2"/>
+  <text x="760" y="288" text-anchor="middle" font-size="17" font-weight="800" fill="#b65a17">Permissions &amp; Hooks</text>
+  <text x="760" y="311" text-anchor="middle" font-size="14" fill="#5b6577">allow · ask · deny</text>
+
+  <!-- Tools -->
+  <rect x="625" y="372" width="270" height="110" rx="12" fill="#fff" stroke="#0f7c8c" stroke-width="2"/>
+  <text x="760" y="405" text-anchor="middle" font-size="18" font-weight="800" fill="#1d2433">Tools</text>
+  <text x="760" y="432" text-anchor="middle" font-size="14.5" fill="#1d2433">Read · Edit · Bash · Grep</text>
+  <text x="760" y="456" text-anchor="middle" font-size="14.5" fill="#1d2433">Web · MCP-Server · Subagents</text>
+
+  <!-- observation -->
+  <rect x="250" y="372" width="280" height="110" rx="12" fill="#fff" stroke="#0f7c8c" stroke-width="2"/>
+  <text x="390" y="410" text-anchor="middle" font-size="18" font-weight="800" fill="#1d2433">Observation</text>
+  <text x="390" y="437" text-anchor="middle" font-size="14.5" fill="#5b6577">file content, diff,</text>
+  <text x="390" y="459" text-anchor="middle" font-size="14.5" fill="#5b6577">test output, error message</text>
+
+  <!-- environment -->
+  <rect x="965" y="350" width="215" height="155" rx="14" fill="#fff" stroke="#1d2433" stroke-width="2"/>
+  <text x="1072" y="385" text-anchor="middle" font-size="19" font-weight="800" fill="#1d2433">Environment</text>
+  <g font-size="14.5" fill="#5b6577" text-anchor="middle">
+    <text x="1072" y="413">repo &amp; file system</text>
+    <text x="1072" y="436">shell · tests · CI</text>
+    <text x="1072" y="459">APIs · databases</text>
+    <text x="1072" y="482">Web</text>
+  </g>
+
+  <!-- arrows -->
+  <path d="M180,265 H246" stroke="#1d2433" stroke-width="2.5" fill="none" marker-end="url(#a)"/>
+  <path d="M530,165 H621" stroke="#0f7c8c" stroke-width="3" fill="none" marker-end="url(#ap)"/>
+  <path d="M760,215 V254" stroke="#0f7c8c" stroke-width="3" fill="none" marker-end="url(#ap)"/>
+  <text x="772" y="241" font-size="13" fill="#0f7c8c" font-weight="700">tool call</text>
+  <path d="M760,328 V368" stroke="#0f7c8c" stroke-width="3" fill="none" marker-end="url(#ap)"/>
+  <path d="M625,427 H534" stroke="#0f7c8c" stroke-width="3" fill="none" marker-end="url(#ap)"/>
+  <path d="M390,372 V294" stroke="#0f7c8c" stroke-width="3" fill="none" marker-end="url(#ap)"/>
+  <path d="M895,427 H961" stroke="#1d2433" stroke-width="2.5" fill="none" marker-end="url(#a)" marker-start="url(#a)"/>
+  <!-- answer back to the human -->
+  <path d="M760,110 V36 H100 V211" stroke="#1d2433" stroke-width="2" stroke-dasharray="6 5" fill="none" marker-end="url(#a)"/>
+  <text x="430" y="28" text-anchor="middle" font-size="14" fill="#5b6577">done → answer / diff back to the human</text>
+
+  <!-- loop symbol -->
+  <g transform="translate(578,345)">
+    <circle r="28" fill="none" stroke="#0f7c8c" stroke-width="3" stroke-dasharray="130 46"/>
+    <text y="6" text-anchor="middle" font-size="16" font-weight="800" fill="#0f7c8c">↻</text>
+  </g>
+  <text x="578" y="300" text-anchor="middle" font-size="13" font-weight="700" fill="#0f7c8c">Loop</text>
+</svg>
