@@ -1,0 +1,113 @@
+/*-- scss:defaults --*/
+// Adjust colours here (e.g. to match CorrelAid branding)
+$ink: #1d2433;
+$muted: #5b6577;
+$accent: #0f7c8c;      // Petrol – Hauptakzent
+$accent-2: #e07a2f;    // Orange – Warnung / "verliert an Gewicht"
+$good: #2f8f5b;
+$paper: #fbfaf7;
+$line: #dfe3ea;
+
+$body-bg: $paper;
+$body-color: $ink;
+$link-color: $accent;
+$presentation-heading-color: $ink;
+$presentation-heading-font: "Inter", "Helvetica Neue", Arial, sans-serif;
+$font-family-sans-serif: "Inter", "Helvetica Neue", Arial, sans-serif;
+$presentation-font-size-root: 34px;
+$presentation-heading-font-weight: 700;
+$presentation-h2-font-size: 1.3em;
+$code-block-font-size: 0.66em;
+$code-color: #a23b72;
+
+/*-- scss:rules --*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+
+.reveal code { font-family: "JetBrains Mono", monospace; }
+.reveal h2 { letter-spacing: -0.01em; margin-bottom: 0.5em; }
+.reveal .slide-number { color: $muted; background: transparent; }
+.reveal .footer { color: $muted; font-size: 0.45em; }
+
+.reveal .kicker {
+  text-transform: uppercase; letter-spacing: .12em; font-size: .5em;
+  color: $accent; font-weight: 700; margin-bottom: .2em;
+}
+.reveal .muted { color: $muted; }
+.reveal .small { font-size: .78em; }
+.reveal .tiny { font-size: .5em; color: $muted; }
+.reveal .accent { color: $accent; }
+.reveal .warn { color: $accent-2; }
+
+// Title slide
+#title-slide {
+  text-align: left;
+  .quarto-title-authors { justify-content: flex-start; }
+  .quarto-title-author { padding-left: 0; }
+  .title { font-size: 2.3em; font-weight: 800; line-height: 1.05; }
+  .subtitle { color: $accent; font-weight: 500; margin-top: .4em; }
+}
+
+// Cards
+.reveal .cards { display: grid; gap: 18px; margin-top: .3em; }
+.reveal .cards.c2 { grid-template-columns: 1fr 1fr; }
+.reveal .cards.c3 { grid-template-columns: repeat(3, 1fr); }
+.reveal .card {
+  background: #fff; border: 1px solid $line; border-radius: 12px;
+  padding: 16px 22px; font-size: .74em; line-height: 1.32; color: $ink;
+  box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  .ct { display: block; font-weight: 800; font-size: 1.2em; margin-bottom: .3em; color: $ink; }
+  p { margin: .2em 0; }
+  ul { margin: .2em 0 0 1em; }
+}
+
+.reveal .card.accent, .reveal .card.warn, .reveal .card.good { color: $ink; }
+.reveal .card.accent { border-top: 5px solid $accent; }
+.reveal .card.warn { border-top: 5px solid $accent-2; }
+.reveal .card.good { border-top: 5px solid $good; }
+
+// Glossar
+.reveal dl.glossary {
+  display: grid; grid-template-columns: 230px 1fr; gap: 8px 22px;
+  font-size: .64em; line-height: 1.3; margin-top: .2em;
+  dt { font-weight: 700; color: $accent; }
+  dd { margin: 0; }
+}
+
+// Stats
+.reveal .stat { font-size: 2.2em; font-weight: 800; line-height: 1; color: $accent; }
+.reveal .stat.warn { color: $accent-2; }
+.reveal .stat-label { font-size: .5em; color: $muted; margin-top: .3em; }
+
+.reveal .bigquote {
+  font-size: 1.5em; font-weight: 700; line-height: 1.2; color: $ink;
+  border-left: 8px solid $accent; padding-left: .6em;
+}
+
+.reveal table { font-size: .6em; }
+.reveal table th { color: $accent; border-bottom: 2px solid $accent; }
+.reveal table td, .reveal table th { padding: .35em .6em; }
+
+.reveal .todo {
+  background: repeating-linear-gradient(45deg, #fff6ec, #fff6ec 10px, #fff 10px, #fff 20px);
+  border: 2px dashed $accent-2; border-radius: 12px; padding: 18px 24px; font-size: .8em;
+}
+
+.reveal img.full { display: block; margin: 10px auto 0; width: 100%; max-height: 540px; object-fit: contain; }
+.reveal .sources { font-size: .52em; line-height: 1.35; }
+.reveal .sources ul { columns: 2; column-gap: 36px; }
+.reveal .sources li { margin-bottom: .35em; break-inside: avoid; }
+
+// Glossary cards
+.reveal .cards.terms { gap: 22px; margin-top: .6em; }
+.reveal .card.term {
+  font-size: .8em; padding: 20px 24px; border-top: 6px solid $accent; line-height: 1.32;
+  .ct { color: $accent; font-size: 1.45em; margin-bottom: .35em; }
+  .ex { display: block; margin-top: .6em; font-size: .82em; color: $muted; font-family: "JetBrains Mono", monospace; }
+}
+
+// Stacked cards inside a column need their own spacing (grids use gap)
+.reveal .column > .card + .card { margin-top: 16px; }
+
+.reveal .card .stat { font-size: 2.4em; margin-top: .35em; }
+.reveal .card .stat-label { font-size: .85em; margin: .1em 0 .4em; }
+.reveal .card table { font-size: .9em; width: 100%; margin: .2em 0 0; }

@@ -1,0 +1,25 @@
+project:
+  type: default
+  output-dir: _site
+  render:
+    - index.qmd
+
+lang: en
+
+format:
+  revealjs:
+    theme: [default, theme.scss]
+    width: 1280
+    height: 720
+    margin: 0.06
+    slide-number: c/t
+    hash: true
+    transition: fade
+    transition-speed: fast
+    highlight-style: github
+    code-copy: false
+    code-line-numbers: false
+    preview-links: auto
+    footer: "Coding Agents and Best Practices · CorrelCon 2026 Karlsruhe · Nov 14, 2026"
+    embed-resources: false
+    chalkboard: false
