@@ -6,6 +6,10 @@ Speakers: Michael Aydinbas & Benjamin Fries
 
 The slides are written in Markdown and built with [Quarto](https://quarto.org), which turns them into a [reveal.js](https://revealjs.com) presentation that runs in the browser.
 
+**Hands-on workshop:** the coding agent setup (OpenCode + EU-hosted model on IONOS) is in
+[`SETUP.md`](SETUP.md), the example project in [`example/`](example/). Background on
+providers, costs and test results: [`example/docs/infrastructure.md`](example/docs/infrastructure.md).
+
 ---
 
 ## 1. Setup
