@@ -67,9 +67,13 @@ non-answers). Qwen3-Coder-Next's second run used problem-framed names
 
 ## Findings
 
-1. **For these tasks, the cheapest model did as well as the most expensive one.**
-   Qwen3-Coder-Next was fastest, cheapest and the only one that masked all phone numbers in
-   both runs. GLM-5.3 was 10–30× more expensive without better results here.
+1. **Privacy task: the cheapest model was best.** Qwen3-Coder-Next was fastest, cheapest
+   and the only one that masked all phone numbers in both runs.
+   **Categories task: the order flips** (see review below). Qwen3-Coder-Next ignored half of
+   the skill (no structured output, no pydantic, no prompt versioning, swallowed JSON
+   errors) and produced the most overlapping categories. GLM-5.3 produced the cleanest sets
+   but cost ~30× more *as an agent*. Hence the setup: Qwen3-Coder-Next as agent, GLM-5.3 as
+   topic model called from the code (a few cents per call).
 2. **Green tests ≠ correct result.** In 4 of the 8 privacy runs that produced output, the agent wrote its own regex
    and its own test – both passed – yet unusual phone formats slipped through. The fix is
    not a better model but a **human-written test with the hard cases** (spec first).
@@ -80,6 +84,26 @@ non-answers). Qwen3-Coder-Next's second run used problem-framed names
    verification (Organisation quotas). An agent sends 20–60k tokens per step, so 20
    participants need identity verification or an agreed quota. IONOS limits requests
    (5/s per model) and did not throttle 20 simulated agents.
+
+## Category quality review (manual, one rater)
+
+The 100 sample comments were tagged by hand: childcare places (~24), **non-answers/spam
+(~19)**, accessibility with a pram (~19), playgrounds (~17), courses & waiting lists (~12),
+cleanliness & safety (~12), changing/nursing/toilets (~10), indoor play (~7), housing &
+costs (~7), cafés (~6), traffic (~6), healthcare (~3), social climate (~2–3).
+
+| Set | Main topics | Non-answer bucket | Issues | Rating |
+|---|---|---|---|---|
+| GLM-5.3 #1 | all | ✅ | traffic merged into mobility | best |
+| GLM-5.3 #2 | all | ❌ | – | very good |
+| DeepSeek V4 Flash #1 | all | ❌ | nursing merged into gastronomy | very good |
+| Qwen3.8-27B #1 | all | ✅ | traffic inside mobility | good |
+| DeepSeek V4 Flash #2 | all | ❌ | tiny admin/info category overlapping Kita | good |
+| Qwen3.8-27B #2 | all | ❌ | mixes social climate with healthcare | ok |
+| Qwen3-Coder-Next #1 | all | ❌ | nursing under health *and* cleanliness; transport in two categories | weak |
+| Qwen3-Coder-Next #2 | mostly | ❌ | Kita split in two overlapping categories; problem-framed names; English descriptions | weakest |
+
+Only 2 of 8 sets had a bucket for the ~19 % non-answers – the skill now asks for it.
 
 ## Caveats
 
