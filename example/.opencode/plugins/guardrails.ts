@@ -7,7 +7,7 @@
  *
  * 1. tool.execute.before – blocks access to secrets (.env) and raw data (data/raw/),
  *    so their contents are never sent to the LLM.
- * 2. shell.env           – removes the API key from the environment of shell commands
+ * 2. shell.env           – removes the API keys from the environment of shell commands
  *    run by the agent (no `echo $LLM_API_KEY`).
  * 3. tool.execute.after  – runs ruff after every change to a .py file and appends the
  *    result to the tool output: the agent sees lint errors immediately and fixes them
@@ -22,9 +22,9 @@ const BLOCKED_PATHS: RegExp[] = [
 ]
 
 // Shell commands that could print secrets.
-const BLOCKED_COMMANDS: RegExp[] = [/\bprintenv\b/, /^\s*env\s*$/, /\$\{?LLM_API_KEY/]
+const BLOCKED_COMMANDS: RegExp[] = [/\bprintenv\b/, /^\s*env\s*$/, /\$\{?(LLM|IONOS)_API_KEY/]
 
-const SECRET_ENV_VARS = ["LLM_API_KEY"]
+const SECRET_ENV_VARS = ["LLM_API_KEY", "IONOS_API_KEY"]
 
 function blockedReason(text: string): string | undefined {
   for (const re of BLOCKED_PATHS) {

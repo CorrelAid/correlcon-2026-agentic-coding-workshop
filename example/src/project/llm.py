@@ -1,8 +1,12 @@
-"""Single point of access to the language model.
+"""Single point of access to the language model used by the project code.
 
-All LLM calls in the project go through this module. The provider is configured only in
-`.env` (OpenAI-compatible API). Switching providers – e.g. when the NGO takes over the
-project with its own contract – needs no code change.
+Two models, two jobs:
+- the coding agent (OpenCode) writes the code – configured in opencode.json (IONOS);
+- the topic model analyses the comments – configured here via `.env` (default: GLM-5.3 on
+  Scaleway). All LLM calls in project code go through this module.
+
+The provider is set only in `.env` (OpenAI-compatible API), so switching providers – e.g.
+when the NGO takes over with its own contract – needs no code change.
 """
 
 from __future__ import annotations
@@ -26,7 +30,7 @@ EU_HOSTS: dict[str, str] = {
 }
 
 CODING_MODEL = os.getenv("LLM_MODEL_CODING", "Qwen/Qwen3-Coder-Next")
-ANALYSIS_MODEL = os.getenv("LLM_MODEL_ANALYSIS", "openai/gpt-oss-120b")
+ANALYSIS_MODEL = os.getenv("LLM_MODEL_ANALYSIS", "glm-5.3")
 
 
 def provider_name(base_url: str) -> str:

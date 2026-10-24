@@ -11,7 +11,7 @@
       "name": "IONOS AI Model Hub (data centres in Germany)",
       "options": {
         "baseURL": "https://openai.inference.de-txl.ionos.com/v1",
-        "apiKey": "{env:LLM_API_KEY}"
+        "apiKey": "{env:IONOS_API_KEY}"
       },
       "models": {
         "Qwen/Qwen3-Coder-Next": {

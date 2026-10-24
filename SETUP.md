@@ -1,4 +1,4 @@
-# Setup: OpenCode + IONOS AI Model Hub
+# Setup: OpenCode + IONOS (agent) + Scaleway (topic model)
 
 Hands-on setup for the CorrelCon 2026 session *Coding Agents and Best Practices*.
 
@@ -6,15 +6,22 @@ Hands-on setup for the CorrelCon 2026 session *Coding Agents and Best Practices*
 |---|---|---|
 | [1. Participants](#1-participants) | everyone in the workshop | ~10 min |
 | [2. Organisers: IONOS](#2-organisers-ionos) | whoever owns the IONOS contract | ~20 min, once |
+| [2b. Organisers: Scaleway](#2b-organisers-scaleway) | whoever owns the Scaleway account | ~15 min, once |
 | [3. What's in `example/`](#3-whats-in-example) | anyone reusing this in an NGO project | reading |
 | [4. Troubleshooting](#4-troubleshooting) | everyone | – |
 
 Background (provider comparison, costs, load test, cost control, NGO handover):
 [`example/docs/infrastructure.md`](example/docs/infrastructure.md).
 
-**Stack in one line:** [OpenCode](https://opencode.ai) (open-source coding agent, MIT) talks
-to `Qwen/Qwen3-Coder-Next` (open-weight model) hosted by IONOS in German data centres:
-no prompt logging, no training on your data, pay per token, no GPU needed.
+**Two models, two jobs:**
+
+| Job | Model | Hosted by | Why |
+|---|---|---|---|
+| **Coding agent** – writes wrappers, scaffolds, tests | `Qwen/Qwen3-Coder-Next` in [OpenCode](https://opencode.ai) | IONOS, Germany | fastest and cheapest agent in our benchmark |
+| **Topic model** – finds categories, classifies comments (called from project code) | `glm-5.3` | Scaleway, Paris | cleanest category sets in our benchmark; a few cents per call |
+
+Both: open-weight models, EU data centres, no training on your data, pay per token, no GPU
+needed. Benchmark: [`benchmark/RESULTS.md`](benchmark/RESULTS.md).
 
 ---
 
@@ -35,7 +42,7 @@ WSL is recommended – the example's shell hooks are tested on Linux/macOS.
 
 Restart your terminal, then check: `uv --version` and `opencode --version`.
 
-### Step 2 – Get the code and add the token
+### Step 2 – Get the code and add the keys
 
 ```bash
 git clone https://github.com/CorrelAid/correlcon-2026-agentic-coding-workshop
@@ -43,7 +50,10 @@ cd correlcon-2026-agentic-coding-workshop/example
 cp .env.example .env
 ```
 
-Open `.env` and paste the workshop token after `LLM_API_KEY=` (you get it on site).
+Open `.env` and paste the two workshop keys (you get them on site):
+
+- `IONOS_API_KEY=` – for the coding agent (OpenCode)
+- `LLM_API_KEY=` – for the topic model (Scaleway), used by the code the agent writes
 
 ### Step 3 – Check and start
 
@@ -59,14 +69,14 @@ project config and shows all your other providers:
 uv run --env-file .env opencode
 ```
 
-`uv run --env-file .env` passes the token to OpenCode on every OS. The first start takes a
+`uv run --env-file .env` passes the keys to OpenCode on every OS. The first start takes a
 little longer (OpenCode installs the hook dependencies into `.opencode/`).
 
 Try it: *"Write a function in src/project/text.py that masks email addresses and phone
 numbers, add tests and run them."* (≈ 45 s, ≈ €0.02)
 
-> **Please:** only use public or synthetic data with the workshop token. The token runs on
-> CorrelAid's contract and expires at the end of the day.
+> **Please:** only use public or synthetic data with the workshop keys. They run on
+> CorrelAid's accounts and expire at the end of the day.
 
 ---
 
@@ -141,6 +151,44 @@ curl -s https://openai.inference.de-txl.ionos.com/v1/models \
 
 ---
 
+## 2b. Organisers: Scaleway
+
+### Account and access
+
+- Scaleway account **on CorrelAid** with a payment method; a Project, e.g. `correlcon-workshop`.
+- **Verify the organisation's identity** – this raises the rate limit from 200k to
+  1–2M **tokens per minute** (shared by everyone in the organisation). Needed for ~20
+  participants running classifications at the same time.
+- **IAM → Applications → Create** an application (a technical user, e.g. `correlcon-workshop`).
+  **Policy** on the project with only the permission set `GenerativeApisModelAccess`.
+- **API key** for that application with an **expiry date** (workshop day). The secret key
+  is the `LLM_API_KEY`; it is shown only once.
+
+### Cost control
+
+**Billing → Consumption → Billing alerts:** a monthly budget (e.g. €50) with up to 10
+thresholds (e.g. 50 %, 90 %), via e-mail, SMS or webhook. Like IONOS, alerts **notify only**
+– nothing is blocked. After the workshop, delete the API key.
+
+### Smoke test
+
+```bash
+curl -s https://api.scaleway.ai/v1/models -H "Authorization: Bearer $SCW_SECRET_KEY" \
+  | grep -o '"id":"[^"]*"'
+```
+
+`glm-5.3` must be in the list. GLM-5.3 is a reasoning model: Scaleway caps its output at
+16,384 tokens per request.
+
+### Checklist
+
+- [ ] Identity verified (tokens-per-minute limit ≥ 1M)
+- [ ] IAM application with `GenerativeApisModelAccess` only, API key with expiry
+- [ ] Billing alert set
+- [ ] Afterwards: API key deleted, actual cost added to `example/docs/infrastructure.md`
+
+---
+
 ## 3. What's in `example/`
 
 Three layers of control – the core message of the talk:
@@ -149,21 +197,21 @@ Three layers of control – the core message of the talk:
 |---|---|---|
 | **Instructions** | `AGENTS.md` | Tells the agent the project rules. Usually followed – not guaranteed. Cross-tool standard. |
 | **Skills** | `.agents/skills/*/SKILL.md` | Procedures loaded on demand: `privacy-check`, `llm-categorization`, `ngo-handover`. Cross-tool folder. |
-| **Permissions** | `opencode.json` | Only the IONOS provider is enabled; `.env` and `data/raw/` cannot be read; shell commands need approval (except `uv run …`, `git status`, …); session sharing off. |
-| **Hooks** | `.opencode/plugins/guardrails.ts` | Deterministic: blocks raw data and secrets even via shell (`cat data/raw/…`), hides the API key from the agent's shell, runs `ruff` after every Python edit and feeds errors back to the agent. |
+| **Permissions** | `opencode.json` | Only the IONOS provider is enabled for the agent; `.env` and `data/raw/` cannot be read; shell commands need approval (except `uv run …`, `git status`, …); session sharing off. |
+| **Hooks** | `.opencode/plugins/guardrails.ts` | Deterministic: blocks raw data and secrets even via shell (`cat data/raw/…`), hides both API keys from the agent's shell, runs `ruff` after every Python edit and feeds errors back to the agent. |
 
 Supporting code:
 
-- `src/project/llm.py` – the only way project code talks to an LLM; refuses non-approved
-  (non-EU) endpoints.
-- `scripts/check_setup.py` – setup check incl. tool calling (< €0.01).
+- `src/project/llm.py` – the only way project code talks to an LLM (the topic model, set in
+  `.env`); refuses non-approved (non-EU) endpoints.
+- `scripts/check_setup.py` – checks both endpoints incl. tool calling (< €0.01).
 - `scripts/costs.py` – cost calculator for workshop, projects and batch runs.
 
 **Why OpenCode restricts providers:** out of the box OpenCode offers free "Zen" models
 served via OpenCode's own servers. `"enabled_providers": ["ionos"]` turns everything else
 off – verify with `opencode models` inside `example/`.
 
-**Models configured** (all verified on 2026-10-23):
+**Models configured** (all verified on 2026-10-23/24):
 
 | Model | Role | € in/out per 1M tokens |
 |---|---|---|
@@ -171,6 +219,7 @@ off – verify with `opencode models` inside `example/`.
 | `openai/gpt-oss-120b` | fallback, analysis in project code | 0.15 / 0.65 |
 | `Qwen/Qwen3.5-397B-A17B` | hard tasks (`/models` in OpenCode) | 0.60 / 3.60 |
 | `Qwen/Qwen3.5-9B` | `small_model` for session titles – keeps helper calls off the coding model's rate limit | 0.10 / 0.15 |
+| `glm-5.3` (Scaleway) | topic model in project code (`LLM_MODEL_ANALYSIS`) | 1.80 / 5.50 |
 
 ---
 
@@ -182,6 +231,8 @@ off – verify with `opencode models` inside `example/`.
 | `401 Unauthorized` | Token expired (TTL) or you pasted the token ID (UUID) instead of the token (`eyJ…`). |
 | `Invalid URL` / no provider | OpenCode was started without the env: use `uv run --env-file .env opencode`. |
 | `429 Too Many Requests` | Rate limit (5 req/s per model, shared by everyone). OpenCode retries automatically after ~1 s. |
+| `429` from `api.scaleway.ai` | Tokens-per-minute limit of the Scaleway organisation reached (shared by everyone). Use batches of ~20 comments, classify a sample, or the Batch API. |
+| Topic model returns empty content | GLM-5.3 reasons first: raise `max_tokens` (max 16,384). |
 | `529 … server_overloaded` | IONOS platform load – wait, or switch model with `/models` (e.g. `gpt-oss-120b`). |
 | Agent says "Access denied (privacy hook)" | Working as intended: it tried to read `data/raw/` or `.env`. |
 | First start hangs for a minute | OpenCode installs plugin dependencies once; needs access to the npm registry. |

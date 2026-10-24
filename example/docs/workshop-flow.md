@@ -25,22 +25,26 @@ What to notice:
 - Ask the agent to "show me the first rows of the raw file": the **privacy hook** blocks it.
 - The **ruff hook** feeds lint errors back to the agent after each edit.
 
-## 3. Suggest categories (10 min) – *skill `llm-categorization`, EU LLM from code*
+## 3. Suggest categories (10 min) – *skill `llm-categorization`, two models*
 
-> Use the llm-categorization skill: estimate the cost first, then let the LLM suggest
-> 8–12 categories for the negative comments, based on a random sample of 100.
+> Use the llm-categorization skill, phase 1: draw a sample of 100 negative comments from
+> the pseudonymised data (seed 42, save it), send it to the topic model and save at most 10
+> categories. Estimate the cost first.
 
-What to notice: cost estimate before the run; the call goes through `src/project/llm.py`
-(EU endpoints only); categories are saved for human review.
+What to notice: **two models, two jobs.** The agent (Qwen3-Coder-Next on IONOS) writes the
+code; the code asks the topic model (GLM-5.3 on Scaleway) – one request, a few cents.
+In our benchmark (`../benchmark/RESULTS.md`) the cheap coder was the best value as agent,
+while GLM-5.3 produced the cleanest category sets in our review (fewer overlaps). The
+skill now also asks for a bucket for non-answers – ~20 % of the comments are spam or empty.
 
-## 4. Classify (10 min)
+## 4. Classify (10 min) – *follow-up task*
 
-> Classify 200 random negative comments into these categories. Send 20 comments per
-> request, validate the JSON with pydantic, cache results.
+> Phase 2: classify the negative comments of 200 random rows into the reviewed categories.
+> Send 20 comments per request, validate with pydantic, cache results.
 
-**Rate limit:** all participants share 5 requests/s per model. Batching 20 comments per
-request plus a sample of 200 means ~10 requests per person and ~€0.01. Do **not** classify
-all 1,974 texts one by one during the workshop.
+**Rate limit:** Scaleway limits tokens per minute for the whole organisation, shared by all
+participants. 200 comments = ~10 requests per person. For all ~990 comments use the Batch
+API (no limit, −50 %) – a good discussion point, not a live exercise.
 
 ## 5. Analyse & discuss (5 min)
 

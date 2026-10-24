@@ -9,6 +9,13 @@ Data analysis for a non-profit organisation (NGO). Python, managed with `uv`.
 The code will be handed over to people without deep Python knowledge.
 Readability beats cleverness.
 
+## Models
+
+- You (the coding agent) run on Qwen3-Coder-Next via IONOS. Your job: write and test code.
+- Analysing the comments (topics, classification) is done **by project code** via
+  `src/project/llm.py` with the topic model (GLM-5.3 on Scaleway). Don't categorise
+  comments yourself – write code that asks the topic model (skill `llm-categorization`).
+
 ## Data
 
 Babylotse survey 2024 (families with a baby in Frankfurt), CC BY 4.0 – attribution in README.
@@ -31,6 +38,13 @@ Free text may contain contact details or names → pseudonymise first.
 - LLM calls in code only via `src/project/llm.py` (EU provider, configured in `.env`).
   Do not add other AI APIs or US services.
 - Never read, print or commit `.env`.
+
+## Docs to look up (instead of guessing APIs)
+
+- OpenAI Python SDK: https://github.com/openai/openai-python
+- Scaleway Generative APIs: https://www.scaleway.com/en/docs/generative-apis/
+- pandas: https://pandas.pydata.org/docs/ · pydantic: https://docs.pydantic.dev/latest/
+- pytest: https://docs.pytest.org/
 
 ## Commands
 

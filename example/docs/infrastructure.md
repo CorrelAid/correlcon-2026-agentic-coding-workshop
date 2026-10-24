@@ -22,7 +22,7 @@ means fixed costs, operations work and nothing an NGO could take over.
 | **IONOS AI Model Hub** | German data centres only | no training; prompts neither logged nor stored; no sub-processors; BSI C5, ISO 27001 | Qwen3-Coder-Next 80B: €0.15 / €0.80 | ✅ **chosen** |
 | **STACKIT AI Model Serving** | Germany (eu01) | not stored, not used for training; BSI C5 | no dedicated coding model; Qwen3.8 27B / gpt-oss-120b: €0.45 / €0.65 | ✅ German alternative |
 | **OVHcloud AI Endpoints** | France (Gravelines) | per OVH: not stored, not used for training | gpt-oss-120b: €0.08 / €0.40 | ✅ cheapest, good fallback |
-| **Scaleway Generative APIs** | France (Paris) | EU hosting; check privacy page | qwen3.6-35b-a3b: €0.25 / €1.50 | 🟡 good for trying (1M tokens free) |
+| **Scaleway Generative APIs** | France (Paris) | not used for training; prompts not stored (except up to 2 weeks for abuse investigation) | glm-5.3: €1.80 / €5.50; deepseek-v4-flash: €0.40 / €0.80 | ✅ **chosen for the topic model** (GLM-5.3); limits *tokens per minute* per organisation |
 | **Mistral La Plateforme** | EU by default, US endpoint optional | **free plan may train on data**; opt-out on paid plan; some sub-processors outside EU (SCCs) | Devstral 2: ~$0.40 / $2.00 | 🟡 paid plan + documented opt-out only |
 | **Nebius Token Factory** | public endpoints: **location dynamic, no region guarantee** | no training; without zero-data-retention, inputs/outputs stored (Finland) | many, cheap | ❌ EU-bound only with (pricey) dedicated endpoints |
 | GitHub Copilot, OpenAI, Anthropic, OpenCode Zen | US / not guaranteed | – | – | ❌ out |
