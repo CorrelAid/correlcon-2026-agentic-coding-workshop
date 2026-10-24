@@ -19,6 +19,7 @@ import type { Plugin } from "@opencode-ai/plugin"
 const BLOCKED_PATHS: RegExp[] = [
   /(^|[\/\s"'])\.env($|[\s"'])/, // .env (but not .env.example)
   /(^|[\/\s"'])data\/raw(\/|$|[\s"'])/, // raw data, may contain personal data
+  /(^|[\/\s"'])data\/interim(\/|$|[\s"'])/, // steps 1–2, may still contain personal data
 ]
 
 // Shell commands that could print secrets.
@@ -31,7 +32,7 @@ function blockedReason(text: string): string | undefined {
     if (re.test(text)) {
       return (
         `Access denied (privacy hook): "${text}". ` +
-        "Raw data (data/raw/) and .env must not be sent to the language model. " +
+        "Raw/interim data (data/raw/, data/interim/) and .env must not be sent to the model. " +
         "Work with pseudonymised data in data/processed/ or write code that " +
         "processes the data locally without reading it yourself."
       )

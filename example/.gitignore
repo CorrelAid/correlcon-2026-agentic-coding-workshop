@@ -7,3 +7,8 @@ data/raw/*
 !data/raw/.gitkeep
 outputs/
 *.cache.jsonl
+data/reference/*
+!data/reference/.gitkeep
+data/interim/
+data/processed/*
+!data/processed/.gitkeep

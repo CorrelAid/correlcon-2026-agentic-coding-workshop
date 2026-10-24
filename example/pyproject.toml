@@ -5,8 +5,10 @@ description = "CorrelCon 2026 example: data project with a coding agent and an E
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "geopandas>=1.2.0",
     "openai>=1.50",
     "pandas>=2.2",
+    "plotly>=7.1.0",
     "pydantic>=2.7",
     "python-dotenv>=1.0",
 ]

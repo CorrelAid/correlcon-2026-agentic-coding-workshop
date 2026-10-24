@@ -16,25 +16,22 @@ Readability beats cleverness.
   `src/project/llm.py` with the topic model (GLM-5.3 on Scaleway). Don't categorise
   comments yourself – write code that asks the topic model (skill `llm-categorization`).
 
-## Data
+## Data & pipeline
 
 Babylotse survey 2024 (families with a baby in Frankfurt), CC BY 4.0 – attribution in README.
-Get it with `uv run python scripts/get_data.py` → `data/raw/babylotse_survey_2024.csv`.
-987 rows, UTF-8, German. Columns (you do not need to open the file to know them):
-
-- `ID`, `Date Created`, `Title` (a timestamp, not a title)
-- `Ich wohne im Stadtteil` – district; contains HTML entities (e.g. `&ouml;`)
-- `Das gefällt mir gut mit Baby in Frankfurt` – free text, positive
-- `Das gefällt mir nicht gut mit Baby in Frankfurt` – free text, negative
-
-Free text may contain contact details or names → pseudonymise first.
+987 responses, German. Six steps, one file each – **contracts in `docs/pipeline.md`**,
+paths in `src/project/paths.py`. Steps 0–1 are ready-made; steps 2–6 are stubs you
+implement (`src/project/{spam,pii,topics,classify,report}.py`), run via `scripts/0N_*.py`.
+Raw columns (you do not need to open the file to know them): `ID`, `Date Created`,
+`Title` (a timestamp), `Ich wohne im Stadtteil`, `Das gefällt mir gut mit Baby in Frankfurt`,
+`Das gefällt mir nicht gut mit Baby in Frankfurt`.
 
 ## Data protection (non-negotiable)
 
-- `data/raw/` holds raw data that may contain personal data. **Never read or print it.**
-  Write code that processes it locally instead.
-- Only work with `data/processed/` (pseudonymised) or synthetic sample data.
-- Before data is sent to an LLM: use the `privacy-check` skill.
+- `data/raw/` and `data/interim/` may contain personal data. **Never read or print them.**
+  Write code that processes them; print only counts.
+- You may inspect `data/processed/` (spam removed, PII masked) or synthetic sample data.
+- Step 1 masks contact details before any LLM call. For new data sources: `privacy-check` skill.
 - LLM calls in code only via `src/project/llm.py` (EU provider, configured in `.env`).
   Do not add other AI APIs or US services.
 - Never read, print or commit `.env`.
