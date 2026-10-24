@@ -361,6 +361,57 @@ The agent implements task by task; tests derived from the acceptance criteria ar
 ~1.5 min. A spec doesn't replace review, but it moves the most important review moment to the front: mistakes in the spec are cheap, mistakes in the code are expensive.
 :::
 
+## Agentic coding in civil society: the hard parts
+
+::: {.cards .c2}
+::: {.card .warn}
+[Data protection]{.ct}
+
+Data about vulnerable people – US providers often off-limits.
+
+**~50 %** of AI-using nonprofits name privacy risks¹
+:::
+
+::: {.card .warn}
+[Expertise]{.ct}
+
+No in-house tech staff, no rules → "shadow AI".
+
+**41 %** lack in-house tech expertise¹ · **76 %** have no AI strategy²
+:::
+
+::: {.card .warn}
+[Money]{.ct}
+
+Tokens and tools compete with the mission.
+
+**69 %**: budget is the main obstacle³ · **60 %** no support for digital costs³
+:::
+
+::: {.card .warn}
+[Who maintains it?]{.ct}
+
+Volunteers move on – non-techies inherit the code.
+
+**78 %** of organisations (Bavaria) have no paid staff⁴
+:::
+:::
+
+**Our setup:** EU-hosted open models · guardrails · pay-per-use (~€15/workshop)
+
+[¹ Fast Forward 2025 (US) · ² TechSoup 2025 (US) · ³ Charity Digital Skills 2025 (UK) · ⁴ ZiviZ 2023]{.small}
+
+::: notes
+~1.5 min. We build for organisations without an IT department – that shapes every choice in the workshop.
+
+- Data protection: NGOs hold data about children, patients, refugees. GDPR is a real legal uncertainty for volunteer boards (ZiviZ). Shadow AI: staff paste data into tools nobody approved.
+- Expertise: Fast Forward surveyed ~200 nonprofits that already use AI – so the real gap is bigger. 41 % lack tech expertise, nearly half name privacy risks, 84 % name funding for tools and talent as their greatest need.
+- Money: UK Charity Digital Skills Report 2025 (n = 672): 69 % budget squeeze, 60 % no support for digital costs.
+- Maintenance: ZiviZ 2023 Bavaria: only 22 % of organisations have any paid staff. Whatever we build must survive the handover.
+
+Transition: that is why the workshop setup looks the way it does.
+:::
+
 ## Responsibility: where does the human stay?
 
 ::: {.todo}
@@ -403,4 +454,8 @@ Deliberately left open – bridge into the discussion.
 - AGENTS.md: [agents.md](https://agents.md) · Agentic AI Foundation (Linux Foundation, Dec 2025)
 - Claude Code settings, permissions & hooks: [docs.claude.com](https://docs.claude.com/en/docs/claude-code/settings)
 - Mistral Vibe: [docs.mistral.ai](https://docs.mistral.ai/mistral-vibe/overview)
+- Fast Forward (2025): *AI for Humanity Report*, via Chronicle of Philanthropy. [philanthropy.com](https://www.philanthropy.com/news/nonprofits-are-embracing-ai-but-many-struggle-to-find-funding/)
+- TechSoup & Tapp Network (2025): *AI Benchmark Report.* [techsoup.org](https://blog.techsoup.org/posts/what-ai-means-for-nonprofits-in-2025-insights-from-the-ai-benchmark-report)
+- Charity Digital Skills Report 2025 (n = 672 UK charities). [Summary](https://digitalskills.mdia.gov.mt/skills-intelligence/charity-digital-skills-report-2025/)
+- ZiviZ (2023): *ZiviZ-Survey 2023 – Vereine und andere zivilgesellschaftliche Organisationen* (Bavaria report). [ziviz.de](https://ziviz.de/sites/ziv/files/ziviz-survey_2023_vereine_und_andere_zivilgesellschaftliche_organisationen.pdf)
 :::
