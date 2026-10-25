@@ -55,12 +55,12 @@ but also drops some real answers with an unmappable district.
 **03_sample.csv** – `row_id`, `polarity` (`positive`/`negative`), `text` – the fixed sample.
 **categories_v1.json** – list of `{"name": …, "description": …}`, at most 10, reviewed by a human.
 
-**04_classified.csv** – one row per non-empty answer (long format)
+**04_classified.csv** – one row per non-empty answer (long format), multi-label
 
 | column | meaning |
 |---|---|
 | `row_id`, `polarity`, `text` | the answer |
-| `category` | one name from `categories_v1.json` or `Keine inhaltliche Aussage` |
+| `categories` | all names from `categories_v1.json` that apply, joined by `;` (usually 1–3), or only `Keine inhaltliche Aussage` |
 | `model`, `prompt_version` | provenance |
 
 ## Original

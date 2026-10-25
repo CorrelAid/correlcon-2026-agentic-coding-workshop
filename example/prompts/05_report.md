@@ -6,7 +6,8 @@ outputs/report.html built with plotly (no server, works offline after creation).
 
 Content:
 1. Key figures: responses, spam removed, answers classified.
-2. Bar chart: share of each category, positive vs. negative side by side.
+2. Bar chart: share of answers that mention each category, positive vs. negative side by
+   side (an answer can have several categories, so shares do not add up to 100 %).
 3. Heatmap: negative categories × region (share per region, not counts).
 4. Map: number of responses per district, using data/reference/ffmstadtteilewahlen.geojson
    and get_stadtteile_gdf() from src/project/districts.py.
@@ -15,7 +16,8 @@ Content:
    Babylotse Frankfurt).
 
 Readable for an NGO board: German labels, no jargon. End the script with sanity checks
-(report file written, every section present, category shares add up to 100 %).
+(report file written, every section present, every category from categories_v1.json
+shown).
 
 - Show the user what is happening: logging (INFO: input files and row counts, each
   chart/section built, output file). No comment text in logs.

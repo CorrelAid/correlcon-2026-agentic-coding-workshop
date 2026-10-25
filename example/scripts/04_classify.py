@@ -7,4 +7,5 @@ from project import classify
 ap = argparse.ArgumentParser()
 ap.add_argument("--limit", type=int, help="only the first N rows (try small first)")
 df = classify.run(limit=ap.parse_args().limit)
-print(df.groupby(["polarity", "category"]).size().to_string())
+counts = df.assign(category=df["categories"].str.split(";")).explode("category")
+print(counts.groupby(["polarity", "category"]).size().to_string())
