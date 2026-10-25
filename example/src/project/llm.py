@@ -5,8 +5,8 @@ Two models, two jobs:
 - the topic model analyses the comments – configured here via `.env` (default: GLM-5.3 on
   Scaleway). All LLM calls in project code go through this module.
 
-The provider is set only in `.env` (OpenAI-compatible API), so switching providers – e.g.
-when the NGO takes over with its own contract – needs no code change.
+The provider is set only in `.env` (OpenAI-compatible API), so switching providers – e.g. to
+an NGO's own contract – needs no code change.
 """
 
 from __future__ import annotations

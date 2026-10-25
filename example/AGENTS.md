@@ -5,9 +5,8 @@ Keep it short: every line is sent with every request.
 
 ## Project
 
-Data analysis for a non-profit organisation (NGO). Python, managed with `uv`.
-The code will be handed over to people without deep Python knowledge.
-Readability beats cleverness.
+Demo project: data analysis for a non-profit organisation (NGO), using the Babylotse survey.
+Python, managed with `uv`. Readers may not be Python experts – readability beats cleverness.
 
 ## Models
 

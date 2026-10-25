@@ -10,10 +10,10 @@ organisation must check the DPA and terms itself.
 3. **DPA (Art. 28 GDPR)** available, transparent sub-processors
 4. **Coding-capable model** with reliable tool calling
 5. **Cost**: pay-per-use, no base fee, affordable for NGOs in the long run
-6. **Handover**: an NGO can sign its own contract and keep running the project
+6. **Reusable by NGOs**: the same setup works with an NGO's own contract – no CorrelAid-specific parts
 
 No local models: participants' laptops have no suitable GPUs, and renting GPU instances
-means fixed costs, operations work and nothing an NGO could take over.
+means fixed costs and operations work – not a setup a typical NGO could run.
 
 ## Provider comparison
 
