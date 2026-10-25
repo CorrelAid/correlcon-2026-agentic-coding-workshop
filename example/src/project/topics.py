@@ -1,7 +1,7 @@
 """Step 4 – find topics (categories) on a sample.
 
 TO BE WRITTEN BY THE AGENT – prompt: prompts/04_topics.md
-Input:  data/processed/03_clean.csv
+Input:  valid answers (03_clean.csv, else 02_spam.csv, else 01_prepared.csv – see docs/pipeline.md)
 Output: data/processed/04_sample.csv, data/processed/categories_v1.json
 """
 

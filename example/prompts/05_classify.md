@@ -4,7 +4,8 @@
 Implement step 5 in src/project/classify.py
 (contracts in docs/pipeline.md).
 
-- Input: data/processed/03_clean.csv and the reviewed data/processed/categories_v1.json.
+- Input: load_valid_answers() from src/project/data.py (step 4) and the reviewed
+  data/processed/categories_v1.json.
 - Long format: one row per non-empty positive or negative answer (row_id, polarity, text).
 - Batches of 20 answers per request to the topic model; the prompt contains the category
   list with descriptions; exactly one category per answer, names only from the list.

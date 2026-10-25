@@ -336,7 +336,20 @@ def is_short_real_answer(text: str) -> bool:
         "pillsbix",
         "truepills",
         "david",
-        "daviddax",  # Brand/person names
+        "daviddax",
+        "davidemash",  # Brand/person names
+        "jason",
+        "jasonmus",  # Brand/person names
+        "robert",
+        "robertemash",  # Brand/person names
+        "mason",
+        "masonemash",  # Brand/person names
+        "cyharles",
+        "cyharlespax",  # Brand/person names
+        "jerald",
+        "jeraldfew",  # Brand/person names
+        "albert",
+        "albertdreni",  # Brand/person names
         "bit",
         "bot",
         "box",

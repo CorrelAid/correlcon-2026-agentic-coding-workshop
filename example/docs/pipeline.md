@@ -51,6 +51,12 @@ steps can be re-run independently.
 02_spam.csv; if step 2 was skipped, `district_known == True` from 01_prepared.csv – a rough
 fallback: it catches most spam, but also drops some real answers with an unmappable district.
 
+**Valid answers (input of steps 4 and 5)** – steps 2 and 3 are optional, so
+`load_valid_answers()` (`src/project/data.py`, written in step 4) uses the first file that
+exists: `03_clean.csv` → `02_spam.csv` with `is_spam == False` → `01_prepared.csv` with
+`district_known == True`. Without step 3, names and addresses are not masked yet – fine for
+this public demo data, not for real personal data.
+
 **04_sample.csv** – `row_id`, `polarity` (`positive`/`negative`), `text` – the fixed sample.
 **categories_v1.json** – list of `{"name": …, "description": …}`, at most 10, reviewed by a human.
 

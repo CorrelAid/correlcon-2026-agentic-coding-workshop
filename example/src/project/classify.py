@@ -1,7 +1,7 @@
 """Step 5 – assign every answer to one category.
 
 TO BE WRITTEN BY THE AGENT – prompt: prompts/05_classify.md
-Input:  data/processed/03_clean.csv, data/processed/categories_v1.json
+Input:  valid answers (see docs/pipeline.md), data/processed/categories_v1.json
 Output: data/processed/05_classified.csv
 """
 

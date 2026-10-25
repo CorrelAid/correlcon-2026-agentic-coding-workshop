@@ -17,7 +17,8 @@ run the command it tells you, look at the result.
 \* per participant with `--limit 100`; the coding agent itself adds ~€0.05–0.15 per step.
 Full data set (all 987 rows): run without `--limit` after the workshop.
 
-**Skipped step 2?** Step 3 then falls back to the district check from step 1.
+**Skipped steps 2 or 3?** Steps 3–5 fall back to the previous file; without step 2 the
+district check from step 1 filters the spam (see `docs/pipeline.md`, "Valid answers").
 
 **Stuck?** Every step only needs the previous step's file (see `docs/pipeline.md`).
 Ask the agent: *"The step failed with this error: … – fix it."*
