@@ -425,7 +425,7 @@ Ready prompts per pipeline step: prepare → spam → topics → classify → re
 ::: {.card .accent}
 [2 · Agent writes code]{.ct}
 
-**Qwen3-Coder-Next** writes and tests the code – never sees raw data, never runs the pipeline.
+**Qwen3-Coder-Next** writes the code – never sees raw data, never runs the pipeline.
 
 [IONOS, Germany · €0.15 / 1M input tokens]{.ex}
 :::

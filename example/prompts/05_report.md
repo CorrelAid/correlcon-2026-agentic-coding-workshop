@@ -14,13 +14,13 @@ Content:
 6. A short methods note: models used, prompt versions, date, data licence (CC BY 4.0,
    Babylotse Frankfurt).
 
-Readable for an NGO board: German labels, no jargon. Add a test that the report file is
-created from a tiny fake data set.
+Readable for an NGO board: German labels, no jargon. End the script with sanity checks
+(report file written, every section present, category shares add up to 100 %).
 
 - Show the user what is happening: logging (INFO: input files and row counts, each
   chart/section built, output file). No comment text in logs.
 
-Run `uv run pytest -q`, then tell me the command to build the report.
+Then tell me the command to build the report.
 ```
 
 **Look at:** open `outputs/report.html`. What would the NGO do with it?

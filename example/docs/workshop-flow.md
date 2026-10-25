@@ -10,7 +10,7 @@ prompt into OpenCode, watch the agent fill the stub, run the script, look at the
 | 5–13 | Step 2 spam – ask the agent to "show me 5 raw rows" | hooks block `data/raw` and `data/interim` |
 | 13–21 | Step 3 topics – read and edit the categories together | two models, two jobs: agent (Qwen3-Coder-Next) writes code, code calls gpt-oss-120b |
 | 21–29 | Step 4 classify with `--limit 100` | batching, validation, caching, shared rate limits |
-| 29–35 | Step 5 report – open `outputs/report.html` | ruff hook + tests keep the generated code clean |
+| 29–35 | Step 5 report – open `outputs/report.html` | ruff hook + sanity checks on real output; discuss: when are tests worth it in a data pipeline? |
 | 35–40 | Discussion: trust, costs (`opencode stats`) | |
 
 Step 2 (spam) is optional – without it, steps 3–5 use the district check from step 1.

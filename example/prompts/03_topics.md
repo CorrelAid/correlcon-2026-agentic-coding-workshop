@@ -18,12 +18,14 @@ Implement step 3 in src/project/topics.py
   validate with pydantic, save data/processed/categories_v1.json.
 - gpt-oss-120b: reasoning_effort="low", max_tokens=8000.
 - The prompt for the analysis model goes into src/project/prompts.py as TOPICS_V1 (the files
-  in prompts/ are instructions for you, not for the analysis model). Tests without LLM calls.
+  in prompts/ are instructions for you, not for the analysis model).
+- End the script with sanity checks on its own output and print them (e.g. all row_ids
+  present, values from the allowed set, counts plausible). No tests that mock the LLM.
 - Show the user what is happening: logging (INFO: input file and row count, sample size,
   request duration and tokens, output file, counts).
   No comment text in logs.
 
-Run `uv run pytest -q`, then tell me the command to run the step.
+Then tell me the command to run the step.
 ```
 
 **Look at:** read the categories together. Would the NGO understand them? Edit

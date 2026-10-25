@@ -13,7 +13,7 @@ Do not spend time overengineering or fixing every mistake, follow pareto princip
 
 ## Models
 
-- You (the coding agent) run on Qwen3-Coder-Next via IONOS. Your job: write and test code.
+- You (the coding agent) run on Qwen3-Coder-Next via IONOS. Your job: write code that works on the real data.
 - Analysing the comments (topics, classification) is done **by project code** via
   `src/project/llm.py` with the analysis model (gpt-oss-120b, also IONOS). Don't categorise
   comments yourself – write code that asks the analysis model (rules below).
@@ -48,7 +48,8 @@ Raw columns (you do not need to open the file to know them): `ID`, `Date Created
   prompt version with the results.
 - gpt-oss-120b reasons before answering: pass `reasoning_effort="low"` and
   `max_tokens=8000`; raise a clear error on `finish_reason == "length"` (empty content).
-- Tests mock the LLM; scripts print counts, never comment text from raw/interim data.
+- No tests that mock the LLM. Scripts end with sanity checks on their real output (ids complete,
+  values valid, counts plausible) and print counts – never comment text from raw/interim data.
 
 ## Docs to look up (instead of guessing APIs)
 
@@ -79,14 +80,16 @@ Raw columns (you do not need to open the file to know them): `ID`, `Date Created
 - `src/project/` – reusable code (functions with docstrings and type hints)
 - `scripts/` – executable entry points
 - `notebooks/` – exploration; logic that stays moves to `src/`
-- `tests/` – pytest; every new function gets at least one test
+- `tests/` – pytest, only for tricky pure logic (parsing, masking, sampling) – this is a data
+  pipeline, not a product
 
 ## Way of working
 
-- Start with a 3–5 point plan, then implement in small steps; run `uv run pytest -q` after each.
+- Start with a 3–5 point plan, then implement in small steps; run `uv run pytest -q` after
+  changing tested code.
 - `prompts/` holds the workshop prompts for you – read-only. Analysis-model prompts go into
   `src/project/prompts.py`.
 - Never run the pipeline scripts (`scripts/0N_*.py`) yourself – they call paid APIs on real
-  data (blocked by policy). Run the tests, then tell the user the exact command (first run
+  data (blocked by policy). Tell the user the exact command (first run
   with `--limit`) and the estimated cost (`scripts/costs.py`).
 - If unsure, ask instead of guessing.

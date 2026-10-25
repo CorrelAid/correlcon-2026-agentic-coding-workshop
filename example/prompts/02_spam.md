@@ -17,12 +17,13 @@ Frankfurt. Short but real answers ("Kitaplätze") are NOT spam.
 - Leave the decision to the LLM: is_spam and spam_reason come from its answer, nothing else.
 - Cache each batch in data/interim/cache/ so a re-run costs nothing; respect --limit.
 - Put the prompt as a versioned constant in src/project/prompts.py.
-- Add tests in tests/test_spam.py that do not call the LLM (mock it).
+- End the script with sanity checks on its own output and print them (e.g. all row_ids
+  present, values from the allowed set, counts plausible). No tests that mock the LLM.
 - Show the user what is happening: logging (INFO: input file and row count, batches,
   cache hits, output file, counts) and a tqdm progress bar over the batches. No comment
   text in logs.
 
-Then run `uv run pytest -q` and tell me the command for a first run with --limit 100.
+Then tell me the command for a first run with --limit 100.
 ```
 
 **Look at:** the agent never reads `data/interim/` (try asking it to – the hook blocks it).
