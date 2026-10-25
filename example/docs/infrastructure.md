@@ -49,8 +49,15 @@ step pays for the full context. Providers with caching would be cheaper than sho
 | 2026-10-26, finishing step 4 (multi-label rework + error fixes) | 302 | 19.6M in + 55k out | €2.99 |
 | Both days, 21 sessions, steps 2–5 incl. retries | ~1,500 | 90.9M | ≈ €13.60 |
 
-So **~60k input tokens per agent step ≈ €0.01**. A smooth pipeline step costs ~€0.15 (step 3:
-€0.15); a step where the agent struggles with errors can cost €1–3.
+So **~60k input tokens per agent step ≈ €0.01** on average – but that average comes from long
+sessions with debugging and rework. **A clean run of one pipeline step costs €0.08–0.15**
+(2026-10-26, step 4 run twice from a fresh session: 23 and 30 agent steps, context growing from
+7k to 28–35k tokens, €0.08 and €0.12; step 3 in the full run: €0.15). A step where the agent
+struggles with errors can cost €1–3. A participant with smooth steps 2–5 therefore costs ~€0.50,
+20 people ~€10; the estimates below are the upper bound when many get stuck.
+
+A lower context limit (64k instead of 256k, so OpenCode compacts earlier) made no difference:
+clean runs never got near it.
 
 Only ~7k tokens of that are fixed (OpenCode system prompt, 12 tool definitions, AGENTS.md –
 measured with a mock server). The rest is file contents, test and command output that pile
