@@ -83,6 +83,8 @@ Raw columns (you do not need to open the file to know them): `ID`, `Date Created
 ## Way of working
 
 - Start with a 3–5 point plan, then implement in small steps; run `uv run pytest -q` after each.
+- `prompts/` holds the workshop prompts for you – read-only. Topic-model prompts go into
+  `src/project/prompts.py`.
 - Never run the pipeline scripts (`scripts/0N_*.py`) yourself – they call paid APIs on real
   data (blocked by policy). Run the tests, then tell the user the exact command (first run
   with `--limit`) and the estimated cost (`scripts/costs.py`).

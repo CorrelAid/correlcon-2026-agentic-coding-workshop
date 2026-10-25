@@ -14,10 +14,14 @@ Implement step 3 in src/project/topics.py
 - Ask for at most 10 neutral categories (topics, not complaints – they must fit positive
   and negative answers), in German, each with a description of what belongs in it and
   what does not. Plus the extra category "Keine inhaltliche Aussage".
-- JSON via response_format, validate with pydantic, save data/processed/categories_v1.json.
-- Versioned prompt in src/project/prompts.py; tests without LLM calls.
+- Answer format {"categories": [{"name": …, "description": …}]} via response_format,
+  validate with pydantic, save data/processed/categories_v1.json.
+- GLM-5.3: reasoning_effort="low", max_tokens=8000 – otherwise it thinks until the output
+  limit and returns nothing.
+- The prompt for the topic model goes into src/project/prompts.py as TOPICS_V1 (the files
+  in prompts/ are instructions for you, not for the topic model). Tests without LLM calls.
 
-Run `uv run pytest -q`, then `uv run python scripts/03_topics.py`.
+Run `uv run pytest -q`, then tell me the command to run the step.
 ```
 
 **Look at:** read the categories together. Would the NGO understand them? Edit

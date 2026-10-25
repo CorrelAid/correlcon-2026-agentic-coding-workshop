@@ -66,6 +66,9 @@
     { "action": "tool.use", "resource": "shell:*API_KEY*", "effect": "deny" },
     { "action": "tool.use", "resource": "execute:*", "effect": "deny" },
     { "action": "tool.use", "resource": "shell:*scripts/0*", "effect": "deny" },
+    { "action": "tool.use", "resource": "edit:*prompts/*", "effect": "deny" },
+    { "action": "tool.use", "resource": "write:*prompts/*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:*prompts/*", "effect": "deny" },
     { "action": "tool.use", "resource": "websearch:*", "effect": "deny" }
   ],
   "permissions": [
