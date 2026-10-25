@@ -11,9 +11,10 @@ languages, keyboard mashing, a made-up name as the whole answer, advertising wit
 has no usable content at all – short real answers ("Kitaplätze", "nichts") are NOT spam.
 district_known == False is a hint, not enough on its own.
 
-- Main rule: language detection. Use a language detection library (e.g. lingua-language-
-  detector, or spaCy with a language detector component – add it with `uv add`) and keep
-  only answers that are German (or English) with high confidence. Foreign-language spam and
+- Main rule: language detection with lingua-language-detector (`uv add
+  lingua-language-detector`: offline, no model download, good on short texts). Build the
+  detector for a handful of languages only and keep answers that are German (or English)
+  with high confidence. Foreign-language spam and
   keyboard mashing then fail this check by themselves – don't write a separate
   keyboard-mashing heuristic. Language detection is unreliable for very short answers:
   answers with fewer than 3 words are not checked.
