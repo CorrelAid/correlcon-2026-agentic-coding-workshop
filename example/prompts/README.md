@@ -8,7 +8,7 @@ run the command it tells you, look at the result.
 |---|---|---|---|---|
 | 0 | – | `uv run python scripts/get_data.py` | 1 min | – |
 | 1 | – (ready-made) | `uv run python scripts/01_prepare.py` | 1 min | – |
-| 2 | [02_spam.md](02_spam.md) *(optional)* | `uv run python scripts/02_spam.py` | 8 min | €0 (no LLM) |
+| 2 | [02_spam.md](02_spam.md) *(optional)* | `uv run python scripts/02_spam.py --limit 100` | 8 min | ~€0.10 |
 | 3 | [03_pii.md](03_pii.md) *(optional)* | `uv run python scripts/03_pii.py` | 5 min | €0 (regex) |
 | 4 | [04_topics.md](04_topics.md) | `uv run python scripts/04_topics.py` | 8 min | ~€0.05 |
 | 5 | [05_classify.md](05_classify.md) | `uv run python scripts/05_classify.py --limit 100` | 8 min | ~€0.15 |

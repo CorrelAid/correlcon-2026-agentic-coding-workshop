@@ -3,7 +3,7 @@
 ```
 raw survey ─▶ 1 prepare ─▶ 2 spam ─▶ 3 PII ─▶ 4 topics ─▶ 5 classify ─▶ 6 report
  (data/raw)   ready-made   agent     agent    agent       agent         agent
-              no LLM       rules     regex    GLM-5.3     GLM-5.3       no LLM
+              no LLM       GLM-5.3   regex    GLM-5.3     GLM-5.3       no LLM
                                      (+GLM)   1 request   batches of 20
 ```
 
@@ -44,7 +44,7 @@ steps can be re-run independently.
 | column | meaning |
 |---|---|
 | `is_spam` | `True` if the whole response is spam / has no usable content |
-| `spam_reason` | the rules that fired, joined by `;` |
+| `spam_reason` | short reason from the model |
 
 **03_clean.csv** – only valid rows, columns of 01 (without `district_known`), plus
 `pii_flag` (bool) and `pii_types` (e.g. `phone;name`). Valid means `is_spam == False` from

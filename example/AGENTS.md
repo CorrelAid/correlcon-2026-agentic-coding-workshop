@@ -35,7 +35,7 @@ Raw columns (you do not need to open the file to know them): `ID`, `Date Created
   Do not add other AI APIs or US services.
 - Never read, print or commit `.env`.
 
-## LLM calls in code (steps 4–5)
+## LLM calls in code (steps 2–5)
 
 - Always via `src/project/llm.py` (`get_client()`, `ANALYSIS_MODEL`); prompts as versioned
   constants in `src/project/prompts.py`.
