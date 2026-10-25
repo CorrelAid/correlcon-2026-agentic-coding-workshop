@@ -17,7 +17,7 @@ Content:
 Readable for an NGO board: German labels, no jargon. Add a test that the report file is
 created from a tiny fake data set.
 
-Run `uv run pytest -q`, then `uv run python scripts/05_report.py`.
+Run `uv run pytest -q`, then tell me the command to build the report.
 ```
 
 **Look at:** open `outputs/report.html`. What would the NGO do with it?

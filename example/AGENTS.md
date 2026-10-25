@@ -46,7 +46,9 @@ Raw columns (you do not need to open the file to know them): `ID`, `Date Created
 - `response_format={"type": "json_object"}`, validate with pydantic, retry a batch once.
 - Cache each batch (`cache/` next to the step's output), respect `--limit`, store model and
   prompt version with the results.
-- GLM-5.3 reasons before answering: `max_tokens` 8000 (max 16,384), read `message.content`.
+- GLM-5.3 reasons before answering and can spend all output tokens thinking (empty content,
+  `finish_reason == "length"` – even at 16k with 100 items): always pass
+  `reasoning_effort="low"` and `max_tokens=8000`; raise a clear error on `"length"`.
 - Tests mock the LLM; scripts print counts, never comment text from raw/interim data.
 
 ## Docs to look up (instead of guessing APIs)
@@ -81,5 +83,7 @@ Raw columns (you do not need to open the file to know them): `ID`, `Date Created
 ## Way of working
 
 - Start with a 3–5 point plan, then implement in small steps; run `uv run pytest -q` after each.
-- Before LLM batch runs: estimate costs with `scripts/costs.py` and state them.
+- Never run the pipeline scripts (`scripts/0N_*.py`) yourself – they call paid APIs on real
+  data (blocked by policy). Run the tests, then tell the user the exact command (first run
+  with `--limit`) and the estimated cost (`scripts/costs.py`).
 - If unsure, ask instead of guessing.

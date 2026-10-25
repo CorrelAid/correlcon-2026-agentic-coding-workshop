@@ -13,7 +13,7 @@ Frankfurt. Short but real answers ("Kitaplätze") are NOT spam.
   numbered by row_id, to the topic model via src/project/llm.py (ANALYSIS_MODEL).
 - Ask for JSON {"results": [{"row_id": …, "is_spam": true/false, "reason": "…"}]},
   use response_format={"type": "json_object"} and validate with pydantic.
-- GLM-5.3 is a reasoning model: max_tokens 8000, read message.content.
+- GLM-5.3 is a reasoning model: pass reasoning_effort="low" and max_tokens=8000.
 - Leave the decision to the LLM: is_spam and spam_reason come from its answer, nothing else.
 - Cache each batch in data/interim/cache/ so a re-run costs nothing; respect --limit.
 - Put the prompt as a versioned constant in src/project/prompts.py.

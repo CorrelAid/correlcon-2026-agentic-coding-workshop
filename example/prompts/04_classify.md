@@ -13,7 +13,7 @@ Implement step 4 in src/project/classify.py
 - Cache per batch, respect --limit (number of survey rows), store model and prompt_version.
 - Write data/processed/04_classified.csv. Tests without LLM calls.
 
-Run `uv run pytest -q`, then `uv run python scripts/04_classify.py --limit 100`.
+Run `uv run pytest -q`, then tell me the command for a first run with --limit 100.
 ```
 
 **Look at:** pick 10 random rows of `04_classified.csv` – would you agree with the model?

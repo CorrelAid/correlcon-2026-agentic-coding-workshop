@@ -65,6 +65,7 @@
     { "action": "tool.use", "resource": "shell:*printenv*", "effect": "deny" },
     { "action": "tool.use", "resource": "shell:*API_KEY*", "effect": "deny" },
     { "action": "tool.use", "resource": "execute:*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:*scripts/0*", "effect": "deny" },
     { "action": "tool.use", "resource": "websearch:*", "effect": "deny" }
   ],
   "permissions": [
@@ -74,8 +75,12 @@
     { "action": "grep", "resource": "*", "effect": "allow" },
     { "action": "skill", "resource": "*", "effect": "allow" },
     { "action": "shell", "resource": "*", "effect": "ask" },
-    { "action": "shell", "resource": "uv run *", "effect": "allow" },
-    { "action": "shell", "resource": "uv sync *", "effect": "allow" },
+    { "action": "shell", "resource": "uv run pytest*", "effect": "allow" },
+    { "action": "shell", "resource": "uv run ruff*", "effect": "allow" },
+    { "action": "shell", "resource": "uv run python scripts/check_setup.py*", "effect": "allow" },
+    { "action": "shell", "resource": "uv run python scripts/costs.py*", "effect": "allow" },
+    { "action": "shell", "resource": "uv sync*", "effect": "allow" },
+    { "action": "shell", "resource": "uv add *", "effect": "allow" },
     { "action": "shell", "resource": "git status *", "effect": "allow" },
     { "action": "shell", "resource": "git diff *", "effect": "allow" },
     { "action": "shell", "resource": "git log *", "effect": "allow" },
