@@ -3,12 +3,12 @@
 ```
 raw survey ─▶ 1 prepare ─▶ 2 spam ─▶ 3 topics ─▶ 4 classify ─▶ 5 report
  (data/raw)   ready-made   agent     agent       agent         agent
-              no LLM       GLM-5.3   GLM-5.3     GLM-5.3       no LLM
+              no LLM       gpt-oss   gpt-oss     gpt-oss       no LLM
                            optional  1 request   batches of 20
 ```
 
 The **agent** (Qwen3-Coder-Next in OpenCode) writes the code for steps 2–5 from the
-prompts in `prompts/`. The **code** then calls the topic model (GLM-5.3) via
+prompts in `prompts/`. The **code** then calls the analysis model (gpt-oss-120b, also on IONOS) via
 `src/project/llm.py`. Each step reads the previous step's file and writes its own, so
 steps can be re-run independently.
 

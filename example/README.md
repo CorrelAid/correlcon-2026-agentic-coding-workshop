@@ -4,7 +4,7 @@ Reusable template for CorrelAid projects with NGOs. Setup instructions: [`../SET
 Background on providers, costs and test results: [`docs/infrastructure.md`](docs/infrastructure.md).
 
 ```bash
-cp .env.example .env          # add the two keys
+cp .env.example .env          # add the IONOS key
 uv sync
 uv run python scripts/check_setup.py
 uv run python scripts/get_data.py

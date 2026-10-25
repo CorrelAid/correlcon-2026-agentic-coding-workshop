@@ -10,16 +10,15 @@ Implement step 3 in src/project/topics.py
   was used.
 - Draw a fixed sample (seed 42) of 50 positive and 50 negative non-empty answers; save
   it as data/processed/03_sample.csv.
-- Send the whole sample in ONE request to the topic model via src/project/llm.py.
+- Send the whole sample in ONE request to the analysis model via src/project/llm.py.
 - Ask for at most 10 neutral categories (topics, not complaints – they must fit positive
   and negative answers), in German, each with a description of what belongs in it and
   what does not. Plus the extra category "Keine inhaltliche Aussage".
 - Answer format {"categories": [{"name": …, "description": …}]} via response_format,
   validate with pydantic, save data/processed/categories_v1.json.
-- GLM-5.3: reasoning_effort="low", max_tokens=8000 – otherwise it thinks until the output
-  limit and returns nothing.
-- The prompt for the topic model goes into src/project/prompts.py as TOPICS_V1 (the files
-  in prompts/ are instructions for you, not for the topic model). Tests without LLM calls.
+- gpt-oss-120b: reasoning_effort="low", max_tokens=8000.
+- The prompt for the analysis model goes into src/project/prompts.py as TOPICS_V1 (the files
+  in prompts/ are instructions for you, not for the analysis model). Tests without LLM calls.
 - Show the user what is happening: logging (INFO: input file and row count, sample size,
   request duration and tokens, output file, counts).
   No comment text in logs.

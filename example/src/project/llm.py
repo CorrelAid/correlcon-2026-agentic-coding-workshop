@@ -2,8 +2,8 @@
 
 Two models, two jobs:
 - the coding agent (OpenCode) writes the code – configured in opencode.json (IONOS);
-- the topic model analyses the comments – configured here via `.env` (default: GLM-5.3 on
-  Scaleway). All LLM calls in project code go through this module.
+- the analysis model analyses the comments – configured here via `.env` (default:
+  gpt-oss-120b on IONOS). All LLM calls in project code go through this module.
 
 The provider is set only in `.env` (OpenAI-compatible API), so switching providers – e.g. to
 an NGO's own contract – needs no code change.
@@ -30,7 +30,7 @@ EU_HOSTS: dict[str, str] = {
 }
 
 CODING_MODEL = os.getenv("LLM_MODEL_CODING", "Qwen/Qwen3-Coder-Next")
-ANALYSIS_MODEL = os.getenv("LLM_MODEL_ANALYSIS", "glm-5.3")
+ANALYSIS_MODEL = os.getenv("LLM_MODEL_ANALYSIS", "openai/gpt-oss-120b")
 
 
 def provider_name(base_url: str) -> str:

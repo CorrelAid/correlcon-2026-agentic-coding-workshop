@@ -15,8 +15,8 @@ Do not spend time overengineering or fixing every mistake, follow pareto princip
 
 - You (the coding agent) run on Qwen3-Coder-Next via IONOS. Your job: write and test code.
 - Analysing the comments (topics, classification) is done **by project code** via
-  `src/project/llm.py` with the topic model (GLM-5.3 on Scaleway). Don't categorise
-  comments yourself – write code that asks the topic model (rules below).
+  `src/project/llm.py` with the analysis model (gpt-oss-120b, also IONOS). Don't categorise
+  comments yourself – write code that asks the analysis model (rules below).
 
 ## Data & pipeline
 
@@ -46,15 +46,14 @@ Raw columns (you do not need to open the file to know them): `ID`, `Date Created
 - `response_format={"type": "json_object"}`, validate with pydantic, retry a batch once.
 - Cache each batch (`cache/` next to the step's output), respect `--limit`, store model and
   prompt version with the results.
-- GLM-5.3 reasons before answering and can spend all output tokens thinking (empty content,
-  `finish_reason == "length"` – even at 16k with 100 items): always pass
-  `reasoning_effort="low"` and `max_tokens=8000`; raise a clear error on `"length"`.
+- gpt-oss-120b reasons before answering: pass `reasoning_effort="low"` and
+  `max_tokens=8000`; raise a clear error on `finish_reason == "length"` (empty content).
 - Tests mock the LLM; scripts print counts, never comment text from raw/interim data.
 
 ## Docs to look up (instead of guessing APIs)
 
 - OpenAI Python SDK: https://github.com/openai/openai-python
-- Scaleway Generative APIs: https://www.scaleway.com/en/docs/generative-apis/
+- IONOS AI Model Hub: https://docs.ionos.com/cloud/ai/ai-model-hub
 - pandas: https://pandas.pydata.org/docs/ · pydantic: https://docs.pydantic.dev/latest/
 - pytest: https://docs.pytest.org/
 
@@ -85,7 +84,7 @@ Raw columns (you do not need to open the file to know them): `ID`, `Date Created
 ## Way of working
 
 - Start with a 3–5 point plan, then implement in small steps; run `uv run pytest -q` after each.
-- `prompts/` holds the workshop prompts for you – read-only. Topic-model prompts go into
+- `prompts/` holds the workshop prompts for you – read-only. Analysis-model prompts go into
   `src/project/prompts.py`.
 - Never run the pipeline scripts (`scripts/0N_*.py`) yourself – they call paid APIs on real
   data (blocked by policy). Run the tests, then tell the user the exact command (first run

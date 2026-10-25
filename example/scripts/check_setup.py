@@ -4,7 +4,7 @@
 
 Two endpoints are checked:
 - IONOS  – the coding agent's model (OpenCode), incl. tool calling
-- the topic model used by project code (default: GLM-5.3 on Scaleway)
+- the analysis model used by project code (default: gpt-oss-120b, same IONOS key)
 
 Cost: one run uses < 2,000 tokens (well below €0.01).
 """
@@ -55,7 +55,7 @@ def check_env() -> str:
     missing = [k for k in ("IONOS_API_KEY", "LLM_API_KEY", "LLM_BASE_URL") if not os.getenv(k)]
     if missing:
         raise RuntimeError(f"empty in .env: {', '.join(missing)}")
-    return f"topic model provider: {provider_name(os.environ['LLM_BASE_URL'])}"
+    return f"analysis model provider: {provider_name(os.environ['LLM_BASE_URL'])}"
 
 
 def ionos() -> OpenAI:
@@ -118,7 +118,7 @@ if __name__ == "__main__":
         results += [
             step("Coding agent model", check_agent_model),
             step("Tool calling", check_tool_calling),
-            step("Topic model", check_topic_model),
+            step("Analysis model", check_topic_model),
         ]
     ready = all(results)
     print("\nAll set – start with: uv run agent" if ready else "\nPlease fix.")

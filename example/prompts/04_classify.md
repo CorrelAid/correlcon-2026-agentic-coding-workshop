@@ -7,7 +7,7 @@ Implement step 4 in src/project/classify.py
 - Input: load_valid_answers() from src/project/data.py (step 3) and the reviewed
   data/processed/categories_v1.json.
 - Long format: one row per non-empty positive or negative answer (row_id, polarity, text).
-- Batches of 20 answers per request to the topic model; the prompt contains the category
+- Batches of 20 answers per request to the analysis model; the prompt contains the category
   list with descriptions; exactly one category per answer, names only from the list.
 - Validate with pydantic (every id present, every category valid); retry a batch once.
 - Cache per batch, respect --limit (number of survey rows), store model and prompt_version.
