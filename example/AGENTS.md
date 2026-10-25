@@ -14,7 +14,7 @@ Readability beats cleverness.
 - You (the coding agent) run on Qwen3-Coder-Next via IONOS. Your job: write and test code.
 - Analysing the comments (topics, classification) is done **by project code** via
   `src/project/llm.py` with the topic model (GLM-5.3 on Scaleway). Don't categorise
-  comments yourself – write code that asks the topic model (skill `llm-categorization`).
+  comments yourself – write code that asks the topic model (rules below).
 
 ## Data & pipeline
 
@@ -35,6 +35,17 @@ Raw columns (you do not need to open the file to know them): `ID`, `Date Created
 - LLM calls in code only via `src/project/llm.py` (EU provider, configured in `.env`).
   Do not add other AI APIs or US services.
 - Never read, print or commit `.env`.
+
+## LLM calls in code (steps 2–5)
+
+- Always via `src/project/llm.py` (`get_client()`, `ANALYSIS_MODEL`); prompts as versioned
+  constants in `src/project/prompts.py`.
+- Batches of ~20 numbered items per request – never one request per comment (shared rate limits).
+- `response_format={"type": "json_object"}`, validate with pydantic, retry a batch once.
+- Cache each batch (`cache/` next to the step's output), respect `--limit`, store model and
+  prompt version with the results.
+- GLM-5.3 reasons before answering: `max_tokens` 8000 (max 16,384), read `message.content`.
+- Tests mock the LLM; scripts print counts, never comment text from raw/interim data.
 
 ## Docs to look up (instead of guessing APIs)
 

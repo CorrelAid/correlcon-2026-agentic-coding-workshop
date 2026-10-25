@@ -173,19 +173,6 @@ server and maintenance.
 | DPA signed / where stored? | check customer area |
 | Burst: docs say 10 and 20 requests per 2 s | measured ≈ 10 |
 
-## Handover to an NGO
-
-1. The NGO opens its own IONOS Cloud account and signs the DPA.
-2. Restricted user + token as in `SETUP.md` §2.2, token into `.env`, run `check_setup.py`.
-3. CorrelAid removes / deactivates its own tokens.
-
-For the NGO's record of processing activities: processor IONOS (Germany); processing in
-German data centres; purpose: categorising pseudonymised free text and coding assistance;
-no content stored by the provider (metadata only: time, model, token count); no training.
-
-Running costs for the NGO: analyses cost cents; developing further with the agent costs
-roughly €0.50 per hour of active use.
-
 ## Sources
 
 - IONOS data handling: <https://docs.ionos.com/cloud/ai/ai-model-hub/governance-and-compliance/data-handling>

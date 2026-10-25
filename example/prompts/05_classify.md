@@ -1,7 +1,7 @@
 # Step 5 – classify every answer
 
 ```text
-Use the llm-categorization skill, phase 2. Implement step 5 in src/project/classify.py
+Implement step 5 in src/project/classify.py
 (contracts in docs/pipeline.md).
 
 - Input: data/processed/03_clean.csv and the reviewed data/processed/categories_v1.json.

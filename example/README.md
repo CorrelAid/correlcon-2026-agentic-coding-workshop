@@ -35,7 +35,7 @@ Layout:
 AGENTS.md                         project rules for any agent
 opencode.json                     IONOS only, permissions, sharing off
 .opencode/plugins/guardrails.ts   hooks: privacy blocks, key hiding, ruff feedback
-.agents/skills/                   privacy-check, llm-categorization
+.agents/skills/                   privacy-check
 prompts/                          copy-paste prompts for steps 2–6
 src/project/                      prepare.py + districts.py (ready), stubs for steps 2–6,
                                   llm.py (single LLM access point, EU endpoints only)

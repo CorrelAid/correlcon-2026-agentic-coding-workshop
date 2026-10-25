@@ -1,7 +1,7 @@
 # Step 4 – find topics
 
 ```text
-Use the llm-categorization skill, phase 1. Implement step 4 in src/project/topics.py
+Implement step 4 in src/project/topics.py
 (contracts in docs/pipeline.md).
 
 - From data/processed/03_clean.csv draw a fixed sample (seed 42) of 50 positive and
