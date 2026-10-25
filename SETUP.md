@@ -33,11 +33,16 @@ macOS / Linux / Windows with WSL:
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh     # Python tooling (uv)
-curl -fsSL https://opencode.ai/install | bash       # coding agent (OpenCode)
+curl -fsSL https://opencode.ai/install | bash       # coding agent (OpenCode 1.x)
 ```
 
+> **OpenCode 1.x, not 2.x.** OpenCode 2 (Sept 2026) has no provider allowlist yet and does
+> not run v1 plugins – our privacy hooks would silently be off. `uv run agent` refuses to
+> start with 2.x. The installer above still installs the newest 1.x (as of Oct 2026); with Node.js,
+> `npm install -g opencode-ai@1` pins 1.x explicitly – also the way back if you upgraded.
+
 Windows without WSL: `powershell -c "irm https://astral.sh/uv/install.ps1 | iex"` and
-`npm install -g opencode-ai` (needs Node.js) or `scoop install opencode`.
+`npm install -g opencode-ai@1` (needs Node.js).
 WSL is recommended – the example's shell hooks are tested on Linux/macOS.
 
 Restart your terminal, then check: `uv --version` and `opencode --version`.

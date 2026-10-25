@@ -28,5 +28,12 @@ def main() -> None:
             print(f"Note: {key} from your shell is ignored – using the value from .env.")
     if shutil.which("opencode") is None:
         sys.exit("opencode not found – see SETUP.md, step 1.")
+    version = subprocess.run(["opencode", "--version"], capture_output=True, text=True).stdout
+    if not version.strip().lstrip("v").startswith("1."):
+        sys.exit(
+            f"OpenCode {version.strip()} found – this workshop needs OpenCode 1.x.\n"
+            "Version 2 ignores the provider allowlist and does not run our privacy hooks.\n"
+            "Install 1.x:  npm install -g opencode-ai@1   (see SETUP.md, step 1)"
+        )
     env = {**os.environ, **values, "PWD": str(ROOT)}
     sys.exit(subprocess.call(["opencode", *sys.argv[1:]], cwd=ROOT, env=env))

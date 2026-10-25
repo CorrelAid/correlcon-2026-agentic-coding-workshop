@@ -14,6 +14,7 @@ from __future__ import annotations
 import json
 import os
 import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -41,7 +42,12 @@ def check_tools() -> str:
     missing = [t for t in ("uv", "opencode", "git") if shutil.which(t) is None]
     if missing:
         raise RuntimeError(f"not found: {', '.join(missing)} (see SETUP.md, step 1)")
-    return "uv, opencode, git"
+    version = subprocess.run(["opencode", "--version"], capture_output=True, text=True).stdout
+    if not version.strip().lstrip("v").startswith("1."):
+        raise RuntimeError(
+            f"OpenCode {version.strip()} – the workshop needs 1.x (SETUP.md, step 1)"
+        )
+    return f"uv, opencode {version.strip()}, git"
 
 
 def check_env() -> str:
