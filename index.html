@@ -719,6 +719,107 @@ beat the placebo – only on cost (−5 % and −12 %), not on pass rate
           display:block!important;
       }</style></aside>
 </section>
+<section id="agentic-coding-in-civil-society-the-hard-parts" class="slide level2">
+<h2>Agentic coding in civil society: the hard parts</h2>
+<div class="cards c2">
+<div class="card warn">
+<p><span class="ct">Data protection</span></p>
+<p>Data about vulnerable people – US providers often off-limits.</p>
+<p><strong>~50 %</strong> of AI-using nonprofits name privacy risks¹</p>
+</div>
+<div class="card warn">
+<p><span class="ct">Expertise</span></p>
+<p>No in-house tech staff, no rules → “shadow AI”.</p>
+<p><strong>41 %</strong> lack in-house tech expertise¹ · <strong>76 %</strong> have no AI strategy²</p>
+</div>
+<div class="card warn">
+<p><span class="ct">Money</span></p>
+<p>Tokens and tools compete with the mission.</p>
+<p><strong>69 %</strong>: budget is the main obstacle³ · <strong>60 %</strong> no support for digital costs³</p>
+</div>
+<div class="card warn">
+<p><span class="ct">Who maintains it?</span></p>
+<p>Volunteers move on – non-techies inherit the code.</p>
+<p><strong>78 %</strong> of organisations (Bavaria) have no paid staff⁴</p>
+</div>
+</div>
+<p><strong>Our setup:</strong> EU-hosted open models · guardrails · pay-per-use (~€40/workshop)</p>
+<p><span class="small">¹ Fast Forward 2025 (US) · ² TechSoup 2025 (US) · ³ Charity Digital Skills 2025 (UK) · ⁴ ZiviZ 2023</span></p>
+<aside class="notes">
+<p>~1.5 min. We build for organisations without an IT department – that shapes every choice in the workshop.</p>
+<ul>
+<li>Data protection: NGOs hold data about children, patients, refugees. GDPR is a real legal uncertainty for volunteer boards (ZiviZ). Shadow AI: staff paste data into tools nobody approved.</li>
+<li>Expertise: Fast Forward surveyed ~200 nonprofits that already use AI – so the real gap is bigger. 41 % lack tech expertise, nearly half name privacy risks, 84 % name funding for tools and talent as their greatest need.</li>
+<li>Money: UK Charity Digital Skills Report 2025 (n = 672): 69 % budget squeeze, 60 % no support for digital costs.</li>
+<li>Maintenance: ZiviZ 2023 Bavaria: only 22 % of organisations have any paid staff. Whatever we build must survive the handover.</li>
+</ul>
+<p>Transition: that is why the workshop setup looks the way it does.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="our-workshop-setup-eu-only-two-models-guardrails" class="slide level2">
+<h2>Our workshop setup: EU-only, two models, guardrails</h2>
+<div class="cards c3">
+<div class="card accent">
+<p><span class="ct">1 · You prompt</span></p>
+<p>Ready prompts per pipeline step: prepare → spam → topics → classify → report.</p>
+<p><span class="ex">OpenCode 2 · <code>uv run agent</code></span></p>
+</div>
+<div class="card accent">
+<p><span class="ct">2 · Agent writes code</span></p>
+<p><strong>Qwen3-Coder-Next</strong> writes and tests the code – never sees raw data, never runs the pipeline.</p>
+<p><span class="ex">IONOS, Germany · €0.15 / 1M input tokens</span></p>
+</div>
+<div class="card accent">
+<p><span class="ct">3 · Code asks a model</span></p>
+<p>Your code sends batches of comments to <strong>gpt-oss-120b</strong>; you run it and review the results.</p>
+<p><span class="ex">same provider, same key · cents per run</span></p>
+</div>
+</div>
+<div class="cards c3">
+<div class="card warn">
+<p><span class="ct">Instructions</span></p>
+<p><code>AGENTS.md</code>: rules, commands, quiet output, data protection</p>
+</div>
+<div class="card warn">
+<p><span class="ct">Policies &amp; hooks</span></p>
+<p>Only IONOS · no <code>.env</code>, no raw data · keys hidden · prompts read-only · ruff after every edit</p>
+</div>
+<div class="card warn">
+<p><span class="ct">Cost</span></p>
+<p>~55k tokens per agent step ≈ <strong>€0.01</strong> → <strong>~€40</strong> for 20 people</p>
+</div>
+</div>
+<aside class="notes">
+<p>~1.5 min. Bridge from the civil-society slide to the hands-on part.</p>
+<ul>
+<li>Two models, two jobs: the coding agent (Qwen3-Coder-Next) writes code; the code the agent writes calls a second model (gpt-oss-120b) for the actual analysis. Both on IONOS: one provider, one key, data stays in Germany, no training on it.</li>
+<li>The agent never sees personal data: raw and interim data are blocked by policy and hooks; it writes code that processes the data and prints counts. The human runs the pipeline scripts – they call a paid API on real data.</li>
+<li>Guardrails in three layers: AGENTS.md (advice – usually followed), policies (hard rules nothing overrides), hooks (deterministic: hide API keys, run ruff and feed errors back). Honest caveat: hooks catch accidents, only isolation is a security boundary.</li>
+<li>Cost, measured: the agent resends its whole context with every step – ~55k tokens on average, no prompt caching on IONOS – about €0.0085 per step, €4.44 for a full prep day. The analysis itself costs cents.</li>
+<li>Why not Scaleway/GLM? Scaleway limits tokens per minute per organisation (1–2M); 20 people with an agent need ~5M. IONOS limits requests (5/s per model) instead.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="responsibility-where-does-the-human-stay" class="slide level2">
 <h2>Responsibility: where does the human stay?</h2>
 <div class="todo">
@@ -773,6 +874,10 @@ beat the placebo – only on cost (−5 % and −12 %), not on pass rate
 <li>AGENTS.md: <a href="https://agents.md">agents.md</a> · Agentic AI Foundation (Linux Foundation, Dec 2025)</li>
 <li>Claude Code settings, permissions &amp; hooks: <a href="https://docs.claude.com/en/docs/claude-code/settings">docs.claude.com</a></li>
 <li>Mistral Vibe: <a href="https://docs.mistral.ai/mistral-vibe/overview">docs.mistral.ai</a></li>
+<li>Fast Forward (2025): <em>AI for Humanity Report</em>, via Chronicle of Philanthropy. <a href="https://www.philanthropy.com/news/nonprofits-are-embracing-ai-but-many-struggle-to-find-funding/">philanthropy.com</a></li>
+<li>TechSoup &amp; Tapp Network (2025): <em>AI Benchmark Report.</em> <a href="https://blog.techsoup.org/posts/what-ai-means-for-nonprofits-in-2025-insights-from-the-ai-benchmark-report">techsoup.org</a></li>
+<li>Charity Digital Skills Report 2025 (n = 672 UK charities). <a href="https://digitalskills.mdia.gov.mt/skills-intelligence/charity-digital-skills-report-2025/">Summary</a></li>
+<li>ZiviZ (2023): <em>ZiviZ-Survey 2023 – Vereine und andere zivilgesellschaftliche Organisationen</em> (Bavaria report). <a href="https://ziviz.de/sites/ziv/files/ziviz-survey_2023_vereine_und_andere_zivilgesellschaftliche_organisationen.pdf">ziviz.de</a></li>
 </ul>
 </div>
 
