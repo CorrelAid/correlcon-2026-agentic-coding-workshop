@@ -3,6 +3,7 @@ name: Publish slides
 on:
   push:
     branches: [main]
+    paths: ["agentic-coding-talk/**", ".github/workflows/publish-slides.yml"]
   workflow_dispatch:
 
 permissions:
@@ -17,5 +18,6 @@ jobs:
       - uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages
+          path: agentic-coding-talk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
