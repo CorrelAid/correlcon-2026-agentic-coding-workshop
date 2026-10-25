@@ -199,7 +199,7 @@ Three layers of control – the core message of the talk:
 | Layer | File | Behaviour |
 |---|---|---|
 | **Instructions** | `AGENTS.md` | Tells the agent the project rules. Usually followed – not guaranteed. Cross-tool standard. |
-| **Skills** | `.agents/skills/*/SKILL.md` | Procedures loaded on demand: `privacy-check`, `llm-categorization`, `ngo-handover`. Cross-tool folder. |
+| **Skills** | `.agents/skills/*/SKILL.md` | Procedures loaded on demand: `privacy-check`, `llm-categorization`. Cross-tool folder. |
 | **Policies** | `opencode.json` → `policies` | Hard rules nothing can override: only the IONOS provider; no reading `.env`, `data/raw/`, `data/interim/` – not even via the shell; no web search. |
 | **Permissions** | `opencode.json` → `permissions` | Shell commands need approval (except `uv run …`, `git status`, …); web fetches ask; sharing off. |
 | **Hooks** | `.opencode/plugins/guardrails.ts` | What policies can't express: blocks glob/grep searches in protected folders, hides both API keys from the agent's shell, runs `ruff` after every Python edit and feeds errors back to the agent. |

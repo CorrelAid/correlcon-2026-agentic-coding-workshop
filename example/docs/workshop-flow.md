@@ -11,7 +11,7 @@ prompt into OpenCode, watch the agent fill the stub, run the script, look at the
 | 13–21 | Step 4 topics – read and edit the categories together | skill `llm-categorization`; two models, two jobs |
 | 21–29 | Step 5 classify with `--limit 100` | batching, validation, caching, shared rate limits |
 | 29–35 | Step 6 report – open `outputs/report.html` | ruff hook + tests keep the generated code clean |
-| 35–40 | Discussion: trust, costs (`opencode stats`), handover (`ngo-handover`) | |
+| 35–40 | Discussion: trust, costs (`opencode stats`) | |
 
 Step 3 (PII) is optional – a good extra for fast groups; otherwise use the one-line
 fallback prompt in `prompts/03_pii.md`.
