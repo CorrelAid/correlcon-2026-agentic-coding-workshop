@@ -41,10 +41,16 @@ A coding agent resends the whole conversation with every step (tool call), so **
 tokens dominate**. IONOS has no prompt caching (`opencode stats`: cached input 0 %), so every
 step pays for the full context. Providers with caching would be cheaper than shown below.
 
-**Measured** (`opencode stats --cost`, IONOS, Qwen3-Coder-Next, 2026-10-25 – one prep day,
-fresh session per pipeline step): **526 agent steps = 28.7M input + 172k output tokens =
-€4.44**, i.e. ~55k input + ~330 output tokens ≈ **€0.0085 per step**. A single pipeline step
-(e.g. step 4 with tests and fixes) can take ~100 steps ≈ €1.
+**Measured** (`opencode stats --cost`, IONOS, Qwen3-Coder-Next, fresh session per pipeline step):
+
+| Run | Agent steps | Tokens | Cost |
+|---|---|---|---|
+| 2026-10-25, prep day | 526 | 28.7M in + 172k out | €4.44 |
+| 2026-10-26, finishing step 4 (multi-label rework + error fixes) | 302 | 19.6M in + 55k out | €2.99 |
+| Both days, 21 sessions, steps 2–5 incl. retries | ~1,500 | 90.9M | ≈ €13.60 |
+
+So **~60k input tokens per agent step ≈ €0.01**. A smooth pipeline step costs ~€0.15 (step 3:
+€0.15); a step where the agent struggles with errors can cost €1–3.
 
 Only ~7k tokens of that are fixed (OpenCode system prompt, 12 tool definitions, AGENTS.md –
 measured with a mock server). The rest is file contents, test and command output that pile
@@ -53,22 +59,23 @@ reading only the files needed.
 
 ### Workshop: 20 people, hands-on part
 
-Assumption: 100 / 200 / 350 agent steps per person (4–5 pipeline steps à ~40–70 steps).
+Assumption: 100 / 200 / 350 agent steps per person. Time caps it: at ~5–10 s per step, 40 min of
+active work is at most ~250–350 steps.
 
 | Provider | Model | In/Out per 1M | Workshop light | Workshop typical | Workshop heavy |
 |---|---|---|---|---|---|
-| IONOS (DE) | Qwen3-Coder-Next 80B | €0.15 / €0.80 | €17.03 | €34.06 | €59.60 |
-| IONOS (DE) | gpt-oss-120b | €0.15 / €0.65 | €16.93 | €33.86 | €59.25 |
-| IONOS (DE) | Qwen3.5-397B-A17B | €0.60 / €3.60 | €68.38 | €136.75 | €239.32 |
-| STACKIT (DE) | Qwen3.8 27B | €0.45 / €0.65 | €49.93 | €99.86 | €174.75 |
-| STACKIT (DE) | gpt-oss-120b | €0.45 / €0.65 | €49.93 | €99.86 | €174.75 |
-| Scaleway (FR) | qwen3.6-35b-a3b | €0.25 / €1.50 | €28.49 | €56.98 | €99.72 |
-| Scaleway (FR) | glm-5.3 | €1.80 / €5.50 | €201.63 | €403.26 | €705.71 |
-| OVHcloud (FR) | gpt-oss-120b | €0.08 / €0.40 | €9.06 | €18.13 | €31.72 |
-| OVHcloud (FR) | Qwen3.5-397B-A17B | €0.60 / €3.60 | €68.38 | €136.75 | €239.32 |
-| Mistral (FR) | Devstral 2 | $0.40 / $2.00 | $45.32 | $90.64 | $158.62 |
+| IONOS (DE) | Qwen3-Coder-Next 80B | €0.15 / €0.80 | €18.48 | €36.96 | €64.68 |
+| IONOS (DE) | gpt-oss-120b | €0.15 / €0.65 | €18.39 | €36.78 | €64.36 |
+| IONOS (DE) | Qwen3.5-397B-A17B | €0.60 / €3.60 | €74.16 | €148.32 | €259.56 |
+| STACKIT (DE) | Qwen3.8 27B | €0.45 / €0.65 | €54.39 | €108.78 | €190.37 |
+| STACKIT (DE) | gpt-oss-120b | €0.45 / €0.65 | €54.39 | €108.78 | €190.37 |
+| Scaleway (FR) | qwen3.6-35b-a3b | €0.25 / €1.50 | €30.90 | €61.80 | €108.15 |
+| Scaleway (FR) | glm-5.3 | €1.80 / €5.50 | €219.30 | €438.60 | €767.55 |
+| OVHcloud (FR) | gpt-oss-120b | €0.08 / €0.40 | €9.84 | €19.68 | €34.44 |
+| OVHcloud (FR) | Qwen3.5-397B-A17B | €0.60 / €3.60 | €74.16 | €148.32 | €259.56 |
+| Mistral (FR) | Devstral 2 | $0.40 / $2.00 | $49.20 | $98.40 | $172.20 |
 
-**Budget:** ~€35 typical, **€60** covers the heavy scenario. The analysis model (gpt-oss-120b on
+**Budget:** ~€40 typical, **€65** covers the heavy scenario. The analysis model (gpt-oss-120b on
 IONOS, steps 2–4 with `--limit 100`) adds only cents per person.
 
 ### NGO project

@@ -452,7 +452,7 @@ Only IONOS · no `.env`, no raw data · keys hidden · prompts read-only · ruff
 ::: {.card .warn}
 [Cost]{.ct}
 
-~55k tokens per agent step ≈ **€0.01** → **~€40** for 20 people
+~60k tokens per agent step ≈ **€0.01** → **~€40** for 20 people
 :::
 :::
 
@@ -462,7 +462,7 @@ Only IONOS · no `.env`, no raw data · keys hidden · prompts read-only · ruff
 - Two models, two jobs: the coding agent (Qwen3-Coder-Next) writes code; the code the agent writes calls a second model (gpt-oss-120b) for the actual analysis. Both on IONOS: one provider, one key, data stays in Germany, no training on it.
 - The agent never sees personal data: raw and interim data are blocked by policy and hooks; it writes code that processes the data and prints counts. The human runs the pipeline scripts – they call a paid API on real data.
 - Guardrails in three layers: AGENTS.md (advice – usually followed), policies (hard rules nothing overrides), hooks (deterministic: hide API keys, run ruff and feed errors back). Honest caveat: hooks catch accidents, only isolation is a security boundary.
-- Cost, measured: the agent resends its whole context with every step – ~55k tokens on average, no prompt caching on IONOS – about €0.0085 per step, €4.44 for a full prep day. The analysis itself costs cents.
+- Cost, measured: the agent resends its whole context with every step – ~60k tokens on average, no prompt caching on IONOS – about €0.01 per step; a smooth pipeline step ~€0.15, one full test run of steps 2–5 with retries ~€13. The analysis itself costs cents.
 - Why not Scaleway/GLM? Scaleway limits tokens per minute per organisation (1–2M); 20 people with an agent need ~5M. IONOS limits requests (5/s per model) instead.
 :::
 

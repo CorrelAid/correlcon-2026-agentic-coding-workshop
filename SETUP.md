@@ -128,9 +128,9 @@ IONOS has **no self-service hard spending cap** (as of Oct 2026). Do this instea
    that stops every token, including any minted ones.
 4. Ask the IONOS account manager about a contractual cost limit (mentioned in their FAQ).
 
-Expected workshop cost (measured ~€0.0085 per agent step, see
+Expected workshop cost (measured ~€0.01 per agent step, see
 [`infrastructure.md`](example/docs/infrastructure.md#workshop-20-people-hands-on-part)):
-**~€35 typical, ~€60 heavy** for 20 people; the analysis model adds only cents.
+**~€40 typical, ~€65 heavy** for 20 people; the analysis model adds only cents.
 
 ### 2.4 Smoke test (no Python needed)
 

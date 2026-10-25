@@ -42,14 +42,16 @@ PRICES: list[Price] = [
 
 # Coding agents resend the whole conversation with every step (tool call), so input tokens
 # dominate. IONOS has no prompt caching, so every step pays for the full context.
-# Measured with `opencode stats` (IONOS, Qwen3-Coder-Next, 2026-10-25, one prep day with a
-# fresh session per pipeline step): 526 steps = 28.7M input + 172k output tokens = €4.44,
-# i.e. ~55k input + ~330 output tokens per step. The fixed part (OpenCode system prompt,
+# Measured with `opencode stats` (IONOS, Qwen3-Coder-Next, fresh session per pipeline step):
+# 2026-10-25: 526 steps = 28.7M input + 172k output = €4.44; 2026-10-26 (full run of
+# steps 2–5): 302 steps = 19.6M input + 55k output = €2.99. Overall ~1.5k steps, 90.9M
+# tokens, i.e. ~60k input + ~200–330 output tokens per step. The fixed part (OpenCode system prompt,
 # tools, AGENTS.md) is only ~7k tokens – the rest is file contents and command output that
 # pile up during a session.
-TOKENS_PER_STEP = (55_000, 330)
+TOKENS_PER_STEP = (60_000, 300)
 
-# Agent steps per person during the hands-on part (4–5 pipeline steps, ~40–70 steps each).
+# Agent steps per person during the hands-on part. Time caps it: ~5–10 s per step, so
+# 40 min of active work is at most ~250–350 steps.
 SCENARIOS = {"light": 100, "typical": 200, "heavy": 350}
 
 # Categorisation: system prompt + category list + one comment -> short JSON answer

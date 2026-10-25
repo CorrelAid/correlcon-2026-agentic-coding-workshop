@@ -13,8 +13,8 @@ run the command it tells you, look at the result.
 | 4 | [04_classify.md](04_classify.md) | `uv run python scripts/04_classify.py --limit 100` | 8 min | ~€0.01 |
 | 5 | [05_report.md](05_report.md) | `uv run python scripts/05_report.py` | 8 min | – |
 
-\* per participant with `--limit 100`; the coding agent itself adds ~€0.30–1 per pipeline step
-(40–100 agent steps × ~€0.0085 – start a fresh session for each step).
+\* per participant with `--limit 100`; the coding agent itself adds ~€0.01 per agent step: a smooth
+pipeline step ~€0.15, one with many fixes €1–3 – start a fresh session for each step.
 Full data set (all 987 rows): run without `--limit` after the workshop.
 
 **Skipped step 2?** Steps 3–5 then use the district check from step 1 to filter spam
