@@ -12,6 +12,9 @@ Implement step 4 in src/project/classify.py
 - Validate with pydantic (every id present, every category valid); retry a batch once.
 - Cache per batch, respect --limit (number of survey rows), store model and prompt_version.
 - Write data/processed/04_classified.csv. Tests without LLM calls.
+- Show the user what is happening: logging (INFO: input file and row count, batches,
+  cache hits, output file, counts) and a tqdm progress bar over the batches. No comment
+  text in logs.
 
 Run `uv run pytest -q`, then tell me the command for a first run with --limit 100.
 ```

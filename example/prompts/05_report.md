@@ -17,6 +17,9 @@ Content:
 Readable for an NGO board: German labels, no jargon. Add a test that the report file is
 created from a tiny fake data set.
 
+- Show the user what is happening: logging (INFO: input files and row counts, each
+  chart/section built, output file). No comment text in logs.
+
 Run `uv run pytest -q`, then tell me the command to build the report.
 ```
 

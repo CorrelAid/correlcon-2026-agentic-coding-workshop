@@ -72,6 +72,8 @@ Raw columns (you do not need to open the file to know them): `ID`, `Date Created
 - Re-run only the failing test (`pytest -q tests/test_x.py::test_y`), not the whole suite.
 - Search with grep/glob first; read only the lines you need (offset/limit), not whole files.
 - Scripts print short summaries (counts, shapes), never whole DataFrames or long logs.
+- Pipeline scripts log progress for the user: `logging` (INFO) for each stage, `tqdm` for
+  LLM batches – the user runs them and wants to see what is happening.
 
 ## Layout
 

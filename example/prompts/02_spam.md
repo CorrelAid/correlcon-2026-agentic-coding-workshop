@@ -18,6 +18,9 @@ Frankfurt. Short but real answers ("Kitaplätze") are NOT spam.
 - Cache each batch in data/interim/cache/ so a re-run costs nothing; respect --limit.
 - Put the prompt as a versioned constant in src/project/prompts.py.
 - Add tests in tests/test_spam.py that do not call the LLM (mock it).
+- Show the user what is happening: logging (INFO: input file and row count, batches,
+  cache hits, output file, counts) and a tqdm progress bar over the batches. No comment
+  text in logs.
 
 Then run `uv run pytest -q` and tell me the command for a first run with --limit 100.
 ```

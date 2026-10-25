@@ -20,6 +20,9 @@ Implement step 3 in src/project/topics.py
   limit and returns nothing.
 - The prompt for the topic model goes into src/project/prompts.py as TOPICS_V1 (the files
   in prompts/ are instructions for you, not for the topic model). Tests without LLM calls.
+- Show the user what is happening: logging (INFO: input file and row count, sample size,
+  request duration and tokens, output file, counts).
+  No comment text in logs.
 
 Run `uv run pytest -q`, then tell me the command to run the step.
 ```
