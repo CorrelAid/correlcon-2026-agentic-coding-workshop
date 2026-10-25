@@ -6,6 +6,7 @@ Quarto (reveal.js) deck for the CorrelAid talk “Coding Agents and Best Practic
 - Live preview: `quarto preview index.qmd`
 - Build: `quarto render` → output in `_site/`
 - PDF export: append `?print-pdf` to the URL and print from the browser
+- Publish: `quarto publish gh-pages` (by hand – GitHub Actions are disabled in the CorrelAid org)
 
 ## Conventions
 - All content in English (CorrelAid is English-first)
