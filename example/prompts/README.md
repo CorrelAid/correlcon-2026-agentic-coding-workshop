@@ -22,3 +22,24 @@ Full data set (all 987 rows): run without `--limit` after the workshop.
 
 **Stuck?** Every step only needs the previous step's file (see `docs/pipeline.md`).
 Ask the agent: *"The step failed with this error: … – fix it."*
+
+**Still stuck? Take the finished step.** The branch `demo-solution` holds a complete run
+(code written by the agent + outputs). Copy one step from it and carry on with the next:
+
+```bash
+git fetch origin demo-solution
+B=origin/demo-solution
+# step 2 – code only (its output contains raw comments and is not in git; re-run the script)
+git checkout $B -- src/project/spam.py src/project/prompts.py
+# step 3 – code + categories
+git checkout $B -- src/project/topics.py src/project/data.py src/project/prompts.py \
+  data/processed/03_sample.csv data/processed/categories_v1.json
+# step 4 – code + classified answers
+git checkout $B -- src/project/classify.py src/project/data.py src/project/prompts.py \
+  scripts/04_classify.py data/processed/04_classified.csv
+# step 5 – code + finished report
+git checkout $B -- src/project/report.py outputs/report.html
+```
+
+Run these inside `example/`. Just want to show the result? `git checkout demo-solution` and open
+`example/outputs/report.html`.
