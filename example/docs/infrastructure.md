@@ -44,7 +44,7 @@ step pays for the full context. Providers with caching would be cheaper than sho
 **Measured** (`opencode stats --cost`, IONOS, Qwen3-Coder-Next, 2026-10-25 – one prep day,
 fresh session per pipeline step): **526 agent steps = 28.7M input + 172k output tokens =
 €4.44**, i.e. ~55k input + ~330 output tokens ≈ **€0.0085 per step**. A single pipeline step
-(e.g. step 3 with tests and fixes) can take ~100 steps ≈ €1.
+(e.g. step 4 with tests and fixes) can take ~100 steps ≈ €1.
 
 Only ~7k tokens of that are fixed (OpenCode system prompt, 12 tool definitions, AGENTS.md –
 measured with a mock server). The rest is file contents, test and command output that pile
@@ -69,7 +69,7 @@ Assumption: 100 / 200 / 350 agent steps per person (4–5 pipeline steps à ~40�
 | Mistral (FR) | Devstral 2 | $0.40 / $2.00 | $45.32 | $90.64 | $158.62 |
 
 **Budget:** ~€35 typical, **€60** covers the heavy scenario. Plus the topic model on
-Scaleway (GLM-5.3, steps 2, 4, 5 with `--limit 100`): ~€0.30 per person, ~€6 in total.
+Scaleway (GLM-5.3, steps 2–4 with `--limit 100`): ~€0.30 per person, ~€6 in total.
 
 ### NGO project
 

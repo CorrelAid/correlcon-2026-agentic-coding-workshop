@@ -1,4 +1,4 @@
-"""Step 5 – classify all answers.  uv run python scripts/05_classify.py [--limit 100]"""
+"""Step 4 – classify all answers.  uv run python scripts/04_classify.py [--limit 100]"""
 
 import argparse
 

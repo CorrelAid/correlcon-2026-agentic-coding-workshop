@@ -1,13 +1,13 @@
 # Pipeline: Babylotse survey, step by step
 
 ```
-raw survey ─▶ 1 prepare ─▶ 2 spam ─▶ 3 PII ─▶ 4 topics ─▶ 5 classify ─▶ 6 report
- (data/raw)   ready-made   agent     agent    agent       agent         agent
-              no LLM       GLM-5.3   regex    GLM-5.3     GLM-5.3       no LLM
-                                     (+GLM)   1 request   batches of 20
+raw survey ─▶ 1 prepare ─▶ 2 spam ─▶ 3 topics ─▶ 4 classify ─▶ 5 report
+ (data/raw)   ready-made   agent     agent       agent         agent
+              no LLM       GLM-5.3   GLM-5.3     GLM-5.3       no LLM
+                           optional  1 request   batches of 20
 ```
 
-The **agent** (Qwen3-Coder-Next in OpenCode) writes the code for steps 2–6 from the
+The **agent** (Qwen3-Coder-Next in OpenCode) writes the code for steps 2–5 from the
 prompts in `prompts/`. The **code** then calls the topic model (GLM-5.3) via
 `src/project/llm.py`. Each step reads the previous step's file and writes its own, so
 steps can be re-run independently.
@@ -17,14 +17,15 @@ steps can be re-run independently.
 | 0 | `scripts/get_data.py` | ready | `data/raw/babylotse_survey_2024.csv`, `data/reference/ffmstadtteilewahlen.geojson` |
 | 1 | `src/project/prepare.py`, `districts.py` | ready | `data/interim/01_prepared.csv` |
 | 2 | `src/project/spam.py` | agent | `data/interim/02_spam.csv` |
-| 3 | `src/project/pii.py` | agent | `data/processed/03_clean.csv` |
-| 4 | `src/project/topics.py` | agent | `data/processed/04_sample.csv`, `categories_v1.json` |
-| 5 | `src/project/classify.py` | agent | `data/processed/05_classified.csv` |
-| 6 | `src/project/report.py` | agent | `outputs/report.html` |
+| 3 | `src/project/topics.py` | agent | `data/processed/03_sample.csv`, `categories_v1.json` |
+| 4 | `src/project/classify.py` | agent | `data/processed/04_classified.csv` |
+| 5 | `src/project/report.py` | agent | `outputs/report.html` |
 
 `data/raw/` and `data/interim/` may contain personal data: the agent never reads them
-(hooks block it) – it writes code that processes them. From step 3 on, data lives in
-`data/processed/`, which the agent may inspect.
+(hooks block it) – it writes code that processes them. Step 1 masks e-mails, phone numbers
+and URLs; names or addresses in free text are not masked. From step 3 on, results live in
+`data/processed/`, which the agent may inspect – fine for this public demo data; with real
+personal data, add a privacy check first (skill `privacy-check`).
 
 ## File contracts
 
@@ -46,21 +47,15 @@ steps can be re-run independently.
 | `is_spam` | `True` if the whole response is spam / has no usable content |
 | `spam_reason` | short reason from the model |
 
-**03_clean.csv** – only valid rows, columns of 01 (without `district_known`), plus
-`pii_flag` (bool) and `pii_types` (e.g. `phone;name`). Valid means `is_spam == False` from
-02_spam.csv; if step 2 was skipped, `district_known == True` from 01_prepared.csv – a rough
-fallback: it catches most spam, but also drops some real answers with an unmappable district.
+**Valid answers (input of steps 3–5)** – `load_valid_answers()` (`src/project/data.py`,
+written in step 3): `02_spam.csv` with `is_spam == False`; if step 2 was skipped,
+`01_prepared.csv` with `district_known == True` – a rough fallback that catches most spam
+but also drops some real answers with an unmappable district.
 
-**Valid answers (input of steps 4 and 5)** – steps 2 and 3 are optional, so
-`load_valid_answers()` (`src/project/data.py`, written in step 4) uses the first file that
-exists: `03_clean.csv` → `02_spam.csv` with `is_spam == False` → `01_prepared.csv` with
-`district_known == True`. Without step 3, names and addresses are not masked yet – fine for
-this public demo data, not for real personal data.
-
-**04_sample.csv** – `row_id`, `polarity` (`positive`/`negative`), `text` – the fixed sample.
+**03_sample.csv** – `row_id`, `polarity` (`positive`/`negative`), `text` – the fixed sample.
 **categories_v1.json** – list of `{"name": …, "description": …}`, at most 10, reviewed by a human.
 
-**05_classified.csv** – one row per non-empty answer (long format)
+**04_classified.csv** – one row per non-empty answer (long format)
 
 | column | meaning |
 |---|---|

@@ -1,7 +1,7 @@
-# Step 6 – report
+# Step 5 – report
 
 ```text
-Implement step 6 in src/project/report.py: a self-contained HTML report
+Implement step 5 in src/project/report.py: a self-contained HTML report
 outputs/report.html built with plotly (no server, works offline after creation).
 
 Content:
@@ -17,7 +17,7 @@ Content:
 Readable for an NGO board: German labels, no jargon. Add a test that the report file is
 created from a tiny fake data set.
 
-Run `uv run pytest`, then `uv run python scripts/06_report.py`.
+Run `uv run pytest -q`, then `uv run python scripts/05_report.py`.
 ```
 
 **Look at:** open `outputs/report.html`. What would the NGO do with it?

@@ -1,19 +1,19 @@
-# Step 5 – classify every answer
+# Step 4 – classify every answer
 
 ```text
-Implement step 5 in src/project/classify.py
+Implement step 4 in src/project/classify.py
 (contracts in docs/pipeline.md).
 
-- Input: load_valid_answers() from src/project/data.py (step 4) and the reviewed
+- Input: load_valid_answers() from src/project/data.py (step 3) and the reviewed
   data/processed/categories_v1.json.
 - Long format: one row per non-empty positive or negative answer (row_id, polarity, text).
 - Batches of 20 answers per request to the topic model; the prompt contains the category
   list with descriptions; exactly one category per answer, names only from the list.
 - Validate with pydantic (every id present, every category valid); retry a batch once.
 - Cache per batch, respect --limit (number of survey rows), store model and prompt_version.
-- Write data/processed/05_classified.csv. Tests without LLM calls.
+- Write data/processed/04_classified.csv. Tests without LLM calls.
 
-Run `uv run pytest`, then `uv run python scripts/05_classify.py --limit 100`.
+Run `uv run pytest -q`, then `uv run python scripts/04_classify.py --limit 100`.
 ```
 
-**Look at:** pick 10 random rows of `05_classified.csv` – would you agree with the model?
+**Look at:** pick 10 random rows of `04_classified.csv` – would you agree with the model?

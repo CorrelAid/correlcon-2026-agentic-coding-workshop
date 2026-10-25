@@ -1,4 +1,4 @@
-"""Step 6 – build the report.  uv run python scripts/06_report.py"""
+"""Step 5 – build the report.  uv run python scripts/05_report.py"""
 
 from project import paths, report
 

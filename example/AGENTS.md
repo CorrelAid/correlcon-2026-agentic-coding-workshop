@@ -8,6 +8,9 @@ Keep it short: every line is sent with every request.
 Demo project: data analysis for a non-profit organisation (NGO), using the Babylotse survey.
 Python, managed with `uv`. Readers may not be Python experts – readability beats cleverness.
 
+Always write a POC first and if that is good enough, let's go on to the next step so we have a working pipeline.
+Do not spend time overengineering or fixing every mistake, follow pareto principle.
+
 ## Models
 
 - You (the coding agent) run on Qwen3-Coder-Next via IONOS. Your job: write and test code.
@@ -18,9 +21,9 @@ Python, managed with `uv`. Readers may not be Python experts – readability bea
 ## Data & pipeline
 
 Babylotse survey 2024 (families with a baby in Frankfurt), CC BY 4.0 – attribution in README.
-987 responses, German. Six steps, one file each – **contracts in `docs/pipeline.md`**,
-paths in `src/project/paths.py`. Steps 0–1 are ready-made; steps 2–6 are stubs you
-implement (`src/project/{spam,pii,topics,classify,report}.py`), run via `scripts/0N_*.py`.
+987 responses, German. Five steps, one file each – **contracts in `docs/pipeline.md`**,
+paths in `src/project/paths.py`. Steps 0–1 are ready-made; steps 2–5 are stubs you
+implement (`src/project/{spam,topics,classify,report}.py`), run via `scripts/0N_*.py`.
 Raw columns (you do not need to open the file to know them): `ID`, `Date Created`,
 `Title` (a timestamp), `Ich wohne im Stadtteil`, `Das gefällt mir gut mit Baby in Frankfurt`,
 `Das gefällt mir nicht gut mit Baby in Frankfurt`.
@@ -29,13 +32,13 @@ Raw columns (you do not need to open the file to know them): `ID`, `Date Created
 
 - `data/raw/` and `data/interim/` may contain personal data. **Never read or print them.**
   Write code that processes them; print only counts.
-- You may inspect `data/processed/` (spam removed, PII masked) or synthetic sample data.
-- Step 1 masks contact details before any LLM call. For new data sources: `privacy-check` skill.
+- You may inspect `data/processed/` (sample, categories, results) or synthetic sample data.
+- Step 1 masks e-mails, phones and URLs before any LLM call. New data source: `privacy-check` skill.
 - LLM calls in code only via `src/project/llm.py` (EU provider, configured in `.env`).
   Do not add other AI APIs or US services.
 - Never read, print or commit `.env`.
 
-## LLM calls in code (steps 2–5)
+## LLM calls in code (steps 2–4)
 
 - Always via `src/project/llm.py` (`get_client()`, `ANALYSIS_MODEL`); prompts as versioned
   constants in `src/project/prompts.py`.
@@ -56,10 +59,17 @@ Raw columns (you do not need to open the file to know them): `ID`, `Date Created
 ## Commands
 
 - Dependencies: `uv sync` · add a package: `uv add <package>`
-- Tests: `uv run pytest`
-- Lint/format: `uv run ruff check --fix . && uv run ruff format .`
+- Tests: `uv run pytest -q`
+- Lint/format: `uv run ruff check --fix -q . && uv run ruff format -q .`
 - Check setup: `uv run python scripts/check_setup.py`
 - Estimate costs: `uv run python scripts/costs.py`
+
+## Keep output short (everything you read is resent with every step)
+
+- Quiet flags: `pytest -q --tb=short`, `ruff -q`, `uv sync -q`, `uv add -q`, `git diff --stat`.
+- Re-run only the failing test (`pytest -q tests/test_x.py::test_y`), not the whole suite.
+- Search with grep/glob first; read only the lines you need (offset/limit), not whole files.
+- Scripts print short summaries (counts, shapes), never whole DataFrames or long logs.
 
 ## Layout
 
@@ -70,6 +80,6 @@ Raw columns (you do not need to open the file to know them): `ID`, `Date Created
 
 ## Way of working
 
-- Start with a 3–5 point plan, then implement in small steps; run `uv run pytest` after each.
+- Start with a 3–5 point plan, then implement in small steps; run `uv run pytest -q` after each.
 - Before LLM batch runs: estimate costs with `scripts/costs.py` and state them.
 - If unsure, ask instead of guessing.

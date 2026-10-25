@@ -26,7 +26,7 @@ Frankfurt / Babylotse for permission to publish and use the data. The data is do
 District polygons (`ffmstadtteilewahlen.geojson`, Stadt Frankfurt am Main) and the district
 mapping in `src/project/districts.py` come from the same 2024 repo; that code is GPL-3.0.
 
-Workshop: follow [`prompts/README.md`](prompts/README.md) – six steps, ready prompts.
+Workshop: follow [`prompts/README.md`](prompts/README.md) – five steps, ready prompts.
 Pipeline and file contracts: [`docs/pipeline.md`](docs/pipeline.md).
 
 Layout:
@@ -36,10 +36,10 @@ AGENTS.md                         project rules for any agent
 opencode.json                     IONOS only, permissions, sharing off
 .opencode/plugins/guardrails.ts   hooks: privacy blocks, key hiding, ruff feedback
 .agents/skills/                   privacy-check
-prompts/                          copy-paste prompts for steps 2–6
-src/project/                      prepare.py + districts.py (ready), stubs for steps 2–6,
+prompts/                          copy-paste prompts for steps 2–5
+src/project/                      prepare.py + districts.py (ready), stubs for steps 2–5,
                                   llm.py (single LLM access point, EU endpoints only)
-scripts/                          get_data.py, 01_prepare.py … 06_report.py, check_setup.py, costs.py
+scripts/                          get_data.py, 01_prepare.py … 05_report.py, check_setup.py, costs.py
 data/raw/, data/interim/          blocked for the agent, not in git
-data/processed/                   spam removed, PII masked – the agent may look here
+data/processed/                   sample, categories, results – the agent may look here
 ```
