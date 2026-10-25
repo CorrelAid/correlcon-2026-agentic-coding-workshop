@@ -46,8 +46,10 @@ steps can be re-run independently.
 | `is_spam` | `True` if the whole response is spam / has no usable content |
 | `spam_reason` | the rules that fired, joined by `;` |
 
-**03_clean.csv** – only rows with `is_spam == False`, columns of 01 (without
-`district_known`), plus `pii_flag` (bool) and `pii_types` (e.g. `phone;name`).
+**03_clean.csv** – only valid rows, columns of 01 (without `district_known`), plus
+`pii_flag` (bool) and `pii_types` (e.g. `phone;name`). Valid means `is_spam == False` from
+02_spam.csv; if step 2 was skipped, `district_known == True` from 01_prepared.csv – a rough
+fallback: it catches most spam, but also drops some real answers with an unmappable district.
 
 **04_sample.csv** – `row_id`, `polarity` (`positive`/`negative`), `text` – the fixed sample.
 **categories_v1.json** – list of `{"name": …, "description": …}`, at most 10, reviewed by a human.
