@@ -1,22 +1,23 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "enabled_providers": [
-    "ionos"
-  ],
   "share": "disabled",
   "autoupdate": false,
-  "provider": {
+  "providers": {
     "ionos": {
-      "npm": "@ai-sdk/openai-compatible",
       "name": "IONOS AI Model Hub (data centres in Germany)",
-      "options": {
-        "baseURL": "https://openai.inference.de-txl.ionos.com/v1",
-        "apiKey": "{env:IONOS_API_KEY}"
+      "env": [
+        "IONOS_API_KEY"
+      ],
+      "package": "@opencode/ai/providers/openai-compatible",
+      "settings": {
+        "baseURL": "https://openai.inference.de-txl.ionos.com/v1"
       },
       "models": {
         "Qwen/Qwen3-Coder-Next": {
           "name": "Qwen3 Coder Next 80B (IONOS, DE)",
-          "tool_call": true,
+          "capabilities": {
+            "tools": true
+          },
           "limit": {
             "context": 256000,
             "output": 32000
@@ -28,7 +29,9 @@
         },
         "openai/gpt-oss-120b": {
           "name": "gpt-oss-120b (IONOS, DE)",
-          "tool_call": true,
+          "capabilities": {
+            "tools": true
+          },
           "cost": {
             "input": 0.15,
             "output": 0.65
@@ -36,43 +39,46 @@
         },
         "Qwen/Qwen3.5-397B-A17B": {
           "name": "Qwen3.5 397B (IONOS, DE) – strongest, ~4x the price",
-          "tool_call": true,
+          "capabilities": {
+            "tools": true
+          },
           "cost": {
             "input": 0.6,
             "output": 3.6
-          }
-        },
-        "Qwen/Qwen3.5-9B": {
-          "name": "Qwen3.5 9B (IONOS, DE) – titles / helper tasks",
-          "cost": {
-            "input": 0.1,
-            "output": 0.15
           }
         }
       }
     }
   },
   "model": "ionos/Qwen/Qwen3-Coder-Next",
-  "small_model": "ionos/Qwen/Qwen3.5-9B",
-  "permission": {
-    "edit": "allow",
-    "read": {
-      "*": "allow",
-      "*.env": "deny",
-      "*.env.*": "allow",
-      "data/raw/*": "deny",
-      "data/interim/*": "deny"
-    },
-    "bash": {
-      "*": "ask",
-      "uv run *": "allow",
-      "uv sync*": "allow",
-      "git status*": "allow",
-      "git diff*": "allow",
-      "git log*": "allow",
-      "ls*": "allow"
-    },
-    "webfetch": "ask",
-    "websearch": "deny"
-  }
+  "policies": [
+    { "action": "provider.use", "resource": "*", "effect": "deny" },
+    { "action": "provider.use", "resource": "ionos", "effect": "allow" },
+    { "action": "tool.use", "resource": "read:*.env", "effect": "deny" },
+    { "action": "tool.use", "resource": "read:data/raw/*", "effect": "deny" },
+    { "action": "tool.use", "resource": "read:data/interim/*", "effect": "deny" },
+    { "action": "tool.use", "resource": "edit:*.env", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:*data/raw*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:*data/interim*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:* .env*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:*/.env*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:*printenv*", "effect": "deny" },
+    { "action": "tool.use", "resource": "shell:*API_KEY*", "effect": "deny" },
+    { "action": "tool.use", "resource": "websearch:*", "effect": "deny" }
+  ],
+  "permissions": [
+    { "action": "read", "resource": "*", "effect": "allow" },
+    { "action": "edit", "resource": "*", "effect": "allow" },
+    { "action": "glob", "resource": "*", "effect": "allow" },
+    { "action": "grep", "resource": "*", "effect": "allow" },
+    { "action": "skill", "resource": "*", "effect": "allow" },
+    { "action": "shell", "resource": "*", "effect": "ask" },
+    { "action": "shell", "resource": "uv run *", "effect": "allow" },
+    { "action": "shell", "resource": "uv sync *", "effect": "allow" },
+    { "action": "shell", "resource": "git status *", "effect": "allow" },
+    { "action": "shell", "resource": "git diff *", "effect": "allow" },
+    { "action": "shell", "resource": "git log *", "effect": "allow" },
+    { "action": "shell", "resource": "ls *", "effect": "allow" },
+    { "action": "webfetch", "resource": "*", "effect": "ask" }
+  ]
 }

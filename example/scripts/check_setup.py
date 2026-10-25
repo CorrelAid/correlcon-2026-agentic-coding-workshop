@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -43,10 +44,8 @@ def check_tools() -> str:
     if missing:
         raise RuntimeError(f"not found: {', '.join(missing)} (see SETUP.md, step 1)")
     version = subprocess.run(["opencode", "--version"], capture_output=True, text=True).stdout
-    if not version.strip().lstrip("v").startswith("1."):
-        raise RuntimeError(
-            f"OpenCode {version.strip()} – the workshop needs 1.x (SETUP.md, step 1)"
-        )
+    if not re.search(r"(^|\D)2\.\d+", version):
+        raise RuntimeError(f"OpenCode {version.strip()} – workshop needs 2.x (SETUP.md, step 1)")
     return f"uv, opencode {version.strip()}, git"
 
 

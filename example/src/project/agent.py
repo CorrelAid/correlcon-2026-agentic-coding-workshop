@@ -1,12 +1,15 @@
 """Start OpenCode the right way:  uv run agent
 
-- always from the example/ folder, so opencode.json (IONOS only, hooks, permissions) applies
+- always from the example/ folder, so opencode.json (IONOS only, policies, hooks) applies
 - with the keys from .env, overriding stale values exported in your shell
+- with `--standalone`: OpenCode 2 otherwise talks to a shared background service that was
+  started without these keys (-> HTTP 401)
 """
 
 from __future__ import annotations
 
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -29,11 +32,16 @@ def main() -> None:
     if shutil.which("opencode") is None:
         sys.exit("opencode not found – see SETUP.md, step 1.")
     version = subprocess.run(["opencode", "--version"], capture_output=True, text=True).stdout
-    if not version.strip().lstrip("v").startswith("1."):
+    major = re.search(r"(\d+)\.\d+", version)
+    if not major or major.group(1) != "2":
         sys.exit(
-            f"OpenCode {version.strip()} found – this workshop needs OpenCode 1.x.\n"
-            "Version 2 ignores the provider allowlist and does not run our privacy hooks.\n"
-            "Install 1.x:  npm install -g opencode-ai@1   (see SETUP.md, step 1)"
+            f"OpenCode {version.strip() or '?'} found – this workshop needs OpenCode 2.\n"
+            "Install: curl -fsSL https://opencode.ai/v2/install | bash   (see SETUP.md, step 1)"
         )
     env = {**os.environ, **values, "PWD": str(ROOT)}
-    sys.exit(subprocess.call(["opencode", *sys.argv[1:]], cwd=ROOT, env=env))
+    args = sys.argv[1:]
+    if not args or args[0].startswith("-"):
+        args = ["--standalone", *args]  # interactive TUI
+    elif args[0] == "run":
+        args = ["run", "--standalone", *args[1:]]  # one-shot prompt
+    sys.exit(subprocess.call(["opencode", *args], cwd=ROOT, env=env))

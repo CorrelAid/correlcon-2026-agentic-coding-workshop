@@ -33,19 +33,16 @@ macOS / Linux / Windows with WSL:
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh     # Python tooling (uv)
-curl -fsSL https://opencode.ai/install | bash       # coding agent (OpenCode 1.x)
+curl -fsSL https://opencode.ai/v2/install | bash    # coding agent (OpenCode 2)
 ```
 
-> **OpenCode 1.x, not 2.x.** OpenCode 2 (Sept 2026) has no provider allowlist yet and does
-> not run v1 plugins – our privacy hooks would silently be off. `uv run agent` refuses to
-> start with 2.x. The installer above still installs the newest 1.x (as of Oct 2026); with Node.js,
-> `npm install -g opencode-ai@1` pins 1.x explicitly – also the way back if you upgraded.
+Alternatives: `brew install anomalyco/tap/opencode-v2` (macOS) · `npm install -g @opencode/cli`
+· Windows: `winget install --id Anomaly.OpenCode -e`. Already on OpenCode 1.x? `opencode upgrade --major`.
+WSL is recommended on Windows – the example's hooks are tested on Linux/macOS.
 
-Windows without WSL: `powershell -c "irm https://astral.sh/uv/install.ps1 | iex"` and
-`npm install -g opencode-ai@1` (needs Node.js).
-WSL is recommended – the example's shell hooks are tested on Linux/macOS.
+Windows without WSL, uv: `powershell -c "irm https://astral.sh/uv/install.ps1 | iex"`.
 
-Restart your terminal, then check: `uv --version` and `opencode --version`.
+Restart your terminal, then check: `uv --version` and `opencode --version` (must show 2.x).
 
 ### Step 2 – Get the code and add the keys
 
@@ -73,10 +70,10 @@ All green? Then start the agent:
 uv run agent
 ```
 
-`uv run agent` starts OpenCode from the `example/` folder with the keys from `.env` – on
-every OS, from any subfolder, and even if your shell already exports older keys. (Plain
-`opencode` does **not** read `.env` and fails with `401`.) The first start takes a little
-longer (OpenCode installs the hook dependencies into `.opencode/`).
+`uv run agent` starts OpenCode 2 from the `example/` folder with the keys from `.env` and
+`--standalone` – on every OS, from any subfolder, even if your shell exports older keys.
+(Plain `opencode` fails with `401`: it does not read `.env`, and OpenCode 2 normally talks to
+a shared background service that knows nothing about this project's keys.)
 
 Try it: *"Write a function in src/project/text.py that masks email addresses and phone
 numbers, add tests and run them."* (≈ 45 s, ≈ €0.02)
@@ -203,8 +200,9 @@ Three layers of control – the core message of the talk:
 |---|---|---|
 | **Instructions** | `AGENTS.md` | Tells the agent the project rules. Usually followed – not guaranteed. Cross-tool standard. |
 | **Skills** | `.agents/skills/*/SKILL.md` | Procedures loaded on demand: `privacy-check`, `llm-categorization`, `ngo-handover`. Cross-tool folder. |
-| **Permissions** | `opencode.json` | Only the IONOS provider is enabled for the agent; `.env` and `data/raw/` cannot be read; shell commands need approval (except `uv run …`, `git status`, …); session sharing off. |
-| **Hooks** | `.opencode/plugins/guardrails.ts` | Deterministic: blocks raw data and secrets even via shell (`cat data/raw/…`), hides both API keys from the agent's shell, runs `ruff` after every Python edit and feeds errors back to the agent. |
+| **Policies** | `opencode.json` → `policies` | Hard rules nothing can override: only the IONOS provider; no reading `.env`, `data/raw/`, `data/interim/` – not even via the shell; no web search. |
+| **Permissions** | `opencode.json` → `permissions` | Shell commands need approval (except `uv run …`, `git status`, …); web fetches ask; sharing off. |
+| **Hooks** | `.opencode/plugins/guardrails.ts` | What policies can't express: blocks glob/grep searches in protected folders, hides both API keys from the agent's shell, runs `ruff` after every Python edit and feeds errors back to the agent. |
 
 Supporting code:
 
@@ -213,18 +211,17 @@ Supporting code:
 - `scripts/check_setup.py` – checks both endpoints incl. tool calling (< €0.01).
 - `scripts/costs.py` – cost calculator for workshop, projects and batch runs.
 
-**Why OpenCode restricts providers:** out of the box OpenCode offers free "Zen" models
-served via OpenCode's own servers. `"enabled_providers": ["ionos"]` turns everything else
-off – verify with `opencode models` inside `example/`.
+**Why OpenCode restricts providers:** OpenCode offers its own "Zen" models and any provider it
+finds credentials for (e.g. AWS keys in your environment). The policy `provider.use: * → deny,
+ionos → allow` turns everything else off – verify with `opencode models` inside `example/`.
 
-**Models configured** (all verified on 2026-10-23/24):
+**Models configured** (verified 2026-10-23/24; config tested with OpenCode 2.1.4):
 
 | Model | Role | € in/out per 1M tokens |
 |---|---|---|
 | `Qwen/Qwen3-Coder-Next` | default coding agent | 0.15 / 0.80 |
 | `openai/gpt-oss-120b` | fallback, analysis in project code | 0.15 / 0.65 |
 | `Qwen/Qwen3.5-397B-A17B` | hard tasks (`/models` in OpenCode) | 0.60 / 3.60 |
-| `Qwen/Qwen3.5-9B` | `small_model` for session titles – keeps helper calls off the coding model's rate limit | 0.10 / 0.15 |
 | `glm-5.3` (Scaleway) | topic model in project code (`LLM_MODEL_ANALYSIS`) | 1.80 / 5.50 |
 
 ---
@@ -235,10 +232,11 @@ off – verify with `opencode models` inside `example/`.
 |---|---|
 | You see your own / other providers' models | OpenCode was started outside `example/` – the project config is only found from that folder. `cd example` first, then check with `opencode models` (only `ionos/…` should appear). Your global `~/.config/opencode` config can stay as it is. |
 | `401 Unauthorized` | Token expired (TTL) or you pasted the token ID (UUID) instead of the token (`eyJ…`). |
-| `401` / `Invalid URL` when starting OpenCode | OpenCode was started without the keys: use `uv run agent` (plain `opencode` does not read `.env`; `uv run --env-file` loses against keys already exported in your shell). |
+| `401` when starting OpenCode | Started without the keys: use `uv run agent`. Plain `opencode` doesn't read `.env`, and OpenCode 2's background service doesn't see keys from your shell (`uv run agent` uses `--standalone`). |
 | `429 Too Many Requests` | Rate limit (5 req/s per model, shared by everyone). OpenCode retries automatically after ~1 s. |
 | `429` from `api.scaleway.ai` | Tokens-per-minute limit of the Scaleway organisation reached (shared by everyone). Use batches of ~20 comments, classify a sample, or the Batch API. |
 | Topic model returns empty content | GLM-5.3 reasons first: raise `max_tokens` (max 16,384). |
 | `529 … server_overloaded` | IONOS platform load – wait, or switch model with `/models` (e.g. `gpt-oss-120b`). |
+| Agent says "Blocked by configuration policy" | Working as intended: a policy in `opencode.json` forbids the command (e.g. reading `data/interim/`). |
 | Agent says "Access denied (privacy hook)" | Working as intended: it tried to read `data/raw/` or `.env`. |
 | First start hangs for a minute | OpenCode installs plugin dependencies once; needs access to the npm registry. |

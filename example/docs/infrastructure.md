@@ -127,7 +127,7 @@ The limit is shared by everything on the contract.
 
 The simulation is harsher than reality (people read, think and type between tasks):
 **the default limit is enough for 20 participants.** Session-title requests go to
-`Qwen3.5-9B` (`small_model`) so they don't count against the coding model's limit.
+`Qwen3.5-9B` (`small_model`, OpenCode 1.x only) so they don't count against the coding model's limit.
 
 ## Restricted user test (2026-10-23)
 
