@@ -14,7 +14,8 @@ run the command it tells you, look at the result.
 | 5 | [05_classify.md](05_classify.md) | `uv run python scripts/05_classify.py --limit 100` | 8 min | ~€0.15 |
 | 6 | [06_report.md](06_report.md) | `uv run python scripts/06_report.py` | 8 min | – |
 
-\* per participant with `--limit 100`; the coding agent itself adds ~€0.05–0.15 per step.
+\* per participant with `--limit 100`; the coding agent itself adds ~€0.30–1 per pipeline step
+(40–100 agent steps × ~€0.0085 – start a fresh session for each step).
 Full data set (all 987 rows): run without `--limit` after the workshop.
 
 **Skipped steps 2 or 3?** Steps 3–5 fall back to the previous file; without step 2 the

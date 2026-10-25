@@ -1,7 +1,7 @@
 """Transparent cost estimate for the workshop and for projects.
 
-    uv run python scripts/costs.py                        # workshop (20 people, 1.5 h)
-    uv run python scripts/costs.py --people 12 --hours 2
+    uv run python scripts/costs.py                        # workshop (20 people)
+    uv run python scripts/costs.py --people 12
     uv run python scripts/costs.py --texts 1974           # LLM categorisation run (1 text/request)
     uv run python scripts/costs.py --markdown             # table for docs
 
@@ -40,16 +40,17 @@ PRICES: list[Price] = [
     Price("Mistral (FR)", "Devstral 2", 0.40, 2.00, "USD", "third-party price source, verify"),
 ]
 
-# Token usage of a coding agent per person and hour of active use. Agents resend the
-# conversation context with every step, so input tokens dominate. EU providers barely
-# offer cheaper cached input, so we calculate without caching (conservative).
-# Reference measurement (IONOS, 2026-10-23): one small task (write function + tests,
-# run pytest) = ~120k input + ~2k output tokens in 46 s.
-SCENARIOS = {
-    "light": (1_000_000, 30_000),
-    "typical": (3_000_000, 80_000),
-    "heavy": (6_000_000, 150_000),
-}
+# Coding agents resend the whole conversation with every step (tool call), so input tokens
+# dominate. IONOS has no prompt caching, so every step pays for the full context.
+# Measured with `opencode stats` (IONOS, Qwen3-Coder-Next, 2026-10-25, one prep day with a
+# fresh session per pipeline step): 526 steps = 28.7M input + 172k output tokens = €4.44,
+# i.e. ~55k input + ~330 output tokens per step. The fixed part (OpenCode system prompt,
+# tools, AGENTS.md) is only ~7k tokens – the rest is file contents and command output that
+# pile up during a session.
+TOKENS_PER_STEP = (55_000, 330)
+
+# Agent steps per person during the hands-on part (4–5 pipeline steps, ~40–70 steps each).
+SCENARIOS = {"light": 100, "typical": 200, "heavy": 350}
 
 # Categorisation: system prompt + category list + one comment -> short JSON answer
 TOKENS_PER_TEXT = (800, 40)
@@ -79,18 +80,19 @@ def table(header: list[str], rows: list[list[str]], markdown: bool) -> str:
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
     ap.add_argument("--people", type=int, default=20)
-    ap.add_argument("--hours", type=float, default=1.5, help="active agent use per person")
     ap.add_argument("--texts", type=int, default=0, help="number of texts to categorise")
     ap.add_argument("--markdown", action="store_true")
     a = ap.parse_args()
 
-    person_hours = a.people * a.hours
-    print(f"\nWorkshop: {a.people} people × {a.hours:g} h = {person_hours:g} person-hours")
+    step_in, step_out = TOKENS_PER_STEP
+    print(f"\nWorkshop: {a.people} people; agent steps per person: {SCENARIOS}")
     print(f"List prices, net, as of {PRICES_AS_OF}\n")
     header = ["Provider", "Model", "In/Out per 1M"] + [f"Workshop {s}" for s in SCENARIOS]
     rows = []
     for p in PRICES:
-        values = [cost(p, i * person_hours, o * person_hours) for i, o in SCENARIOS.values()]
+        values = [
+            cost(p, step_in * n * a.people, step_out * n * a.people) for n in SCENARIOS.values()
+        ]
         rows.append(
             [p.provider, p.model, f"{fmt(p.input, p.currency)} / {fmt(p.output, p.currency)}"]
             + [fmt(v, p.currency) for v in values]
@@ -106,11 +108,10 @@ def main() -> None:
         ]
         print(table(["Provider", "Model", "Cost"], rows, a.markdown))
 
-    i, o = SCENARIOS["typical"]
     print(
-        f"\nAssumption 'typical': {i / 1e6:g}M input and {o / 1e3:g}k output tokens per person "
-        "and hour. After the workshop, check real usage with `opencode stats` or the provider "
-        "dashboard and update this script."
+        f"\nAssumption: ~{step_in / 1e3:g}k input + ~{step_out} output tokens per agent step "
+        "(measured). After the workshop, check real usage with `opencode stats --cost` or the "
+        "provider dashboard and update TOKENS_PER_STEP / SCENARIOS."
     )
 
 

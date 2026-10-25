@@ -397,7 +397,7 @@ Volunteers move on – non-techies inherit the code.
 :::
 :::
 
-**Our setup:** EU-hosted open models · guardrails · pay-per-use (~€15/workshop)
+**Our setup:** EU-hosted open models · guardrails · pay-per-use (~€40/workshop)
 
 [¹ Fast Forward 2025 (US) · ² TechSoup 2025 (US) · ³ Charity Digital Skills 2025 (UK) · ⁴ ZiviZ 2023]{.small}
 

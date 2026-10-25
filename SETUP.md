@@ -121,7 +121,7 @@ Token Manager is only the token *ID* (for deleting it), not the API key.
 
 IONOS has **no self-service hard spending cap** (as of Oct 2026). Do this instead:
 
-1. **Cost Alert** (DCD → Management → Cost alert): e-mail at e.g. **€20**. It fires
+1. **Cost Alert** (DCD → Management → Cost alert): e-mail at e.g. **€40**. It fires
    **once** and **does not block** anything.
 2. **Short TTL** – limits how long a token works. The only technical ceiling is the rate
    limit (5 requests/s per model); a leaked token could theoretically burn **~€690/hour**.
@@ -131,7 +131,9 @@ IONOS has **no self-service hard spending cap** (as of Oct 2026). Do this instea
    that stops every token, including any minted ones.
 4. Ask the IONOS account manager about a contractual cost limit (mentioned in their FAQ).
 
-Expected workshop cost: **~€15 typical, ~€35 worst realistic case** for 20 people × 1.5 h.
+Expected workshop cost (measured ~€0.0085 per agent step, see
+[`infrastructure.md`](example/docs/infrastructure.md#workshop-20-people-hands-on-part)):
+**~€35 typical, ~€60 heavy** for 20 people on IONOS, plus ~€6 for the topic model on Scaleway.
 
 ### 2.4 Smoke test (no Python needed)
 

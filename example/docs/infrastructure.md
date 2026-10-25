@@ -37,40 +37,44 @@ Mistral (Devstral) with the caveats above. Worth a slide and a discussion.
 The only variable cost is tokens. OpenCode, uv and the Python packages are free; no
 servers, no base fee.
 
-A coding agent resends the conversation context with every step, so **input tokens
-dominate**. EU providers barely offer cheaper cached input, so we calculate without
-caching. Assumptions per person and hour of active use:
+A coding agent resends the whole conversation with every step (tool call), so **input
+tokens dominate**. IONOS has no prompt caching (`opencode stats`: cached input 0 %), so every
+step pays for the full context. Providers with caching would be cheaper than shown below.
 
-| Scenario | Input tokens | Output tokens |
-|---|---|---|
-| light | 1M | 30k |
-| typical | 3M | 80k |
-| heavy | 6M | 150k |
+**Measured** (`opencode stats --cost`, IONOS, Qwen3-Coder-Next, 2026-10-25 – one prep day,
+fresh session per pipeline step): **526 agent steps = 28.7M input + 172k output tokens =
+€4.44**, i.e. ~55k input + ~330 output tokens ≈ **€0.0085 per step**. A single pipeline step
+(e.g. step 3 with tests and fixes) can take ~100 steps ≈ €1.
 
-Reference measurement: one small real task (write function + tests, run pytest) took 46 s
-and ~120k input + ~2k output tokens = **€0.02**.
+Only ~7k tokens of that are fixed (OpenCode system prompt, 12 tool definitions, AGENTS.md –
+measured with a mock server). The rest is file contents, test and command output that pile
+up within a session. Levers: a fresh session per pipeline step, short outputs (`pytest -q`),
+reading only the files needed.
 
-### Workshop: 20 people × 1.5 h hands-on
+### Workshop: 20 people, hands-on part
+
+Assumption: 100 / 200 / 350 agent steps per person (4–5 pipeline steps à ~40–70 steps).
 
 | Provider | Model | In/Out per 1M | Workshop light | Workshop typical | Workshop heavy |
 |---|---|---|---|---|---|
-| IONOS (DE) | Qwen3-Coder-Next 80B | €0.15 / €0.80 | €5.22 | €15.42 | €30.60 |
-| IONOS (DE) | gpt-oss-120b | €0.15 / €0.65 | €5.08 | €15.06 | €29.93 |
-| IONOS (DE) | Qwen3.5-397B-A17B | €0.60 / €3.60 | €21.24 | €62.64 | €124.20 |
-| STACKIT (DE) | Qwen3.8 27B | €0.45 / €0.65 | €14.09 | €42.06 | €83.92 |
-| STACKIT (DE) | gpt-oss-120b | €0.45 / €0.65 | €14.09 | €42.06 | €83.92 |
-| Scaleway (FR) | qwen3.6-35b-a3b | €0.25 / €1.50 | €8.85 | €26.10 | €51.75 |
-| Scaleway (FR) | glm-5.3 | €1.80 / €5.50 | €58.95 | €175.20 | €348.75 |
-| OVHcloud (FR) | gpt-oss-120b | €0.08 / €0.40 | €2.76 | €8.16 | €16.20 |
-| OVHcloud (FR) | Qwen3.5-397B-A17B | €0.60 / €3.60 | €21.24 | €62.64 | €124.20 |
-| Mistral (FR) | Devstral 2 | $0.40 / $2.00 | $13.80 | $40.80 | $81.00 |
+| IONOS (DE) | Qwen3-Coder-Next 80B | €0.15 / €0.80 | €17.03 | €34.06 | €59.60 |
+| IONOS (DE) | gpt-oss-120b | €0.15 / €0.65 | €16.93 | €33.86 | €59.25 |
+| IONOS (DE) | Qwen3.5-397B-A17B | €0.60 / €3.60 | €68.38 | €136.75 | €239.32 |
+| STACKIT (DE) | Qwen3.8 27B | €0.45 / €0.65 | €49.93 | €99.86 | €174.75 |
+| STACKIT (DE) | gpt-oss-120b | €0.45 / €0.65 | €49.93 | €99.86 | €174.75 |
+| Scaleway (FR) | qwen3.6-35b-a3b | €0.25 / €1.50 | €28.49 | €56.98 | €99.72 |
+| Scaleway (FR) | glm-5.3 | €1.80 / €5.50 | €201.63 | €403.26 | €705.71 |
+| OVHcloud (FR) | gpt-oss-120b | €0.08 / €0.40 | €9.06 | €18.13 | €31.72 |
+| OVHcloud (FR) | Qwen3.5-397B-A17B | €0.60 / €3.60 | €68.38 | €136.75 | €239.32 |
+| Mistral (FR) | Devstral 2 | $0.40 / $2.00 | $45.32 | $90.64 | $158.62 |
 
-**Budget:** ~€15 typical, **€35** covers the heavy scenario with margin.
+**Budget:** ~€35 typical, **€60** covers the heavy scenario. Plus the topic model on
+Scaleway (GLM-5.3, steps 2, 4, 5 with `--limit 100`): ~€0.30 per person, ~€6 in total.
 
 ### NGO project
 
-Three volunteers × 10 h agent use per month = 30 person-hours, i.e. the same table:
-roughly €5–30/month on IONOS.
+≈ **€8.50 per 1,000 agent steps** on IONOS. Three volunteers with ~300 steps each per month
+(a few focused sessions) ≈ €8/month; heavy use (1,000 steps each) ≈ €25/month.
 
 ### Analysis: LLM categorisation (Babylotse survey)
 
