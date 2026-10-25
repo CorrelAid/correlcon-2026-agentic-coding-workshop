@@ -67,6 +67,12 @@ def prepare(raw: pd.DataFrame) -> pd.DataFrame:
 
 
 def run() -> pd.DataFrame:
+    from project.districts import GEOJSON
+
+    missing = [p for p in (paths.SURVEY, GEOJSON) if not p.exists()]
+    if missing:
+        names = ", ".join(str(p.relative_to(paths.ROOT)) for p in missing)
+        raise SystemExit(f"Missing {names} – run `uv run python scripts/get_data.py` first.")
     logging.getLogger("project.districts").setLevel(logging.WARNING)
     df = prepare(pd.read_csv(paths.SURVEY))
     paths.INTERIM.mkdir(parents=True, exist_ok=True)
