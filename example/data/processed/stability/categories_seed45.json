@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Spielplätze & Parks",
+    "description": "Alle Aussagen, die sich auf Außenbereiche für Kinder beziehen: Spielplätze, Parks, Grünflächen, Wasserspielplätze, deren Zustand, Ausstattung, Sicherheit und Anzahl. Nicht enthalten sind Indoor‑Spielorte oder allgemeine Freizeitangebote, die nicht primär Spielplatz‑Charakter haben."
+  },
+  {
+    "name": "Betreuungs‑ und Kita‑Plätze",
+    "description": "Erwähnungen von Kindertagesstätten, Krippen, Kitaplätzen, Tagesmüttern, Krabbelgruppen, Babyschwimmen, Eltern‑Kind‑Kursen und sonstigen Betreuungsangeboten für Babys und Kleinkinder. Ausschließlich Themen rund um die Verfügbarkeit, Buchung und Qualität dieser Einrichtungen."
+  },
+  {
+    "name": "Barrierefreiheit & ÖPNV",
+    "description": "Aussagen zu Aufzügen, Rampen, rollstuhlgerechten Zugängen, Kinderwagen‑freundlichen Verkehrsmitteln, Haltestellen, Bahnhöfen und genereller Mobilität im öffentlichen Nahverkehr. Nicht enthalten sind allgemeine Verkehrssituationen ohne Bezug zu Barrierefreiheit."
+  },
+  {
+    "name": "Kosten & Preisgestaltung",
+    "description": "Hinweise auf finanzielle Aspekte: kostenfreie Angebote, teure Veranstaltungen, Preis‑ und Gebührenproblematik bei Kursen, Schwimmbädern, Kinderbetreuung etc. Alles, was sich auf Geld, Preise oder finanzielle Belastungen bezieht."
+  },
+  {
+    "name": "Information & Erreichbarkeit",
+    "description": "Themen rund um die Verfügbarkeit, Sichtbarkeit und Verständlichkeit von Informationen zu Angeboten, Sprachbarrieren, Online‑Portale, Flyer, Beratungsstellen und generelle Zugänglichkeit von Wissen für Eltern."
+  },
+  {
+    "name": "Sauberkeit & Müll",
+    "description": "Kommentare zu Verschmutzung, Müll, Schmutz, Hygiene auf Spielplätzen, in öffentlichen Bereichen, an Haltestellen oder in Einrichtungen. Beinhaltet auch Kritik an fehlenden Reinigungsmaßnahmen."
+  },
+  {
+    "name": "Eltern‑ und Familienangebote",
+    "description": "Erwähnungen von speziellen Angeboten für Eltern: Baby‑Treffs, Eltern‑Kind‑Cafés, Stillberatung, Väter‑Treffs, Familienbildung, Austausch‑ und Unterstützungsgruppen, Kurse ohne direkten Betreuungsaspekt für das Kind."
+  },
+  {
+    "name": "Medizinische Versorgung",
+    "description": "Aussagen zu Ärzten, Kinderärzten, Hebammen, Früh‑Hilfen, Gesundheitssystem, medizinischer Infrastruktur und deren Verfügbarkeit für Familien mit Babys."
+  },
+  {
+    "name": "Freizeit‑ und Indoor‑Angebote",
+    "description": "Alle Hinweise zu Indoor‑Freizeitmöglichkeiten: Indoorspielplätze, Museen, Kinderkinos, Schwimm‑ und Krabbelgruppen, kulturelle Veranstaltungen, Angebote bei schlechtem Wetter usw."
+  },
+  {
+    "name": "Wohnungs‑ und Wohnsituation",
+    "description": "Themen, die den Wohnungsmarkt, die Wohnungssuche, Mietpreise, Wohnraumknappheit und damit verbundene Belastungen für Familien mit Babys betreffen."
+  },
+  {
+    "name": "Keine inhaltliche Aussage",
+    "description": "Antworten, die keinen erkennbaren Inhalt zu den Lebensbedingungen mit einem Baby in Frankfurt liefern (z. B. nur ein Bindestrich, \"Nichts\", \"alles ist schön!\" ohne weitere Details)."
+  }
+]

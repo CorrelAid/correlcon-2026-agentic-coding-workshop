@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Spielplätze & Spielgeräte",
+    "description": "Alle Aussagen, die sich auf Spielplätze, deren Ausstattung, Sauberkeit, Sicherheit und Verfügbarkeit von Spielgeräten beziehen. Nicht enthalten sind allgemeine Freizeitangebote, die nicht explizit Spielplätze betreffen."
+  },
+  {
+    "name": "Barrierefreiheit & ÖPNV",
+    "description": "Erwähnungen von Aufzügen, Rolltreppen, barrierefreien Zugängen, Kinderwagen‑tauglichen Verkehrsmitteln und allgemeinen Zugangsproblemen im öffentlichen Nahverkehr. Ausschließlich Themen zur Barrierefreiheit, nicht zu anderen Infrastruktur‑Aspekten."
+  },
+  {
+    "name": "Kinderärzte & medizinische Versorgung",
+    "description": "Kommentare zu Kinderärzten, Hebammen, medizinischer Beratung, Wartezeiten und Personalengpässen im Gesundheitswesen für Babys und Kleinkinder."
+  },
+  {
+    "name": "Kita‑ und Krippenplätze",
+    "description": "Aussagen über Verfügbarkeit, Wartelisten, Qualität, Öffnungszeiten und Personal in Kindertagesstätten, Krippen und anderen Betreuungsangeboten für Kinder."
+  },
+  {
+    "name": "Eltern‑Kind‑Treffs & Kurse",
+    "description": "Erwähnungen von Eltern‑Kind‑Cafés, Babytreffs, Krabbelgruppen, Kursen (z. B. Yoga, Schwimmen) und sonstigen organisierten Treffen für Eltern mit Babys."
+  },
+  {
+    "name": "Grünflächen & Parks",
+    "description": "Alle Hinweise zu Parks, Grünanlagen, Spazierwegen, Natur zum Ausgehen mit dem Baby sowie deren Zustand und Nutzungsmöglichkeiten."
+  },
+  {
+    "name": "Kostenlose / kostengünstige Angebote",
+    "description": "Hinweise auf kostenfreie oder preisgünstige Angebote, wie kostenlose Kurse, kostenlose Treffpunkte, Willkommenspakete und ähnliche finanzielle Aspekte."
+  },
+  {
+    "name": "Familienberatung & Babylotse",
+    "description": "Aussagen zu Beratungsstellen, Babylotsen, Familienhäusern, Mehrgenerationenhäusern und sonstigen Unterstützungsprogrammen für Familien."
+  },
+  {
+    "name": "Sauberkeit & Umweltbedingungen",
+    "description": "Kommentare zu Müll, Hundekot, Schmutz, Luftqualität, Lärm und sonstigen Umwelt‑ bzw. Sauberkeitsaspekten im öffentlichen Raum."
+  },
+  {
+    "name": "Keine inhaltliche Aussage",
+    "description": "Antworten, die keinen erkennbaren Inhalt zum Leben mit einem Baby in Frankfurt liefern (z. B. nur ein Bindestrich, \"xx\" oder völlig unverständliche Texte)."
+  }
+]

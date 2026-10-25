@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Spielplätze & Parks",
+    "description": "Enthält alle Aussagen zu Spielplätzen, Parks, Grünflächen, deren Zustand, Ausstattung (z. B. Schaukeln, Wasserspiele) und Nutzungsmöglichkeiten. Nicht enthalten sind Themen zu Kinderbetreuung, Verkehr oder medizinischer Versorgung."
+  },
+  {
+    "name": "Kinderbetreuung & Kitaplatz",
+    "description": "Bezieht sich auf Kita‑, Krippen‑, Betreuungs‑ und Platzsituation, Wartelisten, Verfügbarkeit und Qualität von Betreuungsangeboten. Schließt keine Aussagen zu Spielplätzen, Verkehr oder Gesundheitsversorgung ein."
+  },
+  {
+    "name": "Eltern‑Kind‑Cafés & Treffpunkte",
+    "description": "Umfasst Angebote wie Eltern‑Kind‑Cafés, Baby‑Lounges, Familientreffs, offene Treffpunkte und Austauschmöglichkeiten für Eltern. Nicht relevant sind allgemeine Freizeitangebote oder medizinische Themen."
+  },
+  {
+    "name": "Barrierefreiheit & ÖPNV",
+    "description": "Alle Kommentare zu Aufzügen, Rolltreppen, barrierefreien Zugängen, Kinderwagen‑freundlichen Straßen und öffentlichen Verkehrsmitteln. Ausschluss: Inhalte zu Spielplätzen, Betreuung oder Gesundheitsversorgung."
+  },
+  {
+    "name": "Gesundheits‑ & Hebammenversorgung",
+    "description": "Bezieht sich auf Krankenhäuser, Kreißsäle, Wochenbettstationen, Hebammen, Kinderärzte und sonstige medizinische Leistungen für Familien mit Baby. Nicht enthalten sind Freizeit‑ oder Infrastrukturthemen."
+  },
+  {
+    "name": "Kurse, Gruppen & Veranstaltungen",
+    "description": "Umfasst Krabbelgruppen, Baby‑Eltern‑Kurse, Musikkurse, Sport‑ und Kulturveranstaltungen, Museumsangebote etc. Ohne Bezug zu Spielplätzen, Betreuung oder Verkehr."
+  },
+  {
+    "name": "Kosten & Finanzierung",
+    "description": "Alle Aussagen zu Kosten, Gebühren, finanziellen Unterstützungen (z. B. Elterngeld), kostenlosen Angeboten und Preis‑Problemen. Schließt andere Themenbereiche aus."
+  },
+  {
+    "name": "Information & Kommunikation",
+    "description": "Beinhaltet Hinweise zu Informationsangeboten, Webseiten, Nutzerfreundlichkeit von Plattformen, Bekanntmachung von Kursen und generelle Kommunikation seitens der Stadt. Nicht relevant sind konkrete Infrastruktur‑ oder Betreuungsaspekte."
+  },
+  {
+    "name": "Umwelt & Infrastruktur",
+    "description": "Bezieht sich auf Luftqualität, Lärm, Verkehrslärm, Schatten, Wasserspielplätze, Grünflächenqualität und generelle städtische Infrastruktur, die nicht direkt Spielplatz‑ oder Barrierefreiheitsaspekte sind."
+  },
+  {
+    "name": "Keine inhaltliche Aussage",
+    "description": "Enthält Antworten, die keinen erkennbaren Inhalt liefern (z. B. '-', 'xx' oder reine Platzhalter)."
+  }
+]

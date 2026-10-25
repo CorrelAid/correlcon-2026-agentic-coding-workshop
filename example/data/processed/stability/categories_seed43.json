@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Familien‑ und Bildungsangebote",
+    "description": "Alle Aussagen zu organisierten Angeboten für Familien, Eltern‑Kind‑Kurse, Familienzentren, kirchliche Familienbildung, Baby‑Lounges, Eltern‑Kind‑Cafés etc. – sowohl positive als auch negative Bewertungen. Nicht enthalten sind allgemeine Freizeit‑ oder Infrastruktur‑Themen."
+  },
+  {
+    "name": "Spielplätze und Grünflächen",
+    "description": "Erwähnungen von Spielplätzen, Parks, Grünanlagen, Wasserspielplätzen, deren Zustand, Ausstattung, Sauberkeit und Verfügbarkeit für Babys und Kleinkinder. Ausschließlich Themen zu Spielgeräten, Schatten, Müll, Renovierungsbedarf etc."
+  },
+  {
+    "name": "Barrierefreiheit und Verkehr",
+    "description": "Aussagen zu öffentlichen Verkehrsmitteln, Aufzügen, Rolltreppen, Zugänglichkeit mit Kinderwagen, Barrierefreiheit von Straßen, Haltestellen und Gebäuden. Sowohl positive (gute Erreichbarkeit) als auch negative (defekte Aufzüge, fehlende Rampen) Aspekte."
+  },
+  {
+    "name": "Kinderbetreuung und Kitaplätze",
+    "description": "Alle Hinweise zu Kitas, Krippen, Hort, Betreuungsplätzen, Personal‑ und Platzmangel, Öffnungszeiten, Wartelisten, Qualität der Betreuung. Enthält sowohl Lob als auch Kritik."
+  },
+  {
+    "name": "Gesundheits‑ und Schwangerschaftsversorgung",
+    "description": "Erwähnungen von Krankenhäusern, Still‑freundlichen Einrichtungen, Hebammen, Nachsorge, Kinderärzten, medizinischer Versorgung für Schwangere und Babys."
+  },
+  {
+    "name": "Kosten und finanzielle Unterstützung",
+    "description": "Kommentare zu finanziellen Aspekten wie Elterngeld, Kosten für Angebote (z. B. Babyschwimmen), Fahrtkosten, kostenfreie Angebote, Preis‑ und Kostenproblematik."
+  },
+  {
+    "name": "Freizeit‑ und Kulturangebote",
+    "description": "Hinweise zu Museen, Zoo, Schwimmbädern, Kindermessen, Festen, Kursen (z. B. Erste‑Hilfe‑Kurse) und anderen kulturellen oder sportlichen Aktivitäten für Familien."
+  },
+  {
+    "name": "Nachbarschaft und soziales Umfeld",
+    "description": "Aussagen über die Nachbarschaft, Hilfsbereitschaft von Mitmenschen, interkulturelles Umfeld, freundliche Atmosphäre, Unterstützung im Alltag."
+  },
+  {
+    "name": "Still‑ und Wickelmöglichkeiten",
+    "description": "Erwähnungen von Räumen oder Einrichtungen zum Stillen, Wickeln, Still‑freundliche Orte, Mangel an entsprechenden Angeboten."
+  },
+  {
+    "name": "Keine inhaltliche Aussage",
+    "description": "Antworten, die keinen erkennbaren Inhalt zu den Lebensbedingungen mit einem Baby in Frankfurt liefern (z. B. nur ein Bindestrich, \"nichts\", oder reine Danksagungen ohne thematischen Bezug)."
+  }
+]

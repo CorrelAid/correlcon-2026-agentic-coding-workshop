@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Spielplätze & Grünflächen",
+    "description": "Alle Aussagen, die sich auf Spielplätze, Parks, Grünanlagen, deren Ausstattung, Pflege und Nutzung beziehen. Einschließlich Kritik an mangelhafter Pflege oder zu wenig Spielgeräte, aber nicht zu anderen Einrichtungen wie Kitas."
+  },
+  {
+    "name": "Baby- und Eltern-Treffs",
+    "description": "Erwähnungen von Baby-Treffs, Krabbelgruppen, Eltern-Kind-Kursen, offenen Treffpunkten und ähnlichen Angeboten für junge Eltern. Sowohl positive als auch negative Erfahrungen mit deren Verfügbarkeit und Qualität."
+  },
+  {
+    "name": "Kinderbetreuung & Kitaplatz",
+    "description": "Themen rund um Kitas, Krippen, Hortplätze, Betreuungsplätze, deren Verfügbarkeit, Vergabe, Personalmangel und Qualität. Schließt auch Aussagen zu frühen Hilfen und Babylotsen ein, wenn sie die Betreuung betreffen."
+  },
+  {
+    "name": "Öffentlicher Nahverkehr & Barrierefreiheit",
+    "description": "Alle Kommentare zu ÖPNV, U-Bahn, S-Bahn, Aufzügen, Rolltreppen, barrierefreiem Zugang, Mobilität mit Kinderwagen und Verkehrssicherheit. Sowohl positive als auch negative Aspekte."
+  },
+  {
+    "name": "Gesundheits- und Hebammenversorgung",
+    "description": "Aussagen zu Kinderärzten, Hebammen, medizinischer Versorgung, frühen Hilfen, Notfall-Anlaufstellen und deren Erreichbarkeit bzw. Mangel."
+  },
+  {
+    "name": "Cafés, Restaurants & Familien-Cafés",
+    "description": "Erwähnungen von gastronomischen Angeboten, Spiel- und Wickel-Ecken in Cafés, Toiletten, Familien-Cafés, sowie Kritik an deren Fehlende oder mangelhafte Ausstattung."
+  },
+  {
+    "name": "Wohn- und Mietsituation",
+    "description": "Kommentare zu Wohnraum, günstigen Wohnungen, Parkplatzsuche, Kosten für Kinderbetreuung und allgemeine finanzielle Belastungen für Familien."
+  },
+  {
+    "name": "Sicherheit & Sauberkeit",
+    "description": "Aussagen zur allgemeinen Sicherheit für Babys (z. B. Gefühl von Sicherheit, Sauberkeit von Spielplätzen, Tierhygiene, Rauchen/Alkohol auf Spielplätzen, Verkehrssicherheit)."
+  },
+  {
+    "name": "Kulturelle & Bildungsangebote",
+    "description": "Erwähnungen von kulturellen Veranstaltungen, Kursen, Museen, Bibliotheken, Bildungs- und Freizeitangebote, die für Familien mit Babys relevant sind."
+  },
+  {
+    "name": "Keine inhaltliche Aussage",
+    "description": "Antworten, die keinen thematischen Inhalt zu Familienleben in Frankfurt liefern (z. B. reine Zeichen wie \"-\", leere Aussagen oder rein subjektive, nicht zuordenbare Kommentare)."
+  }
+]
