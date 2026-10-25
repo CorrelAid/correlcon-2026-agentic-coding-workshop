@@ -11,8 +11,15 @@ languages, keyboard mashing, a made-up name as the whole answer, advertising wit
 has no usable content at all – short real answers ("Kitaplätze", "nichts") are NOT spam.
 district_known == False is a hint, not enough on its own.
 
+- Main rule: language detection. Use a language detection library (e.g. lingua-language-
+  detector, or spaCy with a language detector component – add it with `uv add`) and keep
+  only answers that are German (or English) with high confidence. Foreign-language spam and
+  keyboard mashing then fail this check by themselves – don't write a separate
+  keyboard-mashing heuristic. Language detection is unreliable for very short answers:
+  answers with fewer than 3 words are not checked.
+- A few simple extra rules: only punctuation/placeholders in both answers, [URL] with
+  sales language.
 - One small, readable function per rule; spam_reason lists the rules that fired.
-- Choose a simple, robust approach (a library is fine) and explain your choice briefly.
 - The script prints only counts per reason – never comment text.
 - Tests in tests/test_spam.py with made-up examples, including real answers that must
   NOT be flagged.
