@@ -9,7 +9,7 @@ uv sync
 uv run python scripts/check_setup.py
 uv run python scripts/get_data.py
 uv run python scripts/01_prepare.py
-uv run --env-file .env opencode
+uv run agent
 ```
 
 Workshop exercises: [`docs/workshop-flow.md`](docs/workshop-flow.md).

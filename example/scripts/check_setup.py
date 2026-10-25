@@ -116,5 +116,5 @@ if __name__ == "__main__":
             step("Topic model", check_topic_model),
         ]
     ready = all(results)
-    print("\nAll set – start with: uv run --env-file .env opencode" if ready else "\nPlease fix.")
+    print("\nAll set – start with: uv run agent" if ready else "\nPlease fix.")
     sys.exit(0 if ready else 1)

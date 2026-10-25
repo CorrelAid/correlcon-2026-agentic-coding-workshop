@@ -62,15 +62,16 @@ uv sync
 uv run python scripts/check_setup.py
 ```
 
-All green? Then start the agent – **from inside `example/`**, otherwise OpenCode ignores the
-project config and shows all your other providers:
+All green? Then start the agent:
 
 ```bash
-uv run --env-file .env opencode
+uv run agent
 ```
 
-`uv run --env-file .env` passes the keys to OpenCode on every OS. The first start takes a
-little longer (OpenCode installs the hook dependencies into `.opencode/`).
+`uv run agent` starts OpenCode from the `example/` folder with the keys from `.env` – on
+every OS, from any subfolder, and even if your shell already exports older keys. (Plain
+`opencode` does **not** read `.env` and fails with `401`.) The first start takes a little
+longer (OpenCode installs the hook dependencies into `.opencode/`).
 
 Try it: *"Write a function in src/project/text.py that masks email addresses and phone
 numbers, add tests and run them."* (≈ 45 s, ≈ €0.02)
@@ -229,7 +230,7 @@ off – verify with `opencode models` inside `example/`.
 |---|---|
 | You see your own / other providers' models | OpenCode was started outside `example/` – the project config is only found from that folder. `cd example` first, then check with `opencode models` (only `ionos/…` should appear). Your global `~/.config/opencode` config can stay as it is. |
 | `401 Unauthorized` | Token expired (TTL) or you pasted the token ID (UUID) instead of the token (`eyJ…`). |
-| `Invalid URL` / no provider | OpenCode was started without the env: use `uv run --env-file .env opencode`. |
+| `401` / `Invalid URL` when starting OpenCode | OpenCode was started without the keys: use `uv run agent` (plain `opencode` does not read `.env`; `uv run --env-file` loses against keys already exported in your shell). |
 | `429 Too Many Requests` | Rate limit (5 req/s per model, shared by everyone). OpenCode retries automatically after ~1 s. |
 | `429` from `api.scaleway.ai` | Tokens-per-minute limit of the Scaleway organisation reached (shared by everyone). Use batches of ~20 comments, classify a sample, or the Batch API. |
 | Topic model returns empty content | GLM-5.3 reasons first: raise `max_tokens` (max 16,384). |

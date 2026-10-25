@@ -1,6 +1,6 @@
 # Workshop prompts – copy, paste, run
 
-Start OpenCode **inside `example/`**: `uv run --env-file .env opencode`.
+Start OpenCode **inside `example/`**: `uv run agent`.
 Then, step by step: paste the prompt, watch the agent fill the stub in `src/project/`,
 run the command it tells you, look at the result.
 
