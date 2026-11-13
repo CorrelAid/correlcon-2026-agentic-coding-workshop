@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="index_files/libs/quarto-html/tabby.min.js"></script>
-<script src="index_files/libs/quarto-html/popper.min.js"></script>
-<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-5c1318cf63eba56dbef7ba16bc7d56f5.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.10.19">
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-29e00c98bbba659d91ab3844292f79dc.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.20">
 
   <meta name="author" content="Michael Aydinbas &amp; Benjamin Fries · CorrelAid">
-  <title>Coding Agents and Best Practices</title>
+  <title>Coding Agents – CorrelCon 2026 – Coding Agents and Best Practices</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -100,11 +100,11 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-c5887c4c3613c6d4f72e6b335738d982.css">
-  <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="index_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-a6638d1d7c4710c9e93de22ccdeaba6d.css">
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -213,32 +213,26 @@ Michael Aydinbas &amp; Benjamin Fries · CorrelAid
 </section>
 <section id="terms-12-what-is-an-agent" class="slide level2">
 <h2>Terms (1/2): what is an agent?</h2>
-<div class="cards c3 terms">
-<div class="card term">
-<p><span class="ct">Model (LLM)</span></p>
-<p>Predicts the next token. Can’t execute anything – it only writes text, including tool calls.</p>
-</div>
-<div class="card term">
-<p><span class="ct">Tool</span></p>
-<p>A function the model may call.</p>
-<p><span class="ex">read · edit · bash · web search</span></p>
-</div>
-<div class="card term">
-<p><span class="ct">Agentic loop</span></p>
-<p>Model → tool call → result back into context → next step … until done.</p>
-</div>
-<div class="card term">
-<p><span class="ct">Agent</span></p>
-<p>Model + loop + tools + a goal. Works autonomously over many steps.</p>
-</div>
-<div class="card term">
-<p><span class="ct">Harness</span></p>
-<p>The software around the model: loop, tools, context, permissions, hooks, UI.</p>
-<p><span class="ex">Claude Code · Codex · opencode · Vibe</span></p>
-</div>
-</div>
-<aside class="notes">
-<p>~1 min. Key distinction: model ≠ agent ≠ harness. The model doesn’t “do” anything – the harness executes.</p>
+
+<img data-src="img/agent-anatomy.svg" class="full r-stretch"><aside class="notes">
+<p>~1 min. Read the picture from the inside out: the model only writes text. The harness turns tool calls into real actions and feeds the results back – that’s the loop. Add a goal from you, and the whole thing is an agent: agent = goal + model + harness. Note: one harness can run many agents – e.g.&nbsp;subagents, or an orchestrator that splits a goal into tasks and starts one session per task. Each of those is again goal + model + loop + tools. Key distinction: model ≠ agent ≠ harness. The model doesn’t “do” anything – the harness executes.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="inside-the-harness-one-turn-of-the-loop" class="slide level2">
+<h2>Inside the harness: one turn of the loop</h2>
+
+<img data-src="img/agentic-loop.svg" class="full r-stretch"><aside class="notes">
+<p>~2 min. The model only decides “text or tool call”. The harness executes, checks permissions, runs hooks, collects results and builds the next context. Consequence: the same model performs differently in different harnesses – which is why benchmarks like Terminal-Bench always rate the model + harness pair.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -294,7 +288,25 @@ Michael Aydinbas &amp; Benjamin Fries · CorrelAid
 <h2>How did we get here?</h2>
 
 <img data-src="img/timeline.svg" class="full r-stretch"><aside class="notes">
-<p>~1.5 min. Three jumps: autocomplete (Copilot) → chat → agent in the terminal with tool access. 2025 was the year of terminal agents; since late 2025 standardisation (AGENTS.md, MCP under the Linux Foundation’s Agentic AI Foundation). 2026: focus shifts from the prompt to the harness (“harness engineering”, OpenAI, Feb 2026) – and the first solid studies appear.</p>
+<p>~1.5 min. Three jumps: autocomplete (Copilot) → chat → agent in the terminal with tool access. Next slide: what these jumps mean in numbers. 2025 was the year of terminal agents; since late 2025 standardisation (AGENTS.md, MCP under the Linux Foundation’s Agentic AI Foundation). 2026: focus shifts from the prompt to the harness (“harness engineering”, OpenAI, Feb 2026) – and the first solid studies appear. Dec 2025: the Linux Foundation launched the Agentic AI Foundation (AAIF) with Anthropic’s MCP, OpenAI’s AGENTS.md and Block’s goose as founding projects – the core standards are no longer owned by one vendor, so the same AGENTS.md and MCP servers work across harnesses. Jan 2026: OpenClaw (formerly Clawdbot/Moltbot) goes viral – an open-source agent that runs 24/7, you talk to it via Signal/Telegram/WhatsApp, and it can access mail, calendar and other services. Also a security lesson: leaked secrets, malicious skills, prompt injection. 2026: cloud agents (Claude Code cloud sessions, Codex Cloud, Cursor Cloud Agents) keep working with the laptop closed. Next? Always-on agents with access to all the services they need – vendors already market “super agents”. The open question is less “can they?” than “what may they touch?”.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="from-handholding-to-delegation" class="slide level2">
+<h2>From handholding to delegation</h2>
+
+<img data-src="img/autonomy.svg" class="full r-stretch"><p><span class="tiny"><strong>Source:</strong> METR, <em>Task-Completion Time Horizons of Frontier AI Models</em>, <a href="https://metr.org/time-horizons/">metr.org/time-horizons</a> (last updated Sep 8, 2026; data file <code>benchmark_results_1_1.yaml</code>). Time Horizon 1.1 values; GPT-2 and GPT-3.5 from the original 2025 suite. 50 % horizon = task length, measured in human expert time, at which the agent is predicted to succeed half the time. Trend line and “human equivalent” labels: our illustration.</span></p>
+<aside class="notes">
+<p>~2 min. This is the one chart to remember. Each point is a model; the y-axis is how long a human would need for the tasks the model finishes alone half of the time. Log scale: every gridline step is a big jump. 2023 (GPT-4): a few minutes – you had to check in after every small step. Early 2026 (Claude Opus 4.6): about 12 hours – a day’s work, in principle (95 % CI roughly 5–60 h). Doubling roughly every 4–6 months (METR: ~4.3 months since 2023). Caveats: 50 % ≠ “safe to delegate” (80 % horizons are several times shorter), error bars are about ×2 either way, and METR’s own suite is nearly saturated above ~16 h. Message: the habits we built for the old models – approving every step, long instruction files – were built for the left half of this chart.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -329,23 +341,6 @@ Michael Aydinbas &amp; Benjamin Fries · CorrelAid
 </div>
 <aside class="notes">
 <p>~2 min. METR study: 16 experienced developers, their own large repos, early-2025 tools. Models have improved since – the point stands: measure, don’t guess.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="the-harness-agent-model-loop-tools" class="slide level2">
-<h2>The harness: agent = model + loop + tools</h2>
-
-<img data-src="img/agentic-loop.svg" class="full r-stretch"><aside class="notes">
-<p>~2 min. The model only decides “text or tool call”. The harness executes, checks permissions, runs hooks, collects results and builds the next context. Consequence: the same model performs differently in different harnesses – which is why benchmarks like Terminal-Bench always rate the model + harness pair.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -437,27 +432,72 @@ Michael Aydinbas &amp; Benjamin Fries · CorrelAid
           display:block!important;
       }</style></aside>
 </section>
-<section id="best-practice-1-agents.md-a-map-not-an-encyclopedia" class="slide level2">
-<h2>Best practice 1: AGENTS.md – a map, not an encyclopedia</h2>
+<section id="step-back-what-changes-in-how-we-work" class="slide level2">
+<h2>Step back: what changes in how we work</h2>
+<div class="cards c2">
+<div class="card warn">
+<p><span class="ct">Then (early 2026 habits)</span></p>
+<ul>
+<li>Short runs, the agent stops early, you correct constantly</li>
+<li>CLAUDE.md full of <strong>IMPORTANT!!!</strong> and stack details</li>
+<li>Approve every single command – or skip permissions entirely</li>
+<li>Read every diff at the end</li>
+</ul>
+</div>
+<div class="card good">
+<p><span class="ct">Now (Claude 5.5-era models)</span></p>
+<ul>
+<li>Hand over a <strong>much bigger task</strong> and say what <em>done</em> looks like</li>
+<li>Only write down what the agent <strong>can’t see in the code</strong></li>
+<li><strong>Auto mode + deny rules</strong> instead of clicking “approve”</li>
+<li><strong>Checkpoints that pass or fail</strong> (tests, hooks, CI) instead of reading every diff</li>
+</ul>
+</div>
+</div>
+<div class="cards c2 stats">
+<div class="card accent">
+<p><span class="stat inline">14 %</span> <span class="stat-label">of people approving commands caught a clearly dangerous one</span></p>
+</div>
+<div class="card accent">
+<p><span class="stat inline">89 %</span> <span class="stat-label">were blocked by Claude Code’s auto-mode classifier</span></p>
+</div>
+</div>
+<p><span class="tiny"><strong>Source:</strong> Lydia Hallie (Anthropic), <em>Rethinking Claude Code Best Practices</em>, AI Engineer, Nov 11, 2026 – <a href="https://www.youtube.com/watch?v=vlfCjWuv4es">youtube.com/watch?v=vlfCjWuv4es</a>. The 14 % / 89 % figures are from an internal Anthropic study (Aug 2026) cited in the talk.</span></p>
+<aside class="notes">
+<p>~2.5 min. Based on Lydia Hallie’s talk from this week. Her core message: much of what we added to our setups over the past year now holds the newer models back. Humans are bad gatekeepers: when you approve dozens of commands, you stop reading them. A classifier plus a few hard deny rules does better. Trust is not blind: you replace “watching every step” with checkpoints that fail loudly.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="best-practice-1-agents.md-only-what-the-agent-cant-see" class="slide level2">
+<h2>Best practice 1: AGENTS.md – only what the agent can’t see</h2>
 <div class="columns">
 <div class="column" style="width:52%;">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>AGENTS.md</strong></pre>
 </div>
-<div class="sourceCode" id="cb1" data-filename="AGENTS.md"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">## Commands</span></span>
-<span id="cb1-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Setup: <span class="in">`uv sync`</span></span>
-<span id="cb1-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Tests: <span class="in">`uv run pytest -q`</span></span>
-<span id="cb1-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Lint: <span class="in">`uv run ruff check --fix`</span></span>
-<span id="cb1-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conventions you can't see in the code</span></span>
-<span id="cb1-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Never write to <span class="in">`data/raw/`</span></span>
-<span id="cb1-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>New analyses: Quarto files in <span class="in">`reports/`</span></span>
-<span id="cb1-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Column names always snake_case</span>
-<span id="cb1-10"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">## Definition of done</span></span>
-<span id="cb1-12"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Tests green, ruff clean</span>
-<span id="cb1-13"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>No new dependencies without asking</span></code></pre></div>
+<div class="sourceCode" id="cb1" data-filename="AGENTS.md"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">## Commands</span></span>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Setup: <span class="in">`uv sync`</span></span>
+<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Tests: <span class="in">`uv run pytest -q`</span></span>
+<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Lint: <span class="in">`uv run ruff check --fix`</span></span>
+<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">## Conventions you can't see in the code</span></span>
+<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Never write to <span class="in">`data/raw/`</span></span>
+<span id="cb1-8"><a aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>New analyses: Quarto files in <span class="in">`reports/`</span></span>
+<span id="cb1-9"><a aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Column names always snake_case</span>
+<span id="cb1-10"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a aria-hidden="true" tabindex="-1"></a><span class="fu">## Definition of done</span></span>
+<span id="cb1-12"><a aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Tests green, ruff clean</span>
+<span id="cb1-13"><a aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>No new dependencies without asking</span></code></pre></div>
 </div>
 </div><div class="column" style="width:48%;">
 <div class="card good">
@@ -471,15 +511,15 @@ Michael Aydinbas &amp; Benjamin Fries · CorrelAid
 <div class="card warn">
 <p><strong>Leave out</strong></p>
 <ul>
-<li>Repo overview (the agent finds it itself)</li>
+<li>Stack details and “where to look” – the agent explores itself</li>
 <li>What’s already in the README / linter</li>
 <li>Auto-generated text (<code>/init</code>)</li>
-<li>Style prose and “You are an expert …”</li>
+<li><strong>IMPORTANT!!!</strong> – emphasis makes newer models over-react</li>
 </ul>
 </div>
 </div></div>
 <aside class="notes">
-<p>~2 min. Keep it short (&lt; 100 lines), human-written, only what the agent can’t figure out itself. Every line costs tokens on every call. AGENTS.md is the vendor-neutral format; Claude Code reads CLAUDE.md – tip: CLAUDE.md just contains <code>@AGENTS.md</code>. Meta: this deck lives in a repo with its own AGENTS.md – have a look!</p>
+<p>~2 min. Keep it short (&lt; 100 lines), human-written, only what the agent can’t figure out itself. Every line costs tokens on every call. Hallie’s example of what belongs in: “this service still reads from a legacy data source that isn’t referenced anywhere in the repo”. And: re-audit the file whenever you switch to a newer model – instructions written for older models can now make results worse. AGENTS.md is the vendor-neutral format; Claude Code reads CLAUDE.md – tip: CLAUDE.md just contains <code>@AGENTS.md</code>. Meta: this deck lives in a repo with its own AGENTS.md – have a look!</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -492,43 +532,128 @@ Michael Aydinbas &amp; Benjamin Fries · CorrelAid
           display:block!important;
       }</style></aside>
 </section>
-<section id="best-practice-2-set-boundaries-permissions-hooks" class="slide level2">
-<h2>Best practice 2: set boundaries – permissions &amp; hooks</h2>
+<section id="from-practice-make-the-entry-points-explicit" class="slide level2">
+<h2>From practice: make the entry points explicit</h2>
+<div class="columns">
+<div class="column" style="width:47%;">
+<p><img data-src="img/entrypoints.svg" style="width:100.0%"></p>
+</div><div class="column" style="width:53%;">
+<div class="bigquote sm">
+<p>“The agent must always know what the entry points of the repo are.”</p>
+</div>
+<p><span class="tiny">— Benjamin Fries, from his company projects</span></p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>AGENTS.md (sketch)</strong></pre>
+</div>
+<div class="sourceCode" id="cb2" data-filename="AGENTS.md (sketch)"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">## Entry points</span></span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>app_a/  → <span class="in">`uv run app-a`</span>   uses shared/</span>
+<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>app_b/  → <span class="in">`uv run app-b`</span>   uses shared/</span>
+<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>prep/   → <span class="in">`uv run prep`</span>    writes data/dev/</span>
+<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">## When you change …</span></span>
+<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>shared/      → run tests of app_a AND app_b</span>
+<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>prep/ schema → update fixtures of both apps</span></code></pre></div>
+</div>
+</div></div>
+<aside class="notes">
+<p>~2.5 min (Benjamin). One repo, two small applications that share code, plus a third entry point that prepares data for development. Without documented dependencies the agent fixes one entry point and silently breaks another – “Schiefstände”, things drifting out of sync. This is exactly the kind of knowledge the agent can’t reliably infer from the code: which parts belong together and what has to be re-checked after a change. The excerpt is a simplified sketch, names changed.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="best-practice-2-hard-limits-then-let-it-run" class="slide level2">
+<h2>Best practice 2: hard limits, then let it run</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>.claude/settings.json</strong></pre>
 </div>
-<div class="sourceCode" id="cb2" data-filename=".claude/settings.json"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb2-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"permissions"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb2-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"deny"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"Read(./.env*)"</span><span class="ot">,</span></span>
-<span id="cb2-4"><a href="" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Read(./secrets/**)"</span><span class="ot">,</span></span>
-<span id="cb2-5"><a href="" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Bash(git push:*)"</span><span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb2-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"ask"</span><span class="fu">:</span>  <span class="ot">[</span><span class="st">"Bash(uv add:*)"</span><span class="ot">]</span></span>
-<span id="cb2-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
-<span id="cb2-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"hooks"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb2-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"PostToolUse"</span><span class="fu">:</span> <span class="ot">[</span><span class="fu">{</span></span>
-<span id="cb2-10"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"matcher"</span><span class="fu">:</span> <span class="st">"Edit|Write"</span><span class="fu">,</span></span>
-<span id="cb2-11"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"hooks"</span><span class="fu">:</span> <span class="ot">[</span><span class="fu">{</span> <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"command"</span><span class="fu">,</span></span>
-<span id="cb2-12"><a href="" aria-hidden="true" tabindex="-1"></a>                  <span class="dt">"command"</span><span class="fu">:</span> <span class="st">"ruff format"</span> <span class="fu">}</span><span class="ot">]</span></span>
-<span id="cb2-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span><span class="ot">]</span></span>
-<span id="cb2-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
-<span id="cb2-15"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb3" data-filename=".claude/settings.json"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="dt">"permissions"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>    <span class="dt">"deny"</span><span class="fu">:</span> <span class="ot">[</span><span class="st">"Read(./.env*)"</span><span class="ot">,</span></span>
+<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a>             <span class="st">"Read(./secrets/**)"</span><span class="ot">,</span></span>
+<span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a>             <span class="st">"Bash(git push:*)"</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb3-6"><a aria-hidden="true" tabindex="-1"></a>    <span class="dt">"ask"</span><span class="fu">:</span>  <span class="ot">[</span><span class="st">"Bash(uv add:*)"</span><span class="ot">]</span></span>
+<span id="cb3-7"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb3-8"><a aria-hidden="true" tabindex="-1"></a>  <span class="dt">"hooks"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb3-9"><a aria-hidden="true" tabindex="-1"></a>    <span class="dt">"PostToolUse"</span><span class="fu">:</span> <span class="ot">[</span><span class="fu">{</span></span>
+<span id="cb3-10"><a aria-hidden="true" tabindex="-1"></a>      <span class="dt">"matcher"</span><span class="fu">:</span> <span class="st">"Edit|Write"</span><span class="fu">,</span></span>
+<span id="cb3-11"><a aria-hidden="true" tabindex="-1"></a>      <span class="dt">"hooks"</span><span class="fu">:</span> <span class="ot">[</span><span class="fu">{</span> <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"command"</span><span class="fu">,</span></span>
+<span id="cb3-12"><a aria-hidden="true" tabindex="-1"></a>                  <span class="dt">"command"</span><span class="fu">:</span> <span class="st">"ruff format"</span> <span class="fu">}</span><span class="ot">]</span></span>
+<span id="cb3-13"><a aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span><span class="ot">]</span></span>
+<span id="cb3-14"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb3-15"><a aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="card accent">
-<p><strong>Permissions</strong> = what the agent may do: <code>allow</code> · <code>ask</code> · <code>deny</code></p>
+<p><strong>Deny rules</strong> = the only hard stop. Ask: <em>“If it gets this wrong once, can I take it back?”</em> If not → deny rule.</p>
 </div>
 <div class="card accent">
-<p><strong>Hooks</strong> = what <em>always</em> happens – deterministic, not “please remember” in AGENTS.md</p>
+<p><strong>Auto mode / allow-list</strong> for everything reversible: tests, installs, edits in the repo</p>
 </div>
 <div class="card warn">
-<p><strong>Careful:</strong> denying <code>Read(.env)</code> doesn’t stop <code>cat .env</code> via the shell. Real security only with a <strong>sandbox / container</strong> and secrets outside the repo.</p>
+<p><strong>Careful:</strong> a deny rule on <code>.env</code> doesn’t stop <em>your test script</em> from loading it. Real isolation: <strong>sandbox / cloud session</strong>, secrets outside the repo.</p>
 </div>
 </div></div>
 <aside class="notes">
-<p>~2 min. Rule of thumb: anything that must always happen (formatting, blocking secrets, tests after edits) → hook. Anything the agent must not do → permission / sandbox. AGENTS.md only for knowledge. Skills from the internet are code: an analysis of 31,000 community skills found at least one exploitable vulnerability in 26 % of them.</p>
+<p>~2 min. Wrong code can be reverted – a deleted branch, discarded changes or a key in the transcript can’t. Those get deny rules; everything else runs without asking. Sandboxes only cover shell commands and their children; file tools, MCP servers and hooks run outside. Hallie’s preferred option: a cloud session with its own machine – no .env, no SSH keys on it. Skills from the internet are code: an analysis of 31,000 community skills found at least one exploitable vulnerability in 26 % of them.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="best-practice-3-checkpoints-instead-of-watching" class="slide level2">
+<h2>Best practice 3: checkpoints instead of watching</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="card accent">
+<p><span class="ct">Say what <em>done</em> looks like</span></p>
+<p>Split work into tasks that each come with their own test. Ask the agent to <strong>show the actual output</strong>, not to claim success.</p>
+</div>
+<div class="card accent">
+<p><span class="ct">Hooks = checkpoints that always run</span></p>
+<ul>
+<li>every edit → linter</li>
+<li>task marked complete → relevant tests</li>
+<li>session about to end → full test suite</li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>.claude/hooks/run-tests.sh</strong></pre>
+</div>
+<div class="sourceCode" id="cb4" data-filename=".claude/hooks/run-tests.sh"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env bash</span></span>
+<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run pytest <span class="at">-q</span> <span class="kw">||</span> <span class="kw">{</span></span>
+<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"Tests fail – fix them"</span> <span class="op">&gt;&amp;</span><span class="dv">2</span></span>
+<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="bu">exit</span> 2  <span class="co"># block + send back</span></span>
+<span id="cb4-5"><a aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code></pre></div>
+</div>
+<div class="card warn">
+<p><strong>Gotcha:</strong> most tools exit with <code>1</code> on failure – Claude Code treats that as non-blocking and moves on. Only exit code <strong>2</strong> sends the agent back to fix it.</p>
+</div>
+<div class="card">
+<p><strong>Then:</strong> CI as the backstop, and human review scaled to risk.</p>
+</div>
+</div></div>
+<aside class="notes">
+<p>~2 min. Instead of reading every diff, define pass/fail gates. Hallie’s example: an OAuth migration can be done three ways – keep the old API, migrate only new logins, or log everyone out. The “log everyone out” run fails the first test, without anyone reading the diff. Review ladder: agent review first, then none / one / two human reviewers depending on risk.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -655,7 +780,7 @@ beat the placebo – only on cost (−5 % and −12 %), not on pass rate
 <li>Long, generated CLAUDE.md / AGENTS.md files</li>
 <li>Repo descriptions – the agent explores by itself</li>
 <li>Large skill collections from the internet</li>
-<li>Which exact model? (gaps are shrinking)</li>
+<li>Approving every command by hand</li>
 </ul>
 </div>
 <div class="card good">
@@ -663,7 +788,7 @@ beat the placebo – only on cost (−5 % and −12 %), not on pass rate
 <ul>
 <li><strong>Clear task / spec</strong> – what does “done” mean?</li>
 <li><strong>Verification:</strong> tests, linters, CI as feedback loop</li>
-<li><strong>Boundaries:</strong> permissions, sandbox, hooks</li>
+<li><strong>Boundaries:</strong> deny rules, sandbox, auto mode</li>
 <li><strong>Choice &amp; configuration of the harness</strong></li>
 <li><strong>Review &amp; responsibility</strong> stay with humans</li>
 </ul>
@@ -743,17 +868,16 @@ beat the placebo – only on cost (−5 % and −12 %), not on pass rate
 <p><strong>78 %</strong> of organisations (Bavaria) have no paid staff⁴</p>
 </div>
 </div>
-<p><strong>Our setup:</strong> EU-hosted open models · guardrails · pay-per-use (~€40/workshop)</p>
 <p><span class="small">¹ Fast Forward 2025 (US) · ² TechSoup 2025 (US) · ³ Charity Digital Skills 2025 (UK) · ⁴ ZiviZ 2023</span></p>
 <aside class="notes">
-<p>~1.5 min. We build for organisations without an IT department – that shapes every choice in the workshop.</p>
+<p>~1.5 min. We build for organisations without an IT department – that shapes every choice in this workshop.</p>
 <ul>
 <li>Data protection: NGOs hold data about children, patients, refugees. GDPR is a real legal uncertainty for volunteer boards (ZiviZ). Shadow AI: staff paste data into tools nobody approved.</li>
 <li>Expertise: Fast Forward surveyed ~200 nonprofits that already use AI – so the real gap is bigger. 41 % lack tech expertise, nearly half name privacy risks, 84 % name funding for tools and talent as their greatest need.</li>
 <li>Money: UK Charity Digital Skills Report 2025 (n = 672): 69 % budget squeeze, 60 % no support for digital costs.</li>
 <li>Maintenance: ZiviZ 2023 Bavaria: only 22 % of organisations have any paid staff. Whatever we build must survive the handover.</li>
 </ul>
-<p>Transition: that is why the workshop setup looks the way it does.</p>
+<p>Transition: these constraints are the backdrop for our discussion – and the reason the workshop setup (11:30) looks the way it does.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -766,74 +890,39 @@ beat the placebo – only on cost (−5 % and −12 %), not on pass rate
           display:block!important;
       }</style></aside>
 </section>
-<section id="our-workshop-setup-eu-only-two-models-guardrails" class="slide level2">
-<h2>Our workshop setup: EU-only, two models, guardrails</h2>
-<div class="cards c3">
+<section id="discussion-where-does-the-human-stay" class="slide level2">
+<h2>Discussion: where does the human stay?</h2>
+<div class="cards c2">
 <div class="card accent">
-<p><span class="ct">1 · You prompt</span></p>
-<p>Ready prompts per pipeline step: prepare → spam → topics → classify → report.</p>
-<p><span class="ex">OpenCode 2 · <code>uv run agent</code></span></p>
-</div>
-<div class="card accent">
-<p><span class="ct">2 · Agent writes code</span></p>
-<p><strong>Qwen3-Coder-Next</strong> writes and tests the code – never sees raw data, never runs the pipeline.</p>
-<p><span class="ex">IONOS, Germany · €0.15 / 1M input tokens</span></p>
-</div>
-<div class="card accent">
-<p><span class="ct">3 · Code asks a model</span></p>
-<p>Your code sends batches of comments to <strong>gpt-oss-120b</strong>; you run it and review the results.</p>
-<p><span class="ex">same provider, same key · cents per run</span></p>
-</div>
-</div>
-<div class="cards c3">
-<div class="card warn">
-<p><span class="ct">Instructions</span></p>
-<p><code>AGENTS.md</code>: rules, commands, quiet output, data protection</p>
-</div>
-<div class="card warn">
-<p><span class="ct">Policies &amp; hooks</span></p>
-<p>Only IONOS · no <code>.env</code>, no raw data · keys hidden · prompts read-only · ruff after every edit</p>
-</div>
-<div class="card warn">
-<p><span class="ct">Cost</span></p>
-<p>~55k tokens per agent step ≈ <strong>€0.01</strong> → <strong>~€40</strong> for 20 people</p>
-</div>
-</div>
-<aside class="notes">
-<p>~1.5 min. Bridge from the civil-society slide to the hands-on part.</p>
+<p><span class="ct">Responsibility</span></p>
 <ul>
-<li>Two models, two jobs: the coding agent (Qwen3-Coder-Next) writes code; the code the agent writes calls a second model (gpt-oss-120b) for the actual analysis. Both on IONOS: one provider, one key, data stays in Germany, no training on it.</li>
-<li>The agent never sees personal data: raw and interim data are blocked by policy and hooks; it writes code that processes the data and prints counts. The human runs the pipeline scripts – they call a paid API on real data.</li>
-<li>Guardrails in three layers: AGENTS.md (advice – usually followed), policies (hard rules nothing overrides), hooks (deterministic: hide API keys, run ruff and feed errors back). Honest caveat: hooks catch accidents, only isolation is a security boundary.</li>
-<li>Cost, measured: the agent resends its whole context with every step – ~55k tokens on average, no prompt caching on IONOS – about €0.0085 per step, €4.44 for a full prep day. The analysis itself costs cents.</li>
-<li>Why not Scaleway/GLM? Scaleway limits tokens per minute per organisation (1–2M); 20 people with an agent need ~5M. IONOS limits requests (5/s per model) instead.</li>
+<li>Who owns code that nobody wrote line by line? <em>“You commit it, you own it”</em> – enough?</li>
+<li>How much review is enough when the agent works for hours?</li>
 </ul>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="responsibility-where-does-the-human-stay" class="slide level2">
-<h2>Responsibility: where does the human stay?</h2>
-<div class="todo">
-<p><strong>Placeholder – to be worked out together.</strong> Possible guiding questions:</p>
+</div>
+<div class="card accent">
+<p><span class="ct">Skills &amp; learning</span></p>
 <ul>
-<li>Who is responsible for code that nobody wrote line by line? (“You commit it, you own it”)</li>
-<li>What do we still need to understand ourselves – and what can we delegate?</li>
+<li>What do we still need to understand ourselves?</li>
 <li>How do junior devs learn when the agent solves the exercises?</li>
-<li>Data protection &amp; ethics in non-profits: which data may enter the context at all?</li>
-<li>If AI can code (almost) everything: what is our contribution? Understanding the problem, judgement, domain knowledge, responsibility towards the people affected</li>
 </ul>
 </div>
+<div class="card accent">
+<p><span class="ct">Non-profits</span></p>
+<ul>
+<li>Which data may enter the context at all?</li>
+<li>EU-hosted open models vs.&nbsp;frontier models: what’s the trade-off for us?</li>
+</ul>
+</div>
+<div class="card good">
+<p><span class="ct">Our contribution</span></p>
+<ul>
+<li>If AI can code (almost) everything: problem understanding, judgement, domain knowledge – and responsibility towards the people affected</li>
+</ul>
+</div>
+</div>
 <aside class="notes">
-<p>Deliberately left open – bridge into the discussion.</p>
+<p>Open discussion, ~10 min. Start with a quick show of hands: who uses a coding agent daily? Who let one work alone for more than an hour?</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -846,22 +935,40 @@ beat the placebo – only on cost (−5 % and −12 %), not on pass rate
           display:block!important;
       }</style></aside>
 </section>
-<section id="from-practice-what-a-good-agents.md-achieves" class="slide level2">
-<h2>From practice: what a good AGENTS.md achieves</h2>
-<div class="todo">
-<p><strong>Placeholder – Benjamin’s company projects.</strong> Suggested structure:</p>
-<ul>
-<li>Starting point: project, stack, team size</li>
-<li>Before / after: what concretely changed thanks to the AGENTS.md?</li>
-<li>A real (anonymised) excerpt – which 3 lines help most?</li>
-<li>What did <em>not</em> work / was removed again?</li>
-</ul>
+<section id="try-it-yourself" class="slide level2">
+<h2>Try it yourself</h2>
+<div class="bigquote">
+<p>Coding Agents: intro workshop<br><strong>today, 11:30 – 12:30</strong></p>
 </div>
+<p><br></p>
+<ul>
+<li>Build a survey-analysis pipeline with a coding agent – step by step, ready prompts</li>
+<li>Open harness (<strong>OpenCode 2</strong>) + open models in <strong>German data centres</strong> (IONOS)</li>
+<li>Guardrails that keep the agent away from personal data · ~€0.10 per pipeline step</li>
+<li>Bring a laptop – please install <code>uv</code> and OpenCode 2 beforehand (<code>SETUP.md</code> in the repo)</li>
+</ul>
+<aside class="notes">
+<p>Pointer to the workshop slot after the break.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="sources" class="slide level2">
 <h2>Sources</h2>
 <div class="sources">
 <ul>
+<li>METR (2026): <em>Task-Completion Time Horizons of Frontier AI Models</em> (updated Sep 8, 2026). <a href="https://metr.org/time-horizons/">metr.org/time-horizons</a> · METR (Jan 29, 2026): <em>Time Horizon 1.1.</em> <a href="https://metr.org/blog/2026-01-29-time-horizon-1-1/">metr.org/blog</a></li>
+<li>Hallie, L. (2026): <em>Rethinking Claude Code Best Practices.</em> AI Engineer, Nov 2026. <a href="https://www.youtube.com/watch?v=vlfCjWuv4es">YouTube</a></li>
+<li>OpenClaw (formerly Clawdbot / Moltbot). <a href="https://en.wikipedia.org/wiki/OpenClaw">Wikipedia</a> · GitGuardian (Jan 2026): <em>OpenClaw (Moltbot) personal assistant goes viral – and so do your secrets.</em> <a href="https://blog.gitguardian.com/moltbot-personal-assistant-goes-viral-and-so-do-your-secrets/">blog.gitguardian.com</a></li>
+<li>Fast Forward (2025): <em>AI for Humanity Report</em> (via <a href="https://www.philanthropy.com/news/nonprofits-are-embracing-ai-but-many-struggle-to-find-funding/">Chronicle of Philanthropy</a>) · TechSoup/Tapp (2025): <em>AI Benchmark Report</em> (<a href="https://blog.techsoup.org/posts/what-ai-means-for-nonprofits-in-2025-insights-from-the-ai-benchmark-report">blog.techsoup.org</a>) · <em>Charity Digital Skills Report 2025</em> (<a href="https://digitalskills.mdia.gov.mt/skills-intelligence/charity-digital-skills-report-2025/">summary</a>) · <em>ZiviZ-Survey 2023</em> (<a href="https://ziviz.de/sites/ziv/files/ziviz-survey_2023_vereine_und_andere_zivilgesellschaftliche_organisationen.pdf">ziviz.de</a>)</li>
 <li>Gloaguen, Mündler, Müller, Raychev, Vechev (2026): <em>Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?</em> ICLR 2026. <a href="https://arxiv.org/abs/2602.11988">arXiv:2602.11988</a></li>
 <li>Li et al.&nbsp;(2026): <em>SkillsBench: Benchmarking How Well Agent Skills Work Across Diverse Tasks.</em> <a href="https://arxiv.org/abs/2602.12670">arXiv:2602.12670</a></li>
 <li>Bai et al.&nbsp;(2026): <em>How Do AI Agents Spend Your Money? Analyzing and Predicting Token Consumption in Agentic Coding Tasks.</em> <a href="https://arxiv.org/abs/2604.22750">arXiv:2604.22750</a></li>
@@ -874,35 +981,32 @@ beat the placebo – only on cost (−5 % and −12 %), not on pass rate
 <li>AGENTS.md: <a href="https://agents.md">agents.md</a> · Agentic AI Foundation (Linux Foundation, Dec 2025)</li>
 <li>Claude Code settings, permissions &amp; hooks: <a href="https://docs.claude.com/en/docs/claude-code/settings">docs.claude.com</a></li>
 <li>Mistral Vibe: <a href="https://docs.mistral.ai/mistral-vibe/overview">docs.mistral.ai</a></li>
-<li>Fast Forward (2025): <em>AI for Humanity Report</em>, via Chronicle of Philanthropy. <a href="https://www.philanthropy.com/news/nonprofits-are-embracing-ai-but-many-struggle-to-find-funding/">philanthropy.com</a></li>
-<li>TechSoup &amp; Tapp Network (2025): <em>AI Benchmark Report.</em> <a href="https://blog.techsoup.org/posts/what-ai-means-for-nonprofits-in-2025-insights-from-the-ai-benchmark-report">techsoup.org</a></li>
-<li>Charity Digital Skills Report 2025 (n = 672 UK charities). <a href="https://digitalskills.mdia.gov.mt/skills-intelligence/charity-digital-skills-report-2025/">Summary</a></li>
-<li>ZiviZ (2023): <em>ZiviZ-Survey 2023 – Vereine und andere zivilgesellschaftliche Organisationen</em> (Bavaria report). <a href="https://ziviz.de/sites/ziv/files/ziviz-survey_2023_vereine_und_andere_zivilgesellschaftliche_organisationen.pdf">ziviz.de</a></li>
 </ul>
 </div>
+
 
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>Coding Agents and Best Practices · CorrelCon 2026 Karlsruhe · Nov 14, 2026</p>
+<p>Coding Agents: best practices &amp; discussion · CorrelCon 2026 · Nov 14, 10:45</p>
 </div>
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="index_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="index_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="index_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="index_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="index_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="index_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="index_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="index_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1105,7 +1209,7 @@ beat the placebo – only on cost (−5 % and −12 %), not on pass rate
         });
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp('/' + window.location.host + '/');
+            var filterRegex = new RegExp("https:\/\/CorrelAid\.github\.io\/correlcon-2026-agentic-coding-workshop\/");
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

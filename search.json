@@ -1,0 +1,240 @@
+[
+  {
+    "objectID": "workshop.html#what-youll-take-home",
+    "href": "workshop.html#what-youll-take-home",
+    "title": "Coding Agents: Intro Workshop",
+    "section": "What you’ll take home",
+    "text": "What you’ll take home\n\n\nA setup an NGO can use\nAn open coding agent on your laptop, open models in German data centres, pay per use – no GPU, no subscription.\n\n\nA way of working\nYou decide what and check the result. The agent writes the code. Your code does the analysis.\n\n\nA feel for guardrails & cost\nWhat keeps the agent away from personal data – and what one pipeline step really costs.\n\n\n\n~1 min. Nobody needs prior experience with coding agents. Python basics help, but you won’t write much code yourself."
+  },
+  {
+    "objectID": "workshop.html#plan-for-the-hour",
+    "href": "workshop.html#plan-for-the-hour",
+    "title": "Coding Agents: Intro Workshop",
+    "section": "Plan for the hour",
+    "text": "Plan for the hour\n\n\n\n\n\n\n\n\nTime\nWhat\n\n\n\n\n11:30\nCoding agents in 5 minutes · why this setup\n\n\n11:40\nSetup check: uv run agent, first prompt\n\n\n11:50\nHands-on: pipeline steps 2 – 5, one prompt each (pairs welcome)\n\n\n12:20\nCosts, trust, what worked and what didn’t\n\n\n12:30\nEnd\n\n\n\n\n\n~1 min. If setup fails for someone: pair up with a neighbour – one laptop for two works well. Step 2 (spam) is optional."
+  },
+  {
+    "objectID": "workshop.html#a-coding-agent-in-one-picture",
+    "href": "workshop.html#a-coding-agent-in-one-picture",
+    "title": "Coding Agents: Intro Workshop",
+    "section": "A coding agent in one picture",
+    "text": "A coding agent in one picture\n\n\n~2 min. Recap for everyone who missed the discussion session. The model only writes text, including tool calls. The harness – today: OpenCode 2 – runs the tools on your laptop, checks policies and permissions, and feeds the results back. That loop repeats until the task is done."
+  },
+  {
+    "objectID": "workshop.html#agentic-coding-in-civil-society-the-hard-parts",
+    "href": "workshop.html#agentic-coding-in-civil-society-the-hard-parts",
+    "title": "Coding Agents: Intro Workshop",
+    "section": "Agentic coding in civil society: the hard parts",
+    "text": "Agentic coding in civil society: the hard parts\n\n\nData protection\nData about vulnerable people – US providers often off-limits.\n~50 % of AI-using nonprofits name privacy risks¹\n\n\nExpertise\nNo in-house tech staff, no rules → “shadow AI”.\n41 % lack in-house tech expertise¹ · 76 % have no AI strategy²\n\n\nMoney\nTokens and tools compete with the mission.\n69 %: budget is the main obstacle³ · 60 % no support for digital costs³\n\n\nWho maintains it?\nVolunteers move on – non-techies inherit the code.\n78 % of organisations (Bavaria) have no paid staff⁴\n\n\n¹ Fast Forward 2025 (US) · ² TechSoup 2025 (US) · ³ Charity Digital Skills 2025 (UK) · ⁴ ZiviZ 2023\n\n~1.5 min. We build for organisations without an IT department – that shapes every choice in this workshop.\n\nData protection: NGOs hold data about children, patients, refugees. GDPR is a real legal uncertainty for volunteer boards (ZiviZ). Shadow AI: staff paste data into tools nobody approved.\nExpertise: Fast Forward surveyed ~200 nonprofits that already use AI – so the real gap is bigger. 41 % lack tech expertise, nearly half name privacy risks, 84 % name funding for tools and talent as their greatest need.\nMoney: UK Charity Digital Skills Report 2025 (n = 672): 69 % budget squeeze, 60 % no support for digital costs.\nMaintenance: ZiviZ 2023 Bavaria: only 22 % of organisations have any paid staff. Whatever we build must survive the handover.\n\nTransition: that is why the workshop setup looks the way it does."
+  },
+  {
+    "objectID": "workshop.html#our-setup-two-models-two-jobs-one-key",
+    "href": "workshop.html#our-setup-two-models-two-jobs-one-key",
+    "title": "Coding Agents: Intro Workshop",
+    "section": "Our setup: two models, two jobs, one key",
+    "text": "Our setup: two models, two jobs, one key\n\n\n~2 min. - Two models, two jobs: the coding agent (Qwen3-Coder-Next) writes code; the code the agent writes calls a second model (gpt-oss-120b) for the actual analysis. Both on IONOS: one provider, one key, German data centres, no training on the data. - The agent never sees personal data: raw and interim data are blocked by policy and hooks; it writes code that processes the data and prints counts. You run the pipeline scripts – they call a paid API on real data. - Why IONOS and not Scaleway/GLM? Scaleway limits tokens per minute per organisation; 20 people with an agent need more. IONOS limits requests (5/s per model) instead. Details: example/docs/infrastructure.md."
+  },
+  {
+    "objectID": "workshop.html#setup-three-steps",
+    "href": "workshop.html#setup-three-steps",
+    "title": "Coding Agents: Intro Workshop",
+    "section": "Setup – three steps",
+    "text": "Setup – three steps\n\n\n\n\nterminal\n\n# 1 · install (ideally before the workshop)\ncurl -LsSf https://astral.sh/uv/install.sh | sh\ncurl -fsSL https://opencode.ai/v2/install | bash\n\n# 2 · code + key\ngit clone https://github.com/CorrelAid/\\\ncorrelcon-2026-agentic-coding-workshop\ncd correlcon-2026-agentic-coding-workshop/example\ncp .env.example .env\n# → paste the key after IONOS_API_KEY=\n\n# 3 · check and start\nuv sync\nuv run python scripts/check_setup.py\nuv run agent\n\n\n\nStart with uv run agent – not plain opencode. Plain opencode doesn’t read .env → 401.\n\n\nFirst prompt to try: “Write a function in src/project/text.py that masks email addresses and phone numbers, add tests and run them.”≈ 45 s · ≈ €0.02\n\n\nWindows: use WSL. Details & troubleshooting: SETUP.md\n\n\n\n~10 min incl. helping people. uv run agent starts OpenCode 2 from the example/ folder with the keys from .env and –standalone (OpenCode 2 otherwise talks to a shared background service that knows nothing about the project’s keys). check_setup.py tests both models incl. tool calling for less than one cent."
+  },
+  {
+    "objectID": "workshop.html#five-layers-of-control",
+    "href": "workshop.html#five-layers-of-control",
+    "title": "Coding Agents: Intro Workshop",
+    "section": "Five layers of control",
+    "text": "Five layers of control\n\n\n\n\n\n\n\n\n\nLayer\nFile\nWhat it does\n\n\n\n\nInstructions\nAGENTS.md\nProject rules: columns, commands, data protection. Usually followed – not guaranteed.\n\n\nSkills\n.agents/skills/privacy-check/\nA procedure loaded only when needed – e.g. a new data source.\n\n\nPolicies\nopencode.json\nHard rules: only IONOS · no .env, no data/raw/ – not even via the shell · no pipeline runs · prompts read-only\n\n\nPermissions\nopencode.json\nShell commands ask first – except tests, ruff, git status …\n\n\nHooks\n.opencode/plugins/guardrails.ts\nHide API keys from the shell · block searches in protected folders · run ruff after every edit and feed errors back\n\n\n\n\n\n~2 min. The core message of the discussion session, made concrete: AGENTS.md is advice, policies and hooks are enforced. Honest caveat: hooks catch accidents – only isolation (container, separate machine) is a security boundary. Try it during step 2: ask the agent “show me 5 raw rows” – watch the hook block it."
+  },
+  {
+    "objectID": "workshop.html#our-data-the-babylotse-survey-2024",
+    "href": "workshop.html#our-data-the-babylotse-survey-2024",
+    "title": "Coding Agents: Intro Workshop",
+    "section": "Our data: the Babylotse survey 2024",
+    "text": "Our data: the Babylotse survey 2024\n\n\nBabylotse Frankfurt (Kinderschutzbund Frankfurt) supports families around the birth of a child. In 2024 it asked families in Frankfurt what they like – and don’t like – about life with a baby in the city.\n\n987 answers, in German\nDistrict (typed by hand) + two free-text answers\nCC BY 4.0 – thanks to Babylotse for publishing it\n\n\n\nThe question\nWhat do families talk about – and does it differ between districts?\n\n\nThe rule\nThe agent never reads raw answers. It writes code that does – and prints only counts.\n\n\n\n~1.5 min. In 2024 CorrelAid solved this with notebooks and hand-written prompts (workshop-babylotse). Today a coding agent builds the pipeline – the district mapping from 2024 is reused in step 1."
+  },
+  {
+    "objectID": "workshop.html#the-pipeline",
+    "href": "workshop.html#the-pipeline",
+    "title": "Coding Agents: Intro Workshop",
+    "section": "The pipeline",
+    "text": "The pipeline\n\n\n~1.5 min. Each step reads the previous step’s file and writes its own – steps can be re-run independently. Contracts in docs/pipeline.md."
+  },
+  {
+    "objectID": "workshop.html#one-step-start-to-finish",
+    "href": "workshop.html#one-step-start-to-finish",
+    "title": "Coding Agents: Intro Workshop",
+    "section": "One step, start to finish",
+    "text": "One step, start to finish\n\n\n1 · Paste the prompt\nFrom prompts/0N_*.md. Start a fresh session per step – old context costs money.\n\n\n2 · Let it work\nThe agent fills the stub in src/project/, runs tests & ruff, and tells you the command to run.\n\n\n3 · Run it & look\nYou run the script with --limit 100, then check the output. Humans decide, the model suggests.\n\n\n\n\nprompts/03_topics.md (excerpt)\n\n- Draw a fixed sample (seed 42) of 50 positive and 50 negative answers.\n- Send the whole sample in ONE request to the analysis model via src/project/llm.py.\n- Ask for at most 10 neutral categories, in German, each with a description.\n- Validate with pydantic, save data/processed/categories_v1.json.\n- End the script with sanity checks on its own output. No tests that mock the LLM.\nThen tell me the command to run the step.\n\n\n~2 min. Show step 3 live once, then everyone works. The prompts are deliberately specific: input, output, rules, and how to check – that’s what a good task description looks like."
+  },
+  {
+    "objectID": "workshop.html#hands-on-steps-2-5",
+    "href": "workshop.html#hands-on-steps-2-5",
+    "title": "Coding Agents: Intro Workshop",
+    "section": "Hands-on: steps 2 – 5",
+    "text": "Hands-on: steps 2 – 5\n\n\n\n\n\n\n\n\n\nStep\nThen run\nLook at · best practice on show\n\n\n\n\n2 · Spam (optional)\nscripts/02_spam.py --limit 100\nAsk “show me 5 raw rows” – the hook blocks it\n\n\n3 · Topics\nscripts/03_topics.py\nRead the categories together – edit categories_v1.json by hand\n\n\n4 · Classify\nscripts/04_classify.py --limit 100\nBatches of 20, validation, caching – shared rate limits\n\n\n5 · Report\nscripts/05_report.py\nOpen outputs/report.html – when are tests worth it in a pipeline?\n\n\n\n\nRun everything with uv run python … inside example/. Stuck? Copy the finished step from the branch demo-solution – see prompts/README.md.\n\n~30 min hands-on, ~8 min per step. Nobody needs to finish all four – step 3 alone is a good result. Skipped step 2? Steps 3–5 use the district check from step 1 as a spam filter."
+  },
+  {
+    "objectID": "workshop.html#what-does-it-cost",
+    "href": "workshop.html#what-does-it-cost",
+    "title": "Coding Agents: Intro Workshop",
+    "section": "What does it cost?",
+    "text": "What does it cost?\n\n\n~€0.01\nper agent step (~60k tokens – the whole context is resent each time)\n\n\n€0.08 – 0.15\na clean pipeline step · a step with many fixes: €1 – 3\n\n\n~€40\nfor 20 people today (typical) · the analysis model adds only cents\n\n\n\n\nSee your own numbers: opencode stats\nHard task? Switch with /models to Qwen3.5 397B – stronger, ~4× the price\nFor an NGO: ~3 volunteers with a few sessions a month ≈ €8 / month\n\nMeasured with the workshop repo, Oct 2026 – details in example/docs/infrastructure.md.\n\n~3 min. Ask 2–3 pairs for their opencode stats. The point: the money is in the agent’s context, not in the analysis – fresh sessions and quiet output (AGENTS.md: “Keep output short”) are the main cost levers. The expensive part is your time when the agent goes wrong."
+  },
+  {
+    "objectID": "workshop.html#ground-rules-for-today",
+    "href": "workshop.html#ground-rules-for-today",
+    "title": "Coding Agents: Intro Workshop",
+    "section": "Ground rules for today",
+    "text": "Ground rules for today\n\n\nData\nOnly public or synthetic data with the workshop key – never your organisation’s personal data.\n\n\nThe workshop key\nRuns on CorrelAid’s account and expires tonight. Don’t commit it, don’t post it.\n\n\nReview\nRead the diff before you commit. You own what you commit – not the agent.\n\n\n“Blocked by policy”?\nWorking as intended. Ask the agent for another way – or ask us.\n\n\n\nShow this right before hands-on starts."
+  },
+  {
+    "objectID": "workshop.html#wrap-up",
+    "href": "workshop.html#wrap-up",
+    "title": "Coding Agents: Intro Workshop",
+    "section": "Wrap-up",
+    "text": "Wrap-up\n\n\nWhere did you step in?\nWhich step needed the most correction – and why?\n\n\nWould you trust it?\nWould you hand the report to Babylotse as it is?\n\n\nBack home\nCould your NGO use this setup? What’s missing?\n\n\n\n\nRepo, prompts, setup: github.com/CorrelAid/correlcon-2026-agentic-coding-workshop – the example/ folder is a template for your own projects\nBest practices & research: slides from the 10:45 discussion session (same repo)\nData: Babylotse Frankfurt, CC BY 4.0 · OpenCode: opencode.ai · IONOS AI Model Hub: docs.ionos.com\n\n\n~5 min. Sources for the civil-society slide: Fast Forward 2025 AI for Humanity Report (via Chronicle of Philanthropy) · TechSoup/Tapp AI Benchmark Report 2025 · Charity Digital Skills Report 2025 · ZiviZ-Survey 2023."
+  },
+  {
+    "objectID": "index.html#terms-12-what-is-an-agent",
+    "href": "index.html#terms-12-what-is-an-agent",
+    "title": "Coding Agents and Best Practices",
+    "section": "Terms (1/2): what is an agent?",
+    "text": "Terms (1/2): what is an agent?\n\n\n~1 min. Read the picture from the inside out: the model only writes text. The harness turns tool calls into real actions and feeds the results back – that’s the loop. Add a goal from you, and the whole thing is an agent: agent = goal + model + harness. Note: one harness can run many agents – e.g. subagents, or an orchestrator that splits a goal into tasks and starts one session per task. Each of those is again goal + model + loop + tools. Key distinction: model ≠ agent ≠ harness. The model doesn’t “do” anything – the harness executes."
+  },
+  {
+    "objectID": "index.html#inside-the-harness-one-turn-of-the-loop",
+    "href": "index.html#inside-the-harness-one-turn-of-the-loop",
+    "title": "Coding Agents and Best Practices",
+    "section": "Inside the harness: one turn of the loop",
+    "text": "Inside the harness: one turn of the loop\n\n\n~2 min. The model only decides “text or tool call”. The harness executes, checks permissions, runs hooks, collects results and builds the next context. Consequence: the same model performs differently in different harnesses – which is why benchmarks like Terminal-Bench always rate the model + harness pair."
+  },
+  {
+    "objectID": "index.html#terms-22-how-do-we-steer-it",
+    "href": "index.html#terms-22-how-do-we-steer-it",
+    "title": "Coding Agents and Best Practices",
+    "section": "Terms (2/2): how do we steer it?",
+    "text": "Terms (2/2): how do we steer it?\n\n\nContext\nEverything the model sees in one step. Limited, costs tokens, crowds out the rest.\n\n\nAGENTS.md\nProject file the harness always loads into context: commands, conventions, rules.\nCLAUDE.md · GEMINI.md\n\n\nSkill\nFolder with instructions (+ scripts), loaded only when needed.\n\n\nMCP\nModel Context Protocol – open standard to plug in external tools and data.\n\n\nHook\nDeterministic script the harness runs on events, e.g. before every tool call.\n\n\n\n~1 min. These are the knobs we will talk about in the best-practice part."
+  },
+  {
+    "objectID": "index.html#how-did-we-get-here",
+    "href": "index.html#how-did-we-get-here",
+    "title": "Coding Agents and Best Practices",
+    "section": "How did we get here?",
+    "text": "How did we get here?\n\n\n~1.5 min. Three jumps: autocomplete (Copilot) → chat → agent in the terminal with tool access. Next slide: what these jumps mean in numbers. 2025 was the year of terminal agents; since late 2025 standardisation (AGENTS.md, MCP under the Linux Foundation’s Agentic AI Foundation). 2026: focus shifts from the prompt to the harness (“harness engineering”, OpenAI, Feb 2026) – and the first solid studies appear. Dec 2025: the Linux Foundation launched the Agentic AI Foundation (AAIF) with Anthropic’s MCP, OpenAI’s AGENTS.md and Block’s goose as founding projects – the core standards are no longer owned by one vendor, so the same AGENTS.md and MCP servers work across harnesses. Jan 2026: OpenClaw (formerly Clawdbot/Moltbot) goes viral – an open-source agent that runs 24/7, you talk to it via Signal/Telegram/WhatsApp, and it can access mail, calendar and other services. Also a security lesson: leaked secrets, malicious skills, prompt injection. 2026: cloud agents (Claude Code cloud sessions, Codex Cloud, Cursor Cloud Agents) keep working with the laptop closed. Next? Always-on agents with access to all the services they need – vendors already market “super agents”. The open question is less “can they?” than “what may they touch?”."
+  },
+  {
+    "objectID": "index.html#from-handholding-to-delegation",
+    "href": "index.html#from-handholding-to-delegation",
+    "title": "Coding Agents and Best Practices",
+    "section": "From handholding to delegation",
+    "text": "From handholding to delegation\n\nSource: METR, Task-Completion Time Horizons of Frontier AI Models, metr.org/time-horizons (last updated Sep 8, 2026; data file benchmark_results_1_1.yaml). Time Horizon 1.1 values; GPT-2 and GPT-3.5 from the original 2025 suite. 50 % horizon = task length, measured in human expert time, at which the agent is predicted to succeed half the time. Trend line and “human equivalent” labels: our illustration.\n\n~2 min. This is the one chart to remember. Each point is a model; the y-axis is how long a human would need for the tasks the model finishes alone half of the time. Log scale: every gridline step is a big jump. 2023 (GPT-4): a few minutes – you had to check in after every small step. Early 2026 (Claude Opus 4.6): about 12 hours – a day’s work, in principle (95 % CI roughly 5–60 h). Doubling roughly every 4–6 months (METR: ~4.3 months since 2023). Caveats: 50 % ≠ “safe to delegate” (80 % horizons are several times shorter), error bars are about ×2 either way, and METR’s own suite is nearly saturated above ~16 h. Message: the habits we built for the old models – approving every step, long instruction files – were built for the left half of this chart."
+  },
+  {
+    "objectID": "index.html#whats-different-from-writing-code-yourself",
+    "href": "index.html#whats-different-from-writing-code-yourself",
+    "title": "Coding Agents and Best Practices",
+    "section": "What’s different from writing code yourself?",
+    "text": "What’s different from writing code yourself?\n\n\nFrom author to reviewer\nI write the goal and the constraints, the agent writes the code. My main job: make the task clear, check the result.\n\n\nNon-deterministic\nSame task, different path. Token usage for the very same task varies by up to 30× (Bai et al. 2026).\n\n\nContext instead of memory\nThe agent only knows the project as far as it is in the context – every session starts from zero.\n\n\nFelt ≠ measured\nMETR (2025): experienced OSS developers felt 20 % faster – but were 19 % slower with AI.\n\n\n\n~2 min. METR study: 16 experienced developers, their own large repos, early-2025 tools. Models have improved since – the point stands: measure, don’t guess."
+  },
+  {
+    "objectID": "index.html#which-harness-should-i-choose",
+    "href": "index.html#which-harness-should-i-choose",
+    "title": "Coding Agents and Best Practices",
+    "section": "Which harness should I choose?",
+    "text": "Which harness should I choose?\n\n\n\n\n\n\n\n\n\n\nHarness\nVendor\nLicense\nModels\nCustomise via\n\n\n\n\nClaude Code\nAnthropic\nproprietary\nClaude\nCLAUDE.md, skills, hooks, plugins, Agent SDK\n\n\nCodex CLI\nOpenAI\nApache-2.0\nOpenAI (+ configurable providers)\nAGENTS.md, skills, MCP\n\n\nGemini CLI\nGoogle\nApache-2.0\nGemini\nGEMINI.md, extensions, MCP\n\n\nopencode\ncommunity\nMIT\n75+ providers, incl. EU hosting & local\nAGENTS.md, agents, plugins, MCP\n\n\nMistral Vibe\nMistral (FR)\nopen source\nDevstral / Mistral\nagent profiles, permissions, MCP\n\n\nBuild your own\nyou\n–\nany\nagent SDKs or ~100 lines of your own loop\n\n\n\nCriteria: Where does my data go (GDPR!)? · Am I locked into one model vendor? · How customisable is it? · What does the team use? · Cost per task\n\n~2 min. For non-profits, data protection is often the deciding factor → open harnesses (opencode, Vibe) with EU-hosted models. Building your own is great for understanding (workshop!), rarely for daily work. State: October 2026 – the landscape changes monthly; the concepts (loop, tools, context file, permissions, hooks) are the same everywhere."
+  },
+  {
+    "objectID": "index.html#step-back-what-changes-in-how-we-work",
+    "href": "index.html#step-back-what-changes-in-how-we-work",
+    "title": "Coding Agents and Best Practices",
+    "section": "Step back: what changes in how we work",
+    "text": "Step back: what changes in how we work\n\n\nThen (early 2026 habits)\n\nShort runs, the agent stops early, you correct constantly\nCLAUDE.md full of IMPORTANT!!! and stack details\nApprove every single command – or skip permissions entirely\nRead every diff at the end\n\n\n\nNow (Claude 5.5-era models)\n\nHand over a much bigger task and say what done looks like\nOnly write down what the agent can’t see in the code\nAuto mode + deny rules instead of clicking “approve”\nCheckpoints that pass or fail (tests, hooks, CI) instead of reading every diff\n\n\n\n\n\n14 % of people approving commands caught a clearly dangerous one\n\n\n89 % were blocked by Claude Code’s auto-mode classifier\n\n\nSource: Lydia Hallie (Anthropic), Rethinking Claude Code Best Practices, AI Engineer, Nov 11, 2026 – youtube.com/watch?v=vlfCjWuv4es. The 14 % / 89 % figures are from an internal Anthropic study (Aug 2026) cited in the talk.\n\n~2.5 min. Based on Lydia Hallie’s talk from this week. Her core message: much of what we added to our setups over the past year now holds the newer models back. Humans are bad gatekeepers: when you approve dozens of commands, you stop reading them. A classifier plus a few hard deny rules does better. Trust is not blind: you replace “watching every step” with checkpoints that fail loudly."
+  },
+  {
+    "objectID": "index.html#best-practice-1-agents.md-only-what-the-agent-cant-see",
+    "href": "index.html#best-practice-1-agents.md-only-what-the-agent-cant-see",
+    "title": "Coding Agents and Best Practices",
+    "section": "Best practice 1: AGENTS.md – only what the agent can’t see",
+    "text": "Best practice 1: AGENTS.md – only what the agent can’t see\n\n\n\n\nAGENTS.md\n\n## Commands\n- Setup: `uv sync`\n- Tests: `uv run pytest -q`\n- Lint: `uv run ruff check --fix`\n\n## Conventions you can't see in the code\n- Never write to `data/raw/`\n- New analyses: Quarto files in `reports/`\n- Column names always snake_case\n\n## Definition of done\n- Tests green, ruff clean\n- No new dependencies without asking\n\n\n\nPut in\n\nCommands (build, test, lint)\nNon-obvious conventions\nProhibitions & “definition of done”\n\n\n\nLeave out\n\nStack details and “where to look” – the agent explores itself\nWhat’s already in the README / linter\nAuto-generated text (/init)\nIMPORTANT!!! – emphasis makes newer models over-react\n\n\n\n\n~2 min. Keep it short (&lt; 100 lines), human-written, only what the agent can’t figure out itself. Every line costs tokens on every call. Hallie’s example of what belongs in: “this service still reads from a legacy data source that isn’t referenced anywhere in the repo”. And: re-audit the file whenever you switch to a newer model – instructions written for older models can now make results worse. AGENTS.md is the vendor-neutral format; Claude Code reads CLAUDE.md – tip: CLAUDE.md just contains @AGENTS.md. Meta: this deck lives in a repo with its own AGENTS.md – have a look!"
+  },
+  {
+    "objectID": "index.html#from-practice-make-the-entry-points-explicit",
+    "href": "index.html#from-practice-make-the-entry-points-explicit",
+    "title": "Coding Agents and Best Practices",
+    "section": "From practice: make the entry points explicit",
+    "text": "From practice: make the entry points explicit\n\n\n\n\n\n“The agent must always know what the entry points of the repo are.”\n\n— Benjamin Fries, from his company projects\n\n\nAGENTS.md (sketch)\n\n## Entry points\n- app_a/  → `uv run app-a`   uses shared/\n- app_b/  → `uv run app-b`   uses shared/\n- prep/   → `uv run prep`    writes data/dev/\n## When you change …\n- shared/      → run tests of app_a AND app_b\n- prep/ schema → update fixtures of both apps\n\n\n\n~2.5 min (Benjamin). One repo, two small applications that share code, plus a third entry point that prepares data for development. Without documented dependencies the agent fixes one entry point and silently breaks another – “Schiefstände”, things drifting out of sync. This is exactly the kind of knowledge the agent can’t reliably infer from the code: which parts belong together and what has to be re-checked after a change. The excerpt is a simplified sketch, names changed."
+  },
+  {
+    "objectID": "index.html#best-practice-2-hard-limits-then-let-it-run",
+    "href": "index.html#best-practice-2-hard-limits-then-let-it-run",
+    "title": "Coding Agents and Best Practices",
+    "section": "Best practice 2: hard limits, then let it run",
+    "text": "Best practice 2: hard limits, then let it run\n\n\n\n\n.claude/settings.json\n\n{\n  \"permissions\": {\n    \"deny\": [\"Read(./.env*)\",\n             \"Read(./secrets/**)\",\n             \"Bash(git push:*)\"],\n    \"ask\":  [\"Bash(uv add:*)\"]\n  },\n  \"hooks\": {\n    \"PostToolUse\": [{\n      \"matcher\": \"Edit|Write\",\n      \"hooks\": [{ \"type\": \"command\",\n                  \"command\": \"ruff format\" }]\n    }]\n  }\n}\n\n\n\nDeny rules = the only hard stop. Ask: “If it gets this wrong once, can I take it back?” If not → deny rule.\n\n\nAuto mode / allow-list for everything reversible: tests, installs, edits in the repo\n\n\nCareful: a deny rule on .env doesn’t stop your test script from loading it. Real isolation: sandbox / cloud session, secrets outside the repo.\n\n\n\n~2 min. Wrong code can be reverted – a deleted branch, discarded changes or a key in the transcript can’t. Those get deny rules; everything else runs without asking. Sandboxes only cover shell commands and their children; file tools, MCP servers and hooks run outside. Hallie’s preferred option: a cloud session with its own machine – no .env, no SSH keys on it. Skills from the internet are code: an analysis of 31,000 community skills found at least one exploitable vulnerability in 26 % of them."
+  },
+  {
+    "objectID": "index.html#best-practice-3-checkpoints-instead-of-watching",
+    "href": "index.html#best-practice-3-checkpoints-instead-of-watching",
+    "title": "Coding Agents and Best Practices",
+    "section": "Best practice 3: checkpoints instead of watching",
+    "text": "Best practice 3: checkpoints instead of watching\n\n\n\nSay what done looks like\nSplit work into tasks that each come with their own test. Ask the agent to show the actual output, not to claim success.\n\n\nHooks = checkpoints that always run\n\nevery edit → linter\ntask marked complete → relevant tests\nsession about to end → full test suite\n\n\n\n\n\n.claude/hooks/run-tests.sh\n\n#!/usr/bin/env bash\nuv run pytest -q || {\n  echo \"Tests fail – fix them\" &gt;&2\n  exit 2  # block + send back\n}\n\n\nGotcha: most tools exit with 1 on failure – Claude Code treats that as non-blocking and moves on. Only exit code 2 sends the agent back to fix it.\n\n\nThen: CI as the backstop, and human review scaled to risk.\n\n\n\n~2 min. Instead of reading every diff, define pass/fail gates. Hallie’s example: an OAuth migration can be done three ways – keep the old API, migrate only new logins, or log everyone out. The “log everyone out” run fails the first test, without anyone reading the diff. Review ladder: agent review first, then none / one / two human reviewers depending on risk."
+  },
+  {
+    "objectID": "index.html#what-does-the-research-say",
+    "href": "index.html#what-does-the-research-say",
+    "title": "Coding Agents and Best Practices",
+    "section": "What does the research say?",
+    "text": "What does the research say?\n\n\nAGENTS.md (ETH Zurich, ICLR 2026)\n4 agents, SWE-bench Lite + 138 tasks from repos with real context files\n\nLLM-generated: success rate –0.5 to –2 pp, cost +20–23 %\nHuman-written: approx. +2.4 pp (not significant), cost up to +19 %\nAgents follow the file – they test and explore more, but do not find relevant files faster\n\n\n\nSkillsBench (Feb 2026)\n84 tasks, 11 domains, 7 model–harness combinations\n\nCurated skills: +16.2 pp on average – but software engineering only +4.5 pp (healthcare +52)\nSelf-generated skills: ≈ 0 to –1.8 pp\n2–3 focused skills work best; comprehensive documentation skills hurt (–2.9 pp)\n\n\n\nTakeaway: Knowledge the model already has adds nothing – but costs tokens. Value comes only from real specialist knowledge that is short and human-curated. More tokens ≠ more accuracy (Bai et al. 2026).\n\n~2 min. This is the core. Not “skills/CLAUDE.md are useless”, but: for coding in standard stacks, modern models already know most of it. Context files and skills are a cost that only pays off for non-obvious knowledge. pp = percentage points."
+  },
+  {
+    "objectID": "index.html#skills-vs.-placebo-a-controlled-test",
+    "href": "index.html#skills-vs.-placebo-a-controlled-test",
+    "title": "Coding Agents and Best Practices",
+    "section": "Skills vs. placebo: a controlled test",
+    "text": "Skills vs. placebo: a controlled test\n\n\n\nskill-placebo (Sep 2026)\n9 popular skills vs. neutral text of the same length, loaded the same way. Claude Code + Opus 5.5, 15 tasks, 30 trials per arm, pre-registered.\n\n2 / 9\n\n\nbeat the placebo – only on cost (−5 % and −12 %), not on pass rate\n\n\n6 no better, 1 worse (–20 pp)\nNone cheaper than no skill at all\nThe placebo alone adds +2–16 % cost\n\n\n\n\nClaims vs. measured\n\n\n\nSkill\nClaimed\nMeasured\n\n\n\n\ncaveman\n65 % fewer tokens\n+18 % total tokens, +14 % cost\n\n\nponytail\n~20 % cheaper\n–1 % cost\n\n\nplanning-with-files\n96.7 % pass rate\n80 % vs. 87 % without skill\n\n\n\n\n\nCaveats: one model and harness, short public tasks near the ceiling, long-session skills not covered. A single-author benchmark, not peer-reviewed – but all trials are published.\n\n\n\n~1.5 min. The cleanest design I know: it separates “the skill’s content helps” from “any extra text in the context changes behaviour”. Most of the effect people attribute to skills is the placebo effect of more context – and it costs money. Fits SkillsBench: generic, popular skills for coding add little; value comes from specific, curated knowledge."
+  },
+  {
+    "objectID": "index.html#what-has-lost-weight-and-what-has-gained",
+    "href": "index.html#what-has-lost-weight-and-what-has-gained",
+    "title": "Coding Agents and Best Practices",
+    "section": "What has lost weight – and what has gained",
+    "text": "What has lost weight – and what has gained\n\n\nLosing weight\n\nPrompt tricks (“You are a senior dev …”, magic words)\nLong, generated CLAUDE.md / AGENTS.md files\nRepo descriptions – the agent explores by itself\nLarge skill collections from the internet\nApproving every command by hand\n\n\n\nGaining weight\n\nClear task / spec – what does “done” mean?\nVerification: tests, linters, CI as feedback loop\nBoundaries: deny rules, sandbox, auto mode\nChoice & configuration of the harness\nReview & responsibility stay with humans\n\n\n\n\n~1.5 min. From “prompt engineering” (2023) via “context engineering” (2025) to “harness engineering” (2026): we optimise less and less the text we send to the model and more and more the environment it works in."
+  },
+  {
+    "objectID": "index.html#spec-driven-development",
+    "href": "index.html#spec-driven-development",
+    "title": "Coding Agents and Best Practices",
+    "section": "Spec-driven development",
+    "text": "Spec-driven development\n\n\n1 · Spec\nWhat and why: goal, acceptance criteria, non-goals. Written / reviewed by a human.\n\n\n2 · Plan & tasks\nThe agent proposes an implementation (plan mode), the human corrects it before any code exists.\n\n\n3 · Implement & verify\nThe agent implements task by task; tests derived from the acceptance criteria are the yardstick.\n\n\n\n\nTools: GitHub Spec Kit, AWS Kiro, OpenSpec – or simply a SPEC.md + plan mode\nA bare user story instead of a full spec costs ~30 % more tokens (Smékal 2026)\nThe spec becomes the artefact you review – not every line of code\n\n\n~1.5 min. A spec doesn’t replace review, but it moves the most important review moment to the front: mistakes in the spec are cheap, mistakes in the code are expensive."
+  },
+  {
+    "objectID": "index.html#agentic-coding-in-civil-society-the-hard-parts",
+    "href": "index.html#agentic-coding-in-civil-society-the-hard-parts",
+    "title": "Coding Agents and Best Practices",
+    "section": "Agentic coding in civil society: the hard parts",
+    "text": "Agentic coding in civil society: the hard parts\n\n\nData protection\nData about vulnerable people – US providers often off-limits.\n~50 % of AI-using nonprofits name privacy risks¹\n\n\nExpertise\nNo in-house tech staff, no rules → “shadow AI”.\n41 % lack in-house tech expertise¹ · 76 % have no AI strategy²\n\n\nMoney\nTokens and tools compete with the mission.\n69 %: budget is the main obstacle³ · 60 % no support for digital costs³\n\n\nWho maintains it?\nVolunteers move on – non-techies inherit the code.\n78 % of organisations (Bavaria) have no paid staff⁴\n\n\n¹ Fast Forward 2025 (US) · ² TechSoup 2025 (US) · ³ Charity Digital Skills 2025 (UK) · ⁴ ZiviZ 2023\n\n~1.5 min. We build for organisations without an IT department – that shapes every choice in this workshop.\n\nData protection: NGOs hold data about children, patients, refugees. GDPR is a real legal uncertainty for volunteer boards (ZiviZ). Shadow AI: staff paste data into tools nobody approved.\nExpertise: Fast Forward surveyed ~200 nonprofits that already use AI – so the real gap is bigger. 41 % lack tech expertise, nearly half name privacy risks, 84 % name funding for tools and talent as their greatest need.\nMoney: UK Charity Digital Skills Report 2025 (n = 672): 69 % budget squeeze, 60 % no support for digital costs.\nMaintenance: ZiviZ 2023 Bavaria: only 22 % of organisations have any paid staff. Whatever we build must survive the handover.\n\nTransition: these constraints are the backdrop for our discussion – and the reason the workshop setup (11:30) looks the way it does."
+  },
+  {
+    "objectID": "index.html#discussion-where-does-the-human-stay",
+    "href": "index.html#discussion-where-does-the-human-stay",
+    "title": "Coding Agents and Best Practices",
+    "section": "Discussion: where does the human stay?",
+    "text": "Discussion: where does the human stay?\n\n\nResponsibility\n\nWho owns code that nobody wrote line by line? “You commit it, you own it” – enough?\nHow much review is enough when the agent works for hours?\n\n\n\nSkills & learning\n\nWhat do we still need to understand ourselves?\nHow do junior devs learn when the agent solves the exercises?\n\n\n\nNon-profits\n\nWhich data may enter the context at all?\nEU-hosted open models vs. frontier models: what’s the trade-off for us?\n\n\n\nOur contribution\n\nIf AI can code (almost) everything: problem understanding, judgement, domain knowledge – and responsibility towards the people affected\n\n\n\n\nOpen discussion, ~10 min. Start with a quick show of hands: who uses a coding agent daily? Who let one work alone for more than an hour?"
+  },
+  {
+    "objectID": "index.html#try-it-yourself",
+    "href": "index.html#try-it-yourself",
+    "title": "Coding Agents and Best Practices",
+    "section": "Try it yourself",
+    "text": "Try it yourself\n\nCoding Agents: intro workshoptoday, 11:30 – 12:30\n\n\n\nBuild a survey-analysis pipeline with a coding agent – step by step, ready prompts\nOpen harness (OpenCode 2) + open models in German data centres (IONOS)\nGuardrails that keep the agent away from personal data · ~€0.10 per pipeline step\nBring a laptop – please install uv and OpenCode 2 beforehand (SETUP.md in the repo)\n\n\nPointer to the workshop slot after the break."
+  },
+  {
+    "objectID": "index.html#sources",
+    "href": "index.html#sources",
+    "title": "Coding Agents and Best Practices",
+    "section": "Sources",
+    "text": "Sources\n\n\nMETR (2026): Task-Completion Time Horizons of Frontier AI Models (updated Sep 8, 2026). metr.org/time-horizons · METR (Jan 29, 2026): Time Horizon 1.1. metr.org/blog\nHallie, L. (2026): Rethinking Claude Code Best Practices. AI Engineer, Nov 2026. YouTube\nOpenClaw (formerly Clawdbot / Moltbot). Wikipedia · GitGuardian (Jan 2026): OpenClaw (Moltbot) personal assistant goes viral – and so do your secrets. blog.gitguardian.com\nFast Forward (2025): AI for Humanity Report (via Chronicle of Philanthropy) · TechSoup/Tapp (2025): AI Benchmark Report (blog.techsoup.org) · Charity Digital Skills Report 2025 (summary) · ZiviZ-Survey 2023 (ziviz.de)\nGloaguen, Mündler, Müller, Raychev, Vechev (2026): Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents? ICLR 2026. arXiv:2602.11988\nLi et al. (2026): SkillsBench: Benchmarking How Well Agent Skills Work Across Diverse Tasks. arXiv:2602.12670\nBai et al. (2026): How Do AI Agents Spend Your Money? Analyzing and Predicting Token Consumption in Agentic Coding Tasks. arXiv:2604.22750\nSmékal (2026): Can your AI agent be cheaper? Investigating the effects of task specifications on token spend in agentic coding tasks. arXiv:2608.25399\nSimon (@simonether) (2026): skill-placebo – benchmarking coding-agent skills against a same-length placebo. github.com/simonether/skill-placebo\nSecurity analysis of 31,132 community skills (2026). arXiv:2601.10338\nMETR (2025): Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity. metr.org\nYao et al. (2022): ReAct: Synergizing Reasoning and Acting in Language Models. arXiv:2210.03629\nOpenAI (2026): Harness engineering. openai.com · Coverage: InfoQ\nAGENTS.md: agents.md · Agentic AI Foundation (Linux Foundation, Dec 2025)\nClaude Code settings, permissions & hooks: docs.claude.com\nMistral Vibe: docs.mistral.ai"
+  }
+]
