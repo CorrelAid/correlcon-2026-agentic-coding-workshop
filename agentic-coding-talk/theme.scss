@@ -111,3 +111,19 @@ $code-color: #a23b72;
 .reveal .card .stat { font-size: 2.4em; margin-top: .35em; }
 .reveal .card .stat-label { font-size: .85em; margin: .1em 0 .4em; }
 .reveal .card table { font-size: .9em; width: 100%; margin: .2em 0 0; }
+
+// Stat row & quotes
+.reveal .cards.stats { margin-top: 14px; }
+.reveal .cards.stats .card { display: flex; align-items: center; gap: 18px; padding: 10px 22px; }
+.reveal .card .stat.inline { margin: 0; font-size: 2em; flex: none; }
+.reveal .cards.stats .stat-label { margin: 0; font-size: .9em; color: $ink; }
+.reveal .bigquote.sm { font-size: .95em; margin-bottom: .3em; }
+.reveal .slides section .tiny { display: block; margin-top: .4em; }
+
+// Larger tables (agenda, comparison)
+.reveal .bigtable table { font-size: .8em; width: 100%; }
+.reveal .bigtable td, .reveal .bigtable th { padding: .45em .7em; }
+.reveal .bigtable td:first-child { white-space: nowrap; font-weight: 700; }
+
+.reveal .bigtable.compact table { font-size: .66em; }
+.reveal .bigtable.compact td, .reveal .bigtable.compact th { padding: .35em .6em; }

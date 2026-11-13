@@ -4,44 +4,26 @@ subtitle: "What really matters – and what has lost its weight"
 author: "Michael Aydinbas & Benjamin Fries · CorrelAid"
 date: 2026-11-14
 date-format: "[CorrelCon 2026 · Karlsruhe · ]MMMM D, YYYY"
+footer: "Coding Agents: best practices & discussion · CorrelCon 2026 · Nov 14, 10:45"
 ---
 
 ## Terms (1/2): what is an agent?
 
-::: {.cards .c3 .terms}
-::: {.card .term}
-[Model (LLM)]{.ct}
-
-Predicts the next token. Can't execute anything – it only writes text, including tool calls.
-:::
-::: {.card .term}
-[Tool]{.ct}
-
-A function the model may call.
-
-[read · edit · bash · web search]{.ex}
-:::
-::: {.card .term}
-[Agentic loop]{.ct}
-
-Model → tool call → result back into context → next step … until done.
-:::
-::: {.card .term}
-[Agent]{.ct}
-
-Model + loop + tools + a goal. Works autonomously over many steps.
-:::
-::: {.card .term}
-[Harness]{.ct}
-
-The software around the model: loop, tools, context, permissions, hooks, UI.
-
-[Claude Code · Codex · opencode · Vibe]{.ex}
-:::
-:::
+![](img/agent-anatomy.svg){.full}
 
 ::: notes
-~1 min. Key distinction: model ≠ agent ≠ harness. The model doesn't “do” anything – the harness executes.
+~1 min. Read the picture from the inside out: the model only writes text. The harness turns tool calls into real actions and feeds the results back – that's the loop. Add a goal from you, and the whole thing is an agent: agent = goal + model + harness.
+Note: one harness can run many agents – e.g. subagents, or an orchestrator that splits a goal into tasks and starts one session per task. Each of those is again goal + model + loop + tools.
+Key distinction: model ≠ agent ≠ harness. The model doesn't “do” anything – the harness executes.
+:::
+
+## Inside the harness: one turn of the loop
+
+![](img/agentic-loop.svg){.full}
+
+::: notes
+~2 min. The model only decides “text or tool call”. The harness executes, checks permissions, runs hooks, collects results and builds the next context.
+Consequence: the same model performs differently in different harnesses – which is why benchmarks like Terminal-Bench always rate the model + harness pair.
 :::
 
 ## Terms (2/2): how do we steer it?
@@ -85,9 +67,27 @@ Deterministic script the harness runs on events, e.g. before every tool call.
 ![](img/timeline.svg){.full}
 
 ::: notes
-~1.5 min. Three jumps: autocomplete (Copilot) → chat → agent in the terminal with tool access.
+~1.5 min. Three jumps: autocomplete (Copilot) → chat → agent in the terminal with tool access. Next slide: what these jumps mean in numbers.
 2025 was the year of terminal agents; since late 2025 standardisation (AGENTS.md, MCP under the Linux Foundation's Agentic AI Foundation).
 2026: focus shifts from the prompt to the harness (“harness engineering”, OpenAI, Feb 2026) – and the first solid studies appear.
+Dec 2025: the Linux Foundation launched the Agentic AI Foundation (AAIF) with Anthropic's MCP, OpenAI's AGENTS.md and Block's goose as founding projects – the core standards are no longer owned by one vendor, so the same AGENTS.md and MCP servers work across harnesses.
+Jan 2026: OpenClaw (formerly Clawdbot/Moltbot) goes viral – an open-source agent that runs 24/7, you talk to it via Signal/Telegram/WhatsApp, and it can access mail, calendar and other services. Also a security lesson: leaked secrets, malicious skills, prompt injection.
+2026: cloud agents (Claude Code cloud sessions, Codex Cloud, Cursor Cloud Agents) keep working with the laptop closed.
+Next? Always-on agents with access to all the services they need – vendors already market “super agents”. The open question is less “can they?” than “what may they touch?”.
+:::
+
+## From handholding to delegation
+
+![](img/autonomy.svg){.full}
+
+[**Source:** METR, *Task-Completion Time Horizons of Frontier AI Models*, [metr.org/time-horizons](https://metr.org/time-horizons/) (last updated Sep 8, 2026; data file `benchmark_results_1_1.yaml`). Time Horizon 1.1 values; GPT-2 and GPT-3.5 from the original 2025 suite. 50 % horizon = task length, measured in human expert time, at which the agent is predicted to succeed half the time. Trend line and “human equivalent” labels: our illustration.]{.tiny}
+
+::: notes
+~2 min. This is the one chart to remember. Each point is a model; the y-axis is how long a human would need for the tasks the model finishes alone half of the time. Log scale: every gridline step is a big jump.
+2023 (GPT-4): a few minutes – you had to check in after every small step. Early 2026 (Claude Opus 4.6): about 12 hours – a day's work, in principle (95 % CI roughly 5–60 h).
+Doubling roughly every 4–6 months (METR: ~4.3 months since 2023).
+Caveats: 50 % ≠ “safe to delegate” (80 % horizons are several times shorter), error bars are about ×2 either way, and METR's own suite is nearly saturated above ~16 h.
+Message: the habits we built for the old models – approving every step, long instruction files – were built for the left half of this chart.
 :::
 
 ## What's different from writing code yourself?
@@ -119,15 +119,6 @@ METR (2025): experienced OSS developers felt **20 % faster** – but were **19 %
 ~2 min. METR study: 16 experienced developers, their own large repos, early-2025 tools. Models have improved since – the point stands: measure, don't guess.
 :::
 
-## The harness: agent = model + loop + tools
-
-![](img/agentic-loop.svg){.full}
-
-::: notes
-~2 min. The model only decides “text or tool call”. The harness executes, checks permissions, runs hooks, collects results and builds the next context.
-Consequence: the same model performs differently in different harnesses – which is why benchmarks like Terminal-Bench always rate the model + harness pair.
-:::
-
 ## Which harness should I choose?
 
 | Harness | Vendor | License | Models | Customise via |
@@ -147,7 +138,47 @@ Building your own is great for understanding (workshop!), rarely for daily work.
 State: October 2026 – the landscape changes monthly; the concepts (loop, tools, context file, permissions, hooks) are the same everywhere.
 :::
 
-## Best practice 1: AGENTS.md – a map, not an encyclopedia
+## Step back: what changes in how we work
+
+::: {.cards .c2}
+::: {.card .warn}
+[Then (early 2026 habits)]{.ct}
+
+- Short runs, the agent stops early, you correct constantly
+- CLAUDE.md full of **IMPORTANT!!!** and stack details
+- Approve every single command – or skip permissions entirely
+- Read every diff at the end
+:::
+::: {.card .good}
+[Now (Claude 5.5-era models)]{.ct}
+
+- Hand over a **much bigger task** and say what *done* looks like
+- Only write down what the agent **can't see in the code**
+- **Auto mode + deny rules** instead of clicking “approve”
+- **Checkpoints that pass or fail** (tests, hooks, CI) instead of reading every diff
+:::
+:::
+
+::: {.cards .c2 .stats}
+::: {.card .accent}
+[14 %]{.stat .inline}
+[of people approving commands caught a clearly dangerous one]{.stat-label}
+:::
+::: {.card .accent}
+[89 %]{.stat .inline}
+[were blocked by Claude Code's auto-mode classifier]{.stat-label}
+:::
+:::
+
+[**Source:** Lydia Hallie (Anthropic), *Rethinking Claude Code Best Practices*, AI Engineer, Nov 11, 2026 – [youtube.com/watch?v=vlfCjWuv4es](https://www.youtube.com/watch?v=vlfCjWuv4es). The 14 % / 89 % figures are from an internal Anthropic study (Aug 2026) cited in the talk.]{.tiny}
+
+::: notes
+~2.5 min. Based on Lydia Hallie's talk from this week. Her core message: much of what we added to our setups over the past year now holds the newer models back.
+Humans are bad gatekeepers: when you approve dozens of commands, you stop reading them. A classifier plus a few hard deny rules does better.
+Trust is not blind: you replace “watching every step” with checkpoints that fail loudly.
+:::
+
+## Best practice 1: AGENTS.md – only what the agent can't see
 
 :::: {.columns}
 ::: {.column width="52%"}
@@ -179,21 +210,53 @@ State: October 2026 – the landscape changes monthly; the concepts (loop, tools
 ::: {.card .warn}
 **Leave out**
 
-- Repo overview (the agent finds it itself)
+- Stack details and “where to look” – the agent explores itself
 - What's already in the README / linter
 - Auto-generated text (`/init`)
-- Style prose and “You are an expert …”
+- **IMPORTANT!!!** – emphasis makes newer models over-react
 :::
 :::
 ::::
 
 ::: notes
 ~2 min. Keep it short (< 100 lines), human-written, only what the agent can't figure out itself. Every line costs tokens on every call.
+Hallie's example of what belongs in: “this service still reads from a legacy data source that isn't referenced anywhere in the repo”. And: re-audit the file whenever you switch to a newer model – instructions written for older models can now make results worse.
 AGENTS.md is the vendor-neutral format; Claude Code reads CLAUDE.md – tip: CLAUDE.md just contains `@AGENTS.md`.
 Meta: this deck lives in a repo with its own AGENTS.md – have a look!
 :::
 
-## Best practice 2: set boundaries – permissions & hooks
+## From practice: make the entry points explicit
+
+:::: {.columns}
+::: {.column width="47%"}
+![](img/entrypoints.svg){width="100%"}
+:::
+::: {.column width="53%"}
+::: {.bigquote .sm}
+“The agent must always know what the entry points of the repo are.”
+:::
+
+[— Benjamin Fries, from his company projects]{.tiny}
+
+```{.markdown filename="AGENTS.md (sketch)"}
+## Entry points
+- app_a/  → `uv run app-a`   uses shared/
+- app_b/  → `uv run app-b`   uses shared/
+- prep/   → `uv run prep`    writes data/dev/
+## When you change …
+- shared/      → run tests of app_a AND app_b
+- prep/ schema → update fixtures of both apps
+```
+:::
+::::
+
+::: notes
+~2.5 min (Benjamin). One repo, two small applications that share code, plus a third entry point that prepares data for development.
+Without documented dependencies the agent fixes one entry point and silently breaks another – “Schiefstände”, things drifting out of sync.
+This is exactly the kind of knowledge the agent can't reliably infer from the code: which parts belong together and what has to be re-checked after a change. The excerpt is a simplified sketch, names changed.
+:::
+
+## Best practice 2: hard limits, then let it run
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -217,22 +280,65 @@ Meta: this deck lives in a repo with its own AGENTS.md – have a look!
 :::
 ::: {.column width="50%"}
 ::: {.card .accent}
-**Permissions** = what the agent may do: `allow` · `ask` · `deny`
+**Deny rules** = the only hard stop. Ask: *“If it gets this wrong once, can I take it back?”* If not → deny rule.
 :::
 
 ::: {.card .accent}
-**Hooks** = what *always* happens – deterministic, not “please remember” in AGENTS.md
+**Auto mode / allow-list** for everything reversible: tests, installs, edits in the repo
 :::
 
 ::: {.card .warn}
-**Careful:** denying `Read(.env)` doesn't stop `cat .env` via the shell. Real security only with a **sandbox / container** and secrets outside the repo.
+**Careful:** a deny rule on `.env` doesn't stop *your test script* from loading it. Real isolation: **sandbox / cloud session**, secrets outside the repo.
 :::
 :::
 ::::
 
 ::: notes
-~2 min. Rule of thumb: anything that must always happen (formatting, blocking secrets, tests after edits) → hook. Anything the agent must not do → permission / sandbox. AGENTS.md only for knowledge.
+~2 min. Wrong code can be reverted – a deleted branch, discarded changes or a key in the transcript can't. Those get deny rules; everything else runs without asking.
+Sandboxes only cover shell commands and their children; file tools, MCP servers and hooks run outside. Hallie's preferred option: a cloud session with its own machine – no .env, no SSH keys on it.
 Skills from the internet are code: an analysis of 31,000 community skills found at least one exploitable vulnerability in 26 % of them.
+:::
+
+## Best practice 3: checkpoints instead of watching
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.card .accent}
+[Say what *done* looks like]{.ct}
+
+Split work into tasks that each come with their own test. Ask the agent to **show the actual output**, not to claim success.
+:::
+
+::: {.card .accent}
+[Hooks = checkpoints that always run]{.ct}
+
+- every edit → linter
+- task marked complete → relevant tests
+- session about to end → full test suite
+:::
+:::
+::: {.column width="50%"}
+```{.bash filename=".claude/hooks/run-tests.sh"}
+#!/usr/bin/env bash
+uv run pytest -q || {
+  echo "Tests fail – fix them" >&2
+  exit 2  # block + send back
+}
+```
+
+::: {.card .warn}
+**Gotcha:** most tools exit with `1` on failure – Claude Code treats that as non-blocking and moves on. Only exit code **2** sends the agent back to fix it.
+:::
+
+::: {.card}
+**Then:** CI as the backstop, and human review scaled to risk.
+:::
+:::
+::::
+
+::: notes
+~2 min. Instead of reading every diff, define pass/fail gates. Hallie's example: an OAuth migration can be done three ways – keep the old API, migrate only new logins, or log everyone out. The “log everyone out” run fails the first test, without anyone reading the diff.
+Review ladder: agent review first, then none / one / two human reviewers depending on risk.
 :::
 
 ## What does the research say?
@@ -314,14 +420,14 @@ Fits SkillsBench: generic, popular skills for coding add little; value comes fro
 - Long, generated CLAUDE.md / AGENTS.md files
 - Repo descriptions – the agent explores by itself
 - Large skill collections from the internet
-- Which exact model? (gaps are shrinking)
+- Approving every command by hand
 :::
 ::: {.card .good}
 [Gaining weight]{.ct}
 
 - **Clear task / spec** – what does “done” mean?
 - **Verification:** tests, linters, CI as feedback loop
-- **Boundaries:** permissions, sandbox, hooks
+- **Boundaries:** deny rules, sandbox, auto mode
 - **Choice & configuration of the harness**
 - **Review & responsibility** stay with humans
 :::
@@ -397,105 +503,75 @@ Volunteers move on – non-techies inherit the code.
 :::
 :::
 
-**Our setup:** EU-hosted open models · guardrails · pay-per-use (~€40/workshop)
-
 [¹ Fast Forward 2025 (US) · ² TechSoup 2025 (US) · ³ Charity Digital Skills 2025 (UK) · ⁴ ZiviZ 2023]{.small}
 
 ::: notes
-~1.5 min. We build for organisations without an IT department – that shapes every choice in the workshop.
+~1.5 min. We build for organisations without an IT department – that shapes every choice in this workshop.
 
 - Data protection: NGOs hold data about children, patients, refugees. GDPR is a real legal uncertainty for volunteer boards (ZiviZ). Shadow AI: staff paste data into tools nobody approved.
 - Expertise: Fast Forward surveyed ~200 nonprofits that already use AI – so the real gap is bigger. 41 % lack tech expertise, nearly half name privacy risks, 84 % name funding for tools and talent as their greatest need.
 - Money: UK Charity Digital Skills Report 2025 (n = 672): 69 % budget squeeze, 60 % no support for digital costs.
 - Maintenance: ZiviZ 2023 Bavaria: only 22 % of organisations have any paid staff. Whatever we build must survive the handover.
 
-Transition: that is why the workshop setup looks the way it does.
+Transition: these constraints are the backdrop for our discussion – and the reason the workshop setup (11:30) looks the way it does.
 :::
 
-## Our workshop setup: EU-only, two models, guardrails
+## Discussion: where does the human stay?
 
-::: {.cards .c3}
+::: {.cards .c2}
 ::: {.card .accent}
-[1 · You prompt]{.ct}
+[Responsibility]{.ct}
 
-Ready prompts per pipeline step: prepare → spam → topics → classify → report.
-
-[OpenCode 2 · `uv run agent`]{.ex}
-:::
-::: {.card .accent}
-[2 · Agent writes code]{.ct}
-
-**Qwen3-Coder-Next** writes the code – never sees raw data, never runs the pipeline.
-
-[IONOS, Germany · €0.15 / 1M input tokens]{.ex}
+- Who owns code that nobody wrote line by line? *“You commit it, you own it”* – enough?
+- How much review is enough when the agent works for hours?
 :::
 ::: {.card .accent}
-[3 · Code asks a model]{.ct}
+[Skills & learning]{.ct}
 
-Your code sends batches of comments to **gpt-oss-120b**; you run it and review the results.
-
-[same provider, same key · cents per run]{.ex}
-:::
-:::
-
-::: {.cards .c3}
-::: {.card .warn}
-[Instructions]{.ct}
-
-`AGENTS.md`: rules, commands, quiet output, data protection
-:::
-::: {.card .warn}
-[Policies & hooks]{.ct}
-
-Only IONOS · no `.env`, no raw data · keys hidden · prompts read-only · ruff after every edit
-:::
-::: {.card .warn}
-[Cost]{.ct}
-
-~60k tokens per agent step ≈ **€0.01** → **~€40** for 20 people
-:::
-:::
-
-::: notes
-~1.5 min. Bridge from the civil-society slide to the hands-on part.
-
-- Two models, two jobs: the coding agent (Qwen3-Coder-Next) writes code; the code the agent writes calls a second model (gpt-oss-120b) for the actual analysis. Both on IONOS: one provider, one key, data stays in Germany, no training on it.
-- The agent never sees personal data: raw and interim data are blocked by policy and hooks; it writes code that processes the data and prints counts. The human runs the pipeline scripts – they call a paid API on real data.
-- Guardrails in three layers: AGENTS.md (advice – usually followed), policies (hard rules nothing overrides), hooks (deterministic: hide API keys, run ruff and feed errors back). Honest caveat: hooks catch accidents, only isolation is a security boundary.
-- Cost, measured: the agent resends its whole context with every step – ~60k tokens on average, no prompt caching on IONOS – about €0.01 per step; a smooth pipeline step ~€0.15, one full test run of steps 2–5 with retries ~€13. The analysis itself costs cents.
-- Why not Scaleway/GLM? Scaleway limits tokens per minute per organisation (1–2M); 20 people with an agent need ~5M. IONOS limits requests (5/s per model) instead.
-:::
-
-## Responsibility: where does the human stay?
-
-::: {.todo}
-**Placeholder – to be worked out together.** Possible guiding questions:
-
-- Who is responsible for code that nobody wrote line by line? (“You commit it, you own it”)
-- What do we still need to understand ourselves – and what can we delegate?
+- What do we still need to understand ourselves?
 - How do junior devs learn when the agent solves the exercises?
-- Data protection & ethics in non-profits: which data may enter the context at all?
-- If AI can code (almost) everything: what is our contribution? Understanding the problem, judgement, domain knowledge, responsibility towards the people affected
+:::
+::: {.card .accent}
+[Non-profits]{.ct}
+
+- Which data may enter the context at all?
+- EU-hosted open models vs. frontier models: what's the trade-off for us?
+:::
+::: {.card .good}
+[Our contribution]{.ct}
+
+- If AI can code (almost) everything: problem understanding, judgement, domain knowledge – and responsibility towards the people affected
+:::
 :::
 
 ::: notes
-Deliberately left open – bridge into the discussion.
+Open discussion, ~10 min. Start with a quick show of hands: who uses a coding agent daily? Who let one work alone for more than an hour?
 :::
 
-## From practice: what a good AGENTS.md achieves
+## Try it yourself
 
-::: {.todo}
-**Placeholder – Benjamin's company projects.** Suggested structure:
+::: {.bigquote}
+Coding Agents: intro workshop<br>**today, 11:30 – 12:30**
+:::
 
-- Starting point: project, stack, team size
-- Before / after: what concretely changed thanks to the AGENTS.md?
-- A real (anonymised) excerpt – which 3 lines help most?
-- What did *not* work / was removed again?
+<br>
+
+- Build a survey-analysis pipeline with a coding agent – step by step, ready prompts
+- Open harness (**OpenCode 2**) + open models in **German data centres** (IONOS)
+- Guardrails that keep the agent away from personal data · ~€0.10 per pipeline step
+- Bring a laptop – please install `uv` and OpenCode 2 beforehand (`SETUP.md` in the repo)
+
+::: notes
+Pointer to the workshop slot after the break.
 :::
 
 ## Sources
 
 ::: {.sources}
+- METR (2026): *Task-Completion Time Horizons of Frontier AI Models* (updated Sep 8, 2026). [metr.org/time-horizons](https://metr.org/time-horizons/) · METR (Jan 29, 2026): *Time Horizon 1.1.* [metr.org/blog](https://metr.org/blog/2026-01-29-time-horizon-1-1/)
+- Hallie, L. (2026): *Rethinking Claude Code Best Practices.* AI Engineer, Nov 2026. [YouTube](https://www.youtube.com/watch?v=vlfCjWuv4es)
+- OpenClaw (formerly Clawdbot / Moltbot). [Wikipedia](https://en.wikipedia.org/wiki/OpenClaw) · GitGuardian (Jan 2026): *OpenClaw (Moltbot) personal assistant goes viral – and so do your secrets.* [blog.gitguardian.com](https://blog.gitguardian.com/moltbot-personal-assistant-goes-viral-and-so-do-your-secrets/)
+- Fast Forward (2025): *AI for Humanity Report* (via [Chronicle of Philanthropy](https://www.philanthropy.com/news/nonprofits-are-embracing-ai-but-many-struggle-to-find-funding/)) · TechSoup/Tapp (2025): *AI Benchmark Report* ([blog.techsoup.org](https://blog.techsoup.org/posts/what-ai-means-for-nonprofits-in-2025-insights-from-the-ai-benchmark-report)) · *Charity Digital Skills Report 2025* ([summary](https://digitalskills.mdia.gov.mt/skills-intelligence/charity-digital-skills-report-2025/)) · *ZiviZ-Survey 2023* ([ziviz.de](https://ziviz.de/sites/ziv/files/ziviz-survey_2023_vereine_und_andere_zivilgesellschaftliche_organisationen.pdf))
 - Gloaguen, Mündler, Müller, Raychev, Vechev (2026): *Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?* ICLR 2026. [arXiv:2602.11988](https://arxiv.org/abs/2602.11988)
 - Li et al. (2026): *SkillsBench: Benchmarking How Well Agent Skills Work Across Diverse Tasks.* [arXiv:2602.12670](https://arxiv.org/abs/2602.12670)
 - Bai et al. (2026): *How Do AI Agents Spend Your Money? Analyzing and Predicting Token Consumption in Agentic Coding Tasks.* [arXiv:2604.22750](https://arxiv.org/abs/2604.22750)
@@ -508,8 +584,4 @@ Deliberately left open – bridge into the discussion.
 - AGENTS.md: [agents.md](https://agents.md) · Agentic AI Foundation (Linux Foundation, Dec 2025)
 - Claude Code settings, permissions & hooks: [docs.claude.com](https://docs.claude.com/en/docs/claude-code/settings)
 - Mistral Vibe: [docs.mistral.ai](https://docs.mistral.ai/mistral-vibe/overview)
-- Fast Forward (2025): *AI for Humanity Report*, via Chronicle of Philanthropy. [philanthropy.com](https://www.philanthropy.com/news/nonprofits-are-embracing-ai-but-many-struggle-to-find-funding/)
-- TechSoup & Tapp Network (2025): *AI Benchmark Report.* [techsoup.org](https://blog.techsoup.org/posts/what-ai-means-for-nonprofits-in-2025-insights-from-the-ai-benchmark-report)
-- Charity Digital Skills Report 2025 (n = 672 UK charities). [Summary](https://digitalskills.mdia.gov.mt/skills-intelligence/charity-digital-skills-report-2025/)
-- ZiviZ (2023): *ZiviZ-Survey 2023 – Vereine und andere zivilgesellschaftliche Organisationen* (Bavaria report). [ziviz.de](https://ziviz.de/sites/ziv/files/ziviz-survey_2023_vereine_und_andere_zivilgesellschaftliche_organisationen.pdf)
 :::

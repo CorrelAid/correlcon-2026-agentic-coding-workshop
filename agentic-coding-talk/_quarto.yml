@@ -3,6 +3,7 @@ project:
   output-dir: _site
   render:
     - index.qmd
+    - workshop.qmd
 
 lang: en
 

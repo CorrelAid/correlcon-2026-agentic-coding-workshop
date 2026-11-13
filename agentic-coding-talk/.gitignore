@@ -2,6 +2,7 @@ _site/
 .quarto/
 *_files/
 index.html
+workshop.html
 .env
 .DS_Store
 

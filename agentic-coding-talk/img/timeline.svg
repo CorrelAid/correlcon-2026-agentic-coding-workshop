@@ -1,73 +1,82 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="450" viewBox="0 0 1200 450" font-family="Inter, Helvetica, Arial, sans-serif">
-<rect x="22" y="395" width="156" height="40" rx="8" fill="#e8eef6"/><text x="100.0" y="421" text-anchor="middle" font-size="16" font-weight="700" fill="#1d2433">Autocomplete</text>
-<rect x="182" y="395" width="166" height="40" rx="8" fill="#dcebf0"/><text x="265.0" y="421" text-anchor="middle" font-size="16" font-weight="700" fill="#1d2433">Chat &amp; Copilots</text>
-<rect x="352" y="395" width="506" height="40" rx="8" fill="#cfe6e9"/><text x="605.0" y="421" text-anchor="middle" font-size="16" font-weight="700" fill="#1d2433">Agents in the terminal</text>
-<rect x="862" y="395" width="316" height="40" rx="8" fill="#0f7c8c"/><text x="1020.0" y="421" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">Harness &amp; context engineering</text>
-<line x1="20" y1="215" x2="1180" y2="215" stroke="#1d2433" stroke-width="3"/>
-<polygon points="1180,207 1195,215 1180,223" fill="#1d2433"/>
-<line x1="95.0" y1="215" x2="95.0" y2="153" stroke="#1d2433" stroke-width="1.5" stroke-dasharray="3 3"/>
-<circle cx="95.0" cy="215" r="7" fill="#1d2433" stroke="#fbfaf7" stroke-width="3"/>
-<text x="95.0" y="103" text-anchor="middle" font-size="14" font-weight="700" fill="#1d2433">2021·06</text>
-<text x="95.0" y="124" text-anchor="middle" font-size="16" font-weight="700" fill="#1d2433">GitHub Copilot</text>
-<text x="95.0" y="143" text-anchor="middle" font-size="13.5" fill="#5b6577">editor autocomplete</text>
-<line x1="179.5" y1="215" x2="179.5" y2="277" stroke="#1d2433" stroke-width="1.5" stroke-dasharray="3 3"/>
-<circle cx="179.5" cy="215" r="7" fill="#1d2433" stroke="#fbfaf7" stroke-width="3"/>
-<text x="179.5" y="297" text-anchor="middle" font-size="14" font-weight="700" fill="#1d2433">2022·10</text>
-<text x="179.5" y="318" text-anchor="middle" font-size="16" font-weight="700" fill="#1d2433">ReAct paper</text>
-<text x="179.5" y="337" text-anchor="middle" font-size="13.5" fill="#5b6577">“reason + act” loop</text>
-<line x1="264.0" y1="215" x2="264.0" y2="153" stroke="#1d2433" stroke-width="1.5" stroke-dasharray="3 3"/>
-<circle cx="264.0" cy="215" r="7" fill="#1d2433" stroke="#fbfaf7" stroke-width="3"/>
-<text x="264.0" y="103" text-anchor="middle" font-size="14" font-weight="700" fill="#1d2433">2022·11</text>
-<text x="264.0" y="124" text-anchor="middle" font-size="16" font-weight="700" fill="#1d2433">ChatGPT</text>
-<text x="264.0" y="143" text-anchor="middle" font-size="13.5" fill="#5b6577">chat, not completion</text>
-<line x1="348.5" y1="215" x2="348.5" y2="277" stroke="#1d2433" stroke-width="1.5" stroke-dasharray="3 3"/>
-<circle cx="348.5" cy="215" r="7" fill="#1d2433" stroke="#fbfaf7" stroke-width="3"/>
-<text x="348.5" y="297" text-anchor="middle" font-size="14" font-weight="700" fill="#1d2433">2023·10</text>
-<text x="348.5" y="318" text-anchor="middle" font-size="16" font-weight="700" fill="#1d2433">SWE-bench</text>
-<text x="348.5" y="337" text-anchor="middle" font-size="13.5" fill="#5b6577">real GitHub issues</text>
-<line x1="433.0" y1="215" x2="433.0" y2="153" stroke="#1d2433" stroke-width="1.5" stroke-dasharray="3 3"/>
-<circle cx="433.0" cy="215" r="7" fill="#1d2433" stroke="#fbfaf7" stroke-width="3"/>
-<text x="433.0" y="103" text-anchor="middle" font-size="14" font-weight="700" fill="#1d2433">2024·03</text>
-<text x="433.0" y="124" text-anchor="middle" font-size="16" font-weight="700" fill="#1d2433">Devin · SWE-agent</text>
-<text x="433.0" y="143" text-anchor="middle" font-size="13.5" fill="#5b6577">first coding agents</text>
-<line x1="517.5" y1="215" x2="517.5" y2="277" stroke="#1d2433" stroke-width="1.5" stroke-dasharray="3 3"/>
-<circle cx="517.5" cy="215" r="7" fill="#1d2433" stroke="#fbfaf7" stroke-width="3"/>
-<text x="517.5" y="297" text-anchor="middle" font-size="14" font-weight="700" fill="#1d2433">2024·11</text>
-<text x="517.5" y="318" text-anchor="middle" font-size="16" font-weight="700" fill="#1d2433">MCP</text>
-<text x="517.5" y="337" text-anchor="middle" font-size="13.5" fill="#5b6577">standard for tools</text>
-<line x1="602.0" y1="215" x2="602.0" y2="153" stroke="#1d2433" stroke-width="1.5" stroke-dasharray="3 3"/>
-<circle cx="602.0" cy="215" r="7" fill="#1d2433" stroke="#fbfaf7" stroke-width="3"/>
-<text x="602.0" y="103" text-anchor="middle" font-size="14" font-weight="700" fill="#1d2433">2025·02</text>
-<text x="602.0" y="124" text-anchor="middle" font-size="16" font-weight="700" fill="#1d2433">Claude Code</text>
-<text x="602.0" y="143" text-anchor="middle" font-size="13.5" fill="#5b6577">“vibe coding”</text>
-<line x1="686.5" y1="215" x2="686.5" y2="277" stroke="#1d2433" stroke-width="1.5" stroke-dasharray="3 3"/>
-<circle cx="686.5" cy="215" r="7" fill="#1d2433" stroke="#fbfaf7" stroke-width="3"/>
-<text x="686.5" y="297" text-anchor="middle" font-size="14" font-weight="700" fill="#1d2433">2025·04–06</text>
-<text x="686.5" y="318" text-anchor="middle" font-size="16" font-weight="700" fill="#1d2433">Codex CLI · Gemini CLI</text>
-<text x="686.5" y="337" text-anchor="middle" font-size="13.5" fill="#5b6577">opencode · Hooks</text>
-<line x1="771.0" y1="215" x2="771.0" y2="153" stroke="#0f7c8c" stroke-width="1.5" stroke-dasharray="3 3"/>
-<circle cx="771.0" cy="215" r="7" fill="#0f7c8c" stroke="#fbfaf7" stroke-width="3"/>
-<text x="771.0" y="103" text-anchor="middle" font-size="14" font-weight="700" fill="#0f7c8c">2025·08</text>
-<text x="771.0" y="124" text-anchor="middle" font-size="16" font-weight="700" fill="#1d2433">AGENTS.md</text>
-<text x="771.0" y="143" text-anchor="middle" font-size="13.5" fill="#5b6577">open format</text>
-<line x1="855.5" y1="215" x2="855.5" y2="277" stroke="#0f7c8c" stroke-width="1.5" stroke-dasharray="3 3"/>
-<circle cx="855.5" cy="215" r="7" fill="#0f7c8c" stroke="#fbfaf7" stroke-width="3"/>
-<text x="855.5" y="297" text-anchor="middle" font-size="14" font-weight="700" fill="#0f7c8c">2025·09–10</text>
-<text x="855.5" y="318" text-anchor="middle" font-size="16" font-weight="700" fill="#1d2433">Spec Kit · Kiro</text>
-<text x="855.5" y="337" text-anchor="middle" font-size="13.5" fill="#5b6577">Agent Skills</text>
-<line x1="940.0" y1="215" x2="940.0" y2="153" stroke="#0f7c8c" stroke-width="1.5" stroke-dasharray="3 3"/>
-<circle cx="940.0" cy="215" r="7" fill="#0f7c8c" stroke="#fbfaf7" stroke-width="3"/>
-<text x="940.0" y="103" text-anchor="middle" font-size="14" font-weight="700" fill="#0f7c8c">2025·12</text>
-<text x="940.0" y="124" text-anchor="middle" font-size="16" font-weight="700" fill="#1d2433">Agentic AI Foundation</text>
-<text x="940.0" y="143" text-anchor="middle" font-size="13.5" fill="#5b6577">Mistral Vibe (EU)</text>
-<line x1="1024.5" y1="215" x2="1024.5" y2="277" stroke="#0f7c8c" stroke-width="1.5" stroke-dasharray="3 3"/>
-<circle cx="1024.5" cy="215" r="7" fill="#0f7c8c" stroke="#fbfaf7" stroke-width="3"/>
-<text x="1024.5" y="297" text-anchor="middle" font-size="14" font-weight="700" fill="#0f7c8c">2026·02</text>
-<text x="1024.5" y="318" text-anchor="middle" font-size="16" font-weight="700" fill="#1d2433">“Harness Engineering”</text>
-<text x="1024.5" y="337" text-anchor="middle" font-size="13.5" fill="#5b6577">studies: AGENTS.md, skills</text>
-<line x1="1109.0" y1="215" x2="1109.0" y2="153" stroke="#e07a2f" stroke-width="1.5" stroke-dasharray="3 3"/>
-<circle cx="1109.0" cy="215" r="9" fill="#e07a2f" stroke="#fbfaf7" stroke-width="3"/>
-<text x="1109.0" y="103" text-anchor="middle" font-size="14" font-weight="700" fill="#e07a2f">2026·10</text>
-<text x="1109.0" y="124" text-anchor="middle" font-size="16" font-weight="700" fill="#1d2433">today</text>
-<text x="1109.0" y="143" text-anchor="middle" font-size="13.5" fill="#5b6577">mature harnesses</text>
+<rect x="22" y="395" width="96" height="40" rx="8" fill="#e8eef6"/><text x="70.0" y="420" text-anchor="middle" font-size="14.5" font-weight="700" fill="#1d2433">Autocomplete</text>
+<rect x="122" y="395" width="158" height="40" rx="8" fill="#dcebf0"/><text x="201.0" y="420" text-anchor="middle" font-size="14.5" font-weight="700" fill="#1d2433">Chat &amp; Copilots</text>
+<rect x="284" y="395" width="562" height="40" rx="8" fill="#cfe6e9"/><text x="565.0" y="420" text-anchor="middle" font-size="14.5" font-weight="700" fill="#1d2433">Agents in the terminal</text>
+<rect x="850" y="395" width="238" height="40" rx="8" fill="#0f7c8c"/><text x="969.0" y="420" text-anchor="middle" font-size="14.5" font-weight="700" fill="#fff">Harness engineering</text>
+<rect x="1092" y="395" width="92" height="40" rx="8" fill="#fff4ea" stroke="#e07a2f" stroke-width="1.5" stroke-dasharray="5 4"/><text x="1138.0" y="420" text-anchor="middle" font-size="14.5" font-weight="700" fill="#b65a17">Always-on?</text>
+<line x1="20" y1="215" x2="1090" y2="215" stroke="#1d2433" stroke-width="3"/>
+<line x1="1090" y1="215" x2="1180" y2="215" stroke="#e07a2f" stroke-width="3" stroke-dasharray="7 6"/>
+<polygon points="1180,207 1195,215 1180,223" fill="#e07a2f"/>
+<line x1="1090" y1="187" x2="1090" y2="243" stroke="#e07a2f" stroke-width="2.5"/>
+<text x="1090" y="261" text-anchor="middle" font-size="13" font-weight="800" fill="#e07a2f" letter-spacing="1">TODAY</text>
+<line x1="80.0" y1="215" x2="80.0" y2="153" stroke="#1d2433" stroke-width="1.5" stroke-dasharray="3 3"/>
+<circle cx="80.0" cy="215" r="7" fill="#1d2433" stroke="#fbfaf7" stroke-width="3"/>
+<text x="80.0" y="103" text-anchor="middle" font-size="14" font-weight="700" fill="#1d2433">2021·06</text>
+<text x="80.0" y="124" text-anchor="middle" font-size="15.5" font-weight="700" fill="#1d2433">GitHub Copilot</text>
+<text x="80.0" y="143" text-anchor="middle" font-size="13" fill="#5b6577">editor autocomplete</text>
+<line x1="160.8" y1="215" x2="160.8" y2="277" stroke="#1d2433" stroke-width="1.5" stroke-dasharray="3 3"/>
+<circle cx="160.8" cy="215" r="7" fill="#1d2433" stroke="#fbfaf7" stroke-width="3"/>
+<text x="160.8" y="297" text-anchor="middle" font-size="14" font-weight="700" fill="#1d2433">2022·11</text>
+<text x="160.8" y="318" text-anchor="middle" font-size="15.5" font-weight="700" fill="#1d2433">ChatGPT · ReAct</text>
+<text x="160.8" y="337" text-anchor="middle" font-size="13" fill="#5b6577">chat + “reason &amp; act”</text>
+<line x1="241.6" y1="215" x2="241.6" y2="153" stroke="#1d2433" stroke-width="1.5" stroke-dasharray="3 3"/>
+<circle cx="241.6" cy="215" r="7" fill="#1d2433" stroke="#fbfaf7" stroke-width="3"/>
+<text x="241.6" y="103" text-anchor="middle" font-size="14" font-weight="700" fill="#1d2433">2023·10</text>
+<text x="241.6" y="124" text-anchor="middle" font-size="15.5" font-weight="700" fill="#1d2433">SWE-bench</text>
+<text x="241.6" y="143" text-anchor="middle" font-size="13" fill="#5b6577">real GitHub issues</text>
+<line x1="322.4" y1="215" x2="322.4" y2="277" stroke="#1d2433" stroke-width="1.5" stroke-dasharray="3 3"/>
+<circle cx="322.4" cy="215" r="7" fill="#1d2433" stroke="#fbfaf7" stroke-width="3"/>
+<text x="322.4" y="297" text-anchor="middle" font-size="14" font-weight="700" fill="#1d2433">2024·03</text>
+<text x="322.4" y="318" text-anchor="middle" font-size="15.5" font-weight="700" fill="#1d2433">Devin · SWE-agent</text>
+<text x="322.4" y="337" text-anchor="middle" font-size="13" fill="#5b6577">first coding agents</text>
+<line x1="403.2" y1="215" x2="403.2" y2="153" stroke="#1d2433" stroke-width="1.5" stroke-dasharray="3 3"/>
+<circle cx="403.2" cy="215" r="7" fill="#1d2433" stroke="#fbfaf7" stroke-width="3"/>
+<text x="403.2" y="103" text-anchor="middle" font-size="14" font-weight="700" fill="#1d2433">2024·11</text>
+<text x="403.2" y="124" text-anchor="middle" font-size="15.5" font-weight="700" fill="#1d2433">MCP</text>
+<text x="403.2" y="143" text-anchor="middle" font-size="13" fill="#5b6577">standard for tools</text>
+<line x1="484.0" y1="215" x2="484.0" y2="277" stroke="#1d2433" stroke-width="1.5" stroke-dasharray="3 3"/>
+<circle cx="484.0" cy="215" r="7" fill="#1d2433" stroke="#fbfaf7" stroke-width="3"/>
+<text x="484.0" y="297" text-anchor="middle" font-size="14" font-weight="700" fill="#1d2433">2025·02</text>
+<text x="484.0" y="318" text-anchor="middle" font-size="15.5" font-weight="700" fill="#1d2433">Claude Code</text>
+<text x="484.0" y="337" text-anchor="middle" font-size="13" fill="#5b6577">“vibe coding”</text>
+<line x1="564.8" y1="215" x2="564.8" y2="153" stroke="#1d2433" stroke-width="1.5" stroke-dasharray="3 3"/>
+<circle cx="564.8" cy="215" r="7" fill="#1d2433" stroke="#fbfaf7" stroke-width="3"/>
+<text x="564.8" y="103" text-anchor="middle" font-size="14" font-weight="700" fill="#1d2433">2025·04–06</text>
+<text x="564.8" y="124" text-anchor="middle" font-size="15.5" font-weight="700" fill="#1d2433">Codex · Gemini CLI</text>
+<text x="564.8" y="143" text-anchor="middle" font-size="13" fill="#5b6577">opencode · hooks</text>
+<line x1="645.6" y1="215" x2="645.6" y2="277" stroke="#1d2433" stroke-width="1.5" stroke-dasharray="3 3"/>
+<circle cx="645.6" cy="215" r="7" fill="#1d2433" stroke="#fbfaf7" stroke-width="3"/>
+<text x="645.6" y="297" text-anchor="middle" font-size="14" font-weight="700" fill="#1d2433">2025·08</text>
+<text x="645.6" y="318" text-anchor="middle" font-size="15.5" font-weight="700" fill="#1d2433">AGENTS.md</text>
+<text x="645.6" y="337" text-anchor="middle" font-size="13" fill="#5b6577">open format</text>
+<line x1="726.4" y1="215" x2="726.4" y2="153" stroke="#1d2433" stroke-width="1.5" stroke-dasharray="3 3"/>
+<circle cx="726.4" cy="215" r="7" fill="#1d2433" stroke="#fbfaf7" stroke-width="3"/>
+<text x="726.4" y="103" text-anchor="middle" font-size="14" font-weight="700" fill="#1d2433">2025·09–10</text>
+<text x="726.4" y="124" text-anchor="middle" font-size="15.5" font-weight="700" fill="#1d2433">Spec Kit · Kiro</text>
+<text x="726.4" y="143" text-anchor="middle" font-size="13" fill="#5b6577">Agent Skills</text>
+<line x1="807.2" y1="215" x2="807.2" y2="277" stroke="#1d2433" stroke-width="1.5" stroke-dasharray="3 3"/>
+<circle cx="807.2" cy="215" r="7" fill="#1d2433" stroke="#fbfaf7" stroke-width="3"/>
+<text x="807.2" y="297" text-anchor="middle" font-size="14" font-weight="700" fill="#1d2433">2025·12</text>
+<text x="807.2" y="318" text-anchor="middle" font-size="15.5" font-weight="700" fill="#1d2433">AAIF (Linux Fdn.)</text>
+<text x="807.2" y="337" text-anchor="middle" font-size="13" fill="#5b6577">MCP + AGENTS.md</text>
+<line x1="888.0" y1="215" x2="888.0" y2="153" stroke="#0f7c8c" stroke-width="1.5" stroke-dasharray="3 3"/>
+<circle cx="888.0" cy="215" r="7" fill="#0f7c8c" stroke="#fbfaf7" stroke-width="3"/>
+<text x="888.0" y="103" text-anchor="middle" font-size="14" font-weight="700" fill="#0f7c8c">2026·01</text>
+<text x="888.0" y="124" text-anchor="middle" font-size="15.5" font-weight="700" fill="#1d2433">OpenClaw</text>
+<text x="888.0" y="143" text-anchor="middle" font-size="13" fill="#5b6577">always-on, in your chats</text>
+<line x1="968.8" y1="215" x2="968.8" y2="277" stroke="#0f7c8c" stroke-width="1.5" stroke-dasharray="3 3"/>
+<circle cx="968.8" cy="215" r="7" fill="#0f7c8c" stroke="#fbfaf7" stroke-width="3"/>
+<text x="968.8" y="297" text-anchor="middle" font-size="14" font-weight="700" fill="#0f7c8c">2026·02</text>
+<text x="968.8" y="318" text-anchor="middle" font-size="15.5" font-weight="700" fill="#1d2433">Harness eng.</text>
+<text x="968.8" y="337" text-anchor="middle" font-size="13" fill="#5b6577">+ first studies</text>
+<line x1="1049.6" y1="215" x2="1049.6" y2="153" stroke="#0f7c8c" stroke-width="1.5" stroke-dasharray="3 3"/>
+<circle cx="1049.6" cy="215" r="7" fill="#0f7c8c" stroke="#fbfaf7" stroke-width="3"/>
+<text x="1049.6" y="103" text-anchor="middle" font-size="14" font-weight="700" fill="#0f7c8c">2026</text>
+<text x="1049.6" y="124" text-anchor="middle" font-size="15.5" font-weight="700" fill="#1d2433">Cloud agents</text>
+<text x="1049.6" y="143" text-anchor="middle" font-size="13" fill="#5b6577">work with laptop closed</text>
+<line x1="1130.4" y1="215" x2="1130.4" y2="277" stroke="#e07a2f" stroke-width="1.5" stroke-dasharray="3 3"/>
+<circle cx="1130.4" cy="215" r="8" fill="#fbfaf7" stroke="#e07a2f" stroke-width="3"/>
+<text x="1130.4" y="297" text-anchor="middle" font-size="14" font-weight="700" fill="#e07a2f">next?</text>
+<text x="1130.4" y="318" text-anchor="middle" font-size="15.5" font-weight="700" fill="#1d2433">Always-on agents</text>
+<text x="1130.4" y="337" text-anchor="middle" font-size="13" fill="#5b6577">all your services, 24/7</text>
 </svg>

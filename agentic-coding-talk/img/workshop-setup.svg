@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440" font-family="Inter, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0f7c8c"/>
+    </marker>
+    <marker id="so" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#e07a2f"/>
+    </marker>
+  </defs>
+  <!-- laptop -->
+  <rect x="20" y="30" width="540" height="390" rx="18" fill="#fff" stroke="#1d2433" stroke-width="2.5"/>
+  <text x="46" y="68" font-size="17" font-weight="800" fill="#1d2433" letter-spacing="2">YOUR LAPTOP</text>
+  <text x="46" y="92" font-size="14.5" fill="#5b6577">code and data stay here · raw data never goes to the agent</text>
+
+  <!-- you -->
+  <rect x="46" y="112" width="150" height="56" rx="10" fill="#fbfaf7" stroke="#1d2433" stroke-width="1.5"/>
+  <text x="121" y="146" text-anchor="middle" font-size="17" font-weight="800" fill="#1d2433">You</text>
+  <path d="M121,168 V196" stroke="#1d2433" stroke-width="2" marker-end="url(#s)"/>
+  <text x="132" y="188" font-size="12.5" fill="#5b6577">paste prompt</text>
+
+  <!-- opencode -->
+  <rect x="46" y="200" width="190" height="104" rx="12" fill="#1d2433"/>
+  <text x="141" y="238" text-anchor="middle" font-size="20" font-weight="800" fill="#fff">OpenCode 2</text>
+  <text x="141" y="262" text-anchor="middle" font-size="13.5" fill="#cfd6e2">uv run agent</text>
+  <text x="141" y="283" text-anchor="middle" font-size="13.5" fill="#cfd6e2">policies · hooks</text>
+
+  <!-- repo -->
+  <rect x="320" y="200" width="214" height="104" rx="12" fill="#eef6f7" stroke="#0f7c8c" stroke-width="2"/>
+  <text x="427" y="236" text-anchor="middle" font-size="18" font-weight="800" fill="#1d2433">example/ repo</text>
+  <text x="427" y="261" text-anchor="middle" font-size="13.5" fill="#5b6577">AGENTS.md · prompts/</text>
+  <text x="427" y="282" text-anchor="middle" font-size="13.5" fill="#5b6577">src/project/ · .env</text>
+  <path d="M242,252 H314" stroke="#0f7c8c" stroke-width="3" fill="none" marker-end="url(#s)"/>
+  <text x="278" y="242" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f7c8c">writes code</text>
+
+  <!-- pipeline -->
+  <rect x="320" y="330" width="214" height="70" rx="12" fill="#fff4ea" stroke="#e07a2f" stroke-width="2"/>
+  <text x="427" y="360" text-anchor="middle" font-size="16" font-weight="800" fill="#1d2433">Your pipeline run</text>
+  <text x="427" y="383" text-anchor="middle" font-size="13" fill="#5b6577">you start it: scripts/0N_*.py</text>
+  <path d="M427,304 V326" stroke="#e07a2f" stroke-width="2.5" marker-end="url(#so)"/>
+  <rect x="46" y="330" width="250" height="70" rx="12" fill="#fbfaf7" stroke="#dfe3ea" stroke-width="1.5"/>
+  <text x="62" y="358" font-size="13" font-weight="800" fill="#0f7c8c" letter-spacing="1">ONE KEY</text>
+  <text x="62" y="382" font-size="13.5" fill="#1d2433" font-family="JetBrains Mono, monospace">.env → IONOS_API_KEY</text>
+
+  <!-- arrows to IONOS -->
+  <path d="M236,220 C330,150 520,150 690,165" fill="none" stroke="#0f7c8c" stroke-width="3.5" marker-end="url(#s)"/>
+  <text x="600" y="140" text-anchor="middle" font-size="14" font-weight="700" fill="#0f7c8c">agent: prompt + context</text>
+  <path d="M534,365 C610,365 640,350 690,330" fill="none" stroke="#e07a2f" stroke-width="3.5" marker-end="url(#so)"/>
+  <text x="628" y="292" text-anchor="middle" font-size="13.5" font-weight="700" fill="#b65a17">your code:</text><text x="628" y="310" text-anchor="middle" font-size="13.5" font-weight="700" fill="#b65a17">20 comments</text><text x="628" y="328" text-anchor="middle" font-size="13.5" font-weight="700" fill="#b65a17">per request</text>
+
+  <!-- ionos -->
+  <rect x="695" y="30" width="485" height="390" rx="18" fill="#eef6f7" stroke="#0f7c8c" stroke-width="2.5" stroke-dasharray="8 6"/>
+  <text x="721" y="68" font-size="17" font-weight="800" fill="#0f7c8c" letter-spacing="2">IONOS AI MODEL HUB</text>
+  <text x="721" y="92" font-size="14.5" fill="#5b6577">German data centres · no training on your data</text>
+  <rect x="721" y="112" width="433" height="110" rx="12" fill="#fff" stroke="#0f7c8c" stroke-width="2"/>
+  <text x="741" y="142" font-size="13" font-weight="800" fill="#0f7c8c" letter-spacing="1">JOB 1 · CODING AGENT</text>
+  <text x="741" y="172" font-size="20" font-weight="800" fill="#1d2433">Qwen3-Coder-Next 80B</text>
+  <text x="741" y="198" font-size="13.5" fill="#5b6577">writes the code · €0.15 / €0.80 per 1M tokens</text>
+  <rect x="721" y="262" width="433" height="110" rx="12" fill="#fff" stroke="#e07a2f" stroke-width="2"/>
+  <text x="741" y="292" font-size="13" font-weight="800" fill="#b65a17" letter-spacing="1">JOB 2 · ANALYSIS MODEL</text>
+  <text x="741" y="322" font-size="20" font-weight="800" fill="#1d2433">gpt-oss-120b</text>
+  <text x="741" y="348" font-size="13.5" fill="#5b6577">spam · topics · classification · €0.15 / €0.65</text>
+  <text x="721" y="402" font-size="13.5" fill="#5b6577">one provider, one key · workshop key expires tonight</text>
+</svg>
