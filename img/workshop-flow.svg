@@ -15,7 +15,7 @@
 <rect x="248" y="112" width="212" height="170" rx="14" fill="#fff" stroke="#0f7c8c" stroke-width="2.5"/>
 <text x="266" y="152" font-size="32" font-weight="800" fill="#0f7c8c">2</text>
 <text x="266" y="188" font-size="21" font-weight="800" fill="#1d2433">Spam</text>
-<text x="266" y="212" font-size="16" fill="#5b6577">optional</text>
+<text x="266" y="212" font-size="16" fill="#5b6577">bonus</text>
 <rect x="262" y="226" width="184" height="22" rx="11" fill="#eef6f7"/>
 <text x="354.0" y="242" text-anchor="middle" font-size="14" font-weight="700" fill="#0f7c8c">agent writes</text>
 <text x="354.0" y="272" text-anchor="middle" font-size="14" fill="#5b6577">gpt-oss</text>
@@ -45,5 +45,5 @@
 <text x="1068.0" y="272" text-anchor="middle" font-size="14" fill="#cfd6e2">no LLM</text>
 <text x="250" y="46" font-size="16" fill="#5b6577">Each step: <tspan font-weight="700" fill="#1d2433">paste prompt → agent fills the stub → you run the script → look at the result</tspan></text>
 <text x="250" y="74" font-size="16" fill="#5b6577">The agent writes code only. The <tspan font-style="italic">code</tspan> calls the analysis model – <tspan font-weight="700" fill="#1d2433">you</tspan> start it, with <tspan font-family="JetBrains Mono, monospace">--limit 100</tspan>.</text>
-<text x="10" y="318" font-size="15" fill="#5b6577">Step 0 (download data) and step 1 are ready-made. Stuck? Copy the finished step from the branch demo-solution.</text>
+<text x="10" y="318" font-size="15" fill="#5b6577">Steps 0 – 1 (download + prepare) are ready-made – run them once, then start with step 3. Stuck? Take the step from demo-solution.</text>
 </svg>

@@ -266,7 +266,7 @@ Michael Aydinbas &amp; Benjamin Fries · CorrelAid
 </tr>
 <tr class="odd">
 <td><strong>11:50</strong></td>
-<td>Hands-on: pipeline steps 2 – 5, one prompt each (pairs welcome)</td>
+<td>Hands-on: steps 3 – 5, one prompt each · step 2 as bonus (pairs welcome)</td>
 </tr>
 <tr class="even">
 <td><strong>12:20</strong></td>
@@ -280,7 +280,7 @@ Michael Aydinbas &amp; Benjamin Fries · CorrelAid
 </table>
 </div>
 <aside class="notes">
-<p>~1 min. If setup fails for someone: pair up with a neighbour – one laptop for two works well. Step 2 (spam) is optional.</p>
+<p>~1 min. If setup fails for someone: pair up with a neighbour – one laptop for two works well. We start with step 3; step 2 (spam) is a bonus at the end.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -392,10 +392,12 @@ Michael Aydinbas &amp; Benjamin Fries · CorrelAid
 <span id="cb1-9"><a aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> .env.example .env</span>
 <span id="cb1-10"><a aria-hidden="true" tabindex="-1"></a><span class="co"># → paste the key after IONOS_API_KEY=</span></span>
 <span id="cb1-11"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a aria-hidden="true" tabindex="-1"></a><span class="co"># 3 · check and start</span></span>
+<span id="cb1-12"><a aria-hidden="true" tabindex="-1"></a><span class="co"># 3 · check, get the data, start</span></span>
 <span id="cb1-13"><a aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync</span>
 <span id="cb1-14"><a aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python scripts/check_setup.py</span>
-<span id="cb1-15"><a aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run agent</span></code></pre></div>
+<span id="cb1-15"><a aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python scripts/get_data.py</span>
+<span id="cb1-16"><a aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python scripts/01_prepare.py</span>
+<span id="cb1-17"><a aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run agent</span></code></pre></div>
 </div>
 </div><div class="column" style="width:40%;">
 <div class="card warn">
@@ -409,7 +411,7 @@ Michael Aydinbas &amp; Benjamin Fries · CorrelAid
 </div>
 </div></div>
 <aside class="notes">
-<p>~10 min incl.&nbsp;helping people. <code>uv run agent</code> starts OpenCode 2 from the example/ folder with the keys from .env and –standalone (OpenCode 2 otherwise talks to a shared background service that knows nothing about the project’s keys). check_setup.py tests both models incl.&nbsp;tool calling for less than one cent.</p>
+<p>~10 min incl.&nbsp;helping people. <code>uv run agent</code> starts OpenCode 2 from the example/ folder with the keys from .env and –standalone (OpenCode 2 otherwise talks to a shared background service that knows nothing about the project’s keys). check_setup.py tests both models incl.&nbsp;tool calling for less than one cent. get_data.py downloads the survey (pinned commit + checksum), 01_prepare.py is the ready-made step 1 (districts, masking) – both must run once before step 3, because step 3 reads data/interim/01_prepared.csv.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -462,13 +464,13 @@ Michael Aydinbas &amp; Benjamin Fries · CorrelAid
 <tr class="odd">
 <td><strong>Hooks</strong></td>
 <td><code>.opencode/plugins/guardrails.ts</code></td>
-<td>Hide API keys from the shell · block searches in protected folders · run <code>ruff</code> after every edit and feed errors back</td>
+<td>Hide API keys from the shell · block searches in protected folders · run <code>ruff</code> after every edit and feed errors back · Code Mode off</td>
 </tr>
 </tbody>
 </table>
 </div>
 <aside class="notes">
-<p>~2 min. The core message of the discussion session, made concrete: AGENTS.md is advice, policies and hooks are enforced. Honest caveat: hooks catch accidents – only isolation (container, separate machine) is a security boundary. Try it during step 2: ask the agent “show me 5 raw rows” – watch the hook block it.</p>
+<p>~2 min. The core message of the discussion session, made concrete: AGENTS.md is advice, policies and hooks are enforced. Honest caveat: hooks catch accidents – only isolation (container, separate machine) is a security boundary. Try it during step 3: ask the agent “show me 5 raw rows” – watch the hook block it.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -545,7 +547,7 @@ Michael Aydinbas &amp; Benjamin Fries · CorrelAid
 </div>
 <div class="card accent">
 <p><span class="ct">3 · Run it &amp; look</span></p>
-<p><strong>You</strong> run the script with <code>--limit 100</code>, then check the output. Humans decide, the model suggests.</p>
+<p><strong>You</strong> run the script (steps 2 and 4 with <code>--limit 100</code>), then check the output. Humans decide, the model suggests.</p>
 </div>
 </div>
 <div class="code-with-filename">
@@ -648,9 +650,9 @@ Run `uv run pytest -q` (checks that everything imports), then tell me the comman
 <ul>
 <li>See your own numbers: <strong><code>opencode stats</code></strong></li>
 <li>Hard task? Switch with <code>/models</code> to <strong>Qwen3.5 397B</strong> – stronger, ~4× the price</li>
-<li>For an NGO: ~3 volunteers with a few sessions a month ≈ <strong>€8 / month</strong></li>
+<li>For an NGO: ≈ <strong>€8–9 per 1,000 agent steps</strong> – a few volunteers stay in single-digit euros a month</li>
 </ul>
-<p><span class="tiny">Measured with the workshop repo, Oct 2026 – details in <code>example/docs/infrastructure.md</code>.</span></p>
+<p><span class="tiny">Measured with the workshop repo, Oct–Nov 2026 – details in <code>example/docs/infrastructure.md</code>.</span></p>
 <aside class="notes">
 <p>~3 min. Ask 2–3 pairs for their <code>opencode stats</code>. The point: the money is in the agent’s context, not in the analysis – fresh sessions and quiet output (AGENTS.md: “Keep output short”) are the main cost levers. The expensive part is your time when the agent goes wrong.</p>
 <style type="text/css">
