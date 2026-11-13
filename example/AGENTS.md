@@ -61,7 +61,8 @@ Raw columns (you do not need to open the file to know them): `ID`, `Date Created
 ## Commands
 
 - Dependencies: `uv sync` · add a package: `uv add <package>`
-- Tests: `uv run pytest -q`
+- Tests: `uv run pytest -q` – includes a smoke test that every module imports; run it before
+  handing over (you cannot run the pipeline scripts yourself).
 - Lint/format: `uv run ruff check --fix -q . && uv run ruff format -q .`
 - Check setup: `uv run python scripts/check_setup.py`
 - Estimate costs: `uv run python scripts/costs.py`
@@ -77,7 +78,8 @@ Raw columns (you do not need to open the file to know them): `ID`, `Date Created
 
 ## Layout
 
-- `src/project/` – reusable code (functions with docstrings and type hints)
+- `src/project/` – reusable code (functions with docstrings and type hints); absolute imports
+  (`from project.llm import chat`, `from project import paths`)
 - `scripts/` – executable entry points
 - `notebooks/` – exploration; logic that stays moves to `src/`
 - `tests/` – pytest, only for tricky pure logic (parsing, masking, sampling) – this is a data

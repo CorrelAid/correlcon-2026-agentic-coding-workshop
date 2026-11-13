@@ -24,7 +24,8 @@ src/project/data.py, docs/pipeline.md, src/project/llm.py, src/project/paths.py.
   cache hits, output file, counts) and a tqdm progress bar over the batches. No comment
   text in logs.
 
-Then tell me the command for a first run with --limit 100.
+Run `uv run pytest -q` (checks that everything imports), then tell me the command for a
+first run with --limit 100.
 ```
 
 **Look at:** pick 10 random rows of `04_classified.csv` – would you agree with the model?

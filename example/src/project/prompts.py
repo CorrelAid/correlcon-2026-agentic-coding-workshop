@@ -1,4 +1,4 @@
-"""Versioned prompts for the topic model (GLM-5.3 on Scaleway, via src/project/llm.py).
+"""Versioned prompts for the analysis model (gpt-oss-120b on IONOS, via src/project/llm.py).
 
 TO BE FILLED BY THE AGENT – steps 2–4 (prompts/02_spam.md, prompts/03_topics.md,
 prompts/04_classify.md).

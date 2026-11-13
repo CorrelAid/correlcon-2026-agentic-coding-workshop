@@ -24,7 +24,8 @@ shown).
 - Show the user what is happening: logging (INFO: input files and row counts, each
   chart/section built, output file). No comment text in logs.
 
-Then tell me the command to build the report.
+Run `uv run pytest -q` (checks that everything imports), then tell me the command to build
+the report.
 ```
 
 **Look at:** open `outputs/report.html`. What would the NGO do with it?

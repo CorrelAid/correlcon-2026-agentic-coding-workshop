@@ -24,6 +24,10 @@ export default Plugin.define({
   id: "correlaid.guardrails",
   async setup(ctx) {
     await ctx.tool.hook("execute.before", (event: any) => {
+      // Code Mode ("execute") runs scripts that bypass the path checks below – switch it off.
+      if (event.tool === "execute") {
+        throw new Error("Code Mode is disabled in this project. Use read/grep/edit and write Python files.")
+      }
       const input = event.input ?? {}
       for (const key of ["path", "filePath", "pattern", "include", "workdir"]) {
         const value = input[key]

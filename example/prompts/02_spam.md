@@ -25,7 +25,8 @@ Frankfurt. Short but real answers ("Kitaplätze") are NOT spam.
   cache hits, output file, counts) and a tqdm progress bar over the batches. No comment
   text in logs.
 
-Then tell me the command for a first run with --limit 100.
+Run `uv run pytest -q` (checks that everything imports), then tell me the command for a
+first run with --limit 100.
 ```
 
 **Look at:** the agent never reads `data/interim/` (try asking it to – the hook blocks it).

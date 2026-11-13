@@ -27,7 +27,8 @@ docs/pipeline.md, src/project/llm.py, src/project/paths.py.
   request duration and tokens, output file, counts).
   No comment text in logs.
 
-Then tell me the command to run the step.
+Run `uv run pytest -q` (checks that everything imports), then tell me the command to run
+the step.
 ```
 
 **Look at:** read the categories together. Would the NGO understand them? Edit
