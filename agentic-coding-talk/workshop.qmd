@@ -38,7 +38,7 @@ What keeps the agent away from personal data – and what one pipeline step real
 |---|---|
 | **11:30** | Coding agents in 5 minutes · why this setup |
 | **11:40** | Setup check: `uv run agent`, first prompt |
-| **11:50** | Hands-on: pipeline steps 2 – 5, one prompt each (pairs welcome) |
+| **11:50** | Hands-on: steps 3 – 5, one prompt each · step 2 as bonus (pairs welcome) |
 | **12:20** | Costs, trust, what worked and what didn't |
 | **12:30** | End |
 
@@ -46,7 +46,7 @@ What keeps the agent away from personal data – and what one pipeline step real
 :::
 
 ::: notes
-~1 min. If setup fails for someone: pair up with a neighbour – one laptop for two works well. Step 2 (spam) is optional.
+~1 min. If setup fails for someone: pair up with a neighbour – one laptop for two works well. We start with step 3; step 2 (spam) is a bonus at the end.
 :::
 
 ## A coding agent in one picture
@@ -133,9 +133,11 @@ cd correlcon-2026-agentic-coding-workshop/example
 cp .env.example .env
 # → paste the key after IONOS_API_KEY=
 
-# 3 · check and start
+# 3 · check, get the data, start
 uv sync
 uv run python scripts/check_setup.py
+uv run python scripts/get_data.py
+uv run python scripts/01_prepare.py
 uv run agent
 ```
 :::
@@ -157,6 +159,7 @@ Windows: use WSL. Details & troubleshooting: **`SETUP.md`**
 ::: notes
 ~10 min incl. helping people. `uv run agent` starts OpenCode 2 from the example/ folder with the keys from .env and --standalone (OpenCode 2 otherwise talks to a shared background service that knows nothing about the project's keys).
 check_setup.py tests both models incl. tool calling for less than one cent.
+get_data.py downloads the survey (pinned commit + checksum), 01_prepare.py is the ready-made step 1 (districts, masking) – both must run once before step 3, because step 3 reads data/interim/01_prepared.csv.
 :::
 
 ## Five layers of control
@@ -168,14 +171,14 @@ check_setup.py tests both models incl. tool calling for less than one cent.
 | **Skills** | `.agents/skills/privacy-check/` | A procedure loaded only when needed – e.g. a new data source. |
 | **Policies** | `opencode.json` | Hard rules: only IONOS · no `.env`, no `data/raw/` – not even via the shell · no pipeline runs · prompts read-only |
 | **Permissions** | `opencode.json` | Shell commands ask first – except tests, ruff, `git status` … |
-| **Hooks** | `.opencode/plugins/guardrails.ts` | Hide API keys from the shell · block searches in protected folders · run `ruff` after every edit and feed errors back |
+| **Hooks** | `.opencode/plugins/guardrails.ts` | Hide API keys from the shell · block searches in protected folders · run `ruff` after every edit and feed errors back · Code Mode off |
 
 : {tbl-colwidths="[18,30,52]"}
 :::
 
 ::: notes
 ~2 min. The core message of the discussion session, made concrete: AGENTS.md is advice, policies and hooks are enforced. Honest caveat: hooks catch accidents – only isolation (container, separate machine) is a security boundary.
-Try it during step 2: ask the agent “show me 5 raw rows” – watch the hook block it.
+Try it during step 3: ask the agent “show me 5 raw rows” – watch the hook block it.
 :::
 
 ## Our data: the Babylotse survey 2024
@@ -231,7 +234,7 @@ The agent fills the stub in `src/project/`, runs the smoke test & ruff, and tell
 ::: {.card .accent}
 [3 · Run it & look]{.ct}
 
-**You** run the script with `--limit 100`, then check the output. Humans decide, the model suggests.
+**You** run the script (steps 2 and 4 with `--limit 100`), then check the output. Humans decide, the model suggests.
 :::
 :::
 
@@ -291,9 +294,9 @@ Run `uv run pytest -q` (checks that everything imports), then tell me the comman
 
 - See your own numbers: **`opencode stats`**
 - Hard task? Switch with `/models` to **Qwen3.5 397B** – stronger, ~4× the price
-- For an NGO: ~3 volunteers with a few sessions a month ≈ **€8 / month**
+- For an NGO: ≈ **€8–9 per 1,000 agent steps** – a few volunteers stay in single-digit euros a month
 
-[Measured with the workshop repo, Oct 2026 – details in `example/docs/infrastructure.md`.]{.tiny}
+[Measured with the workshop repo, Oct–Nov 2026 – details in `example/docs/infrastructure.md`.]{.tiny}
 
 ::: notes
 ~3 min. Ask 2–3 pairs for their `opencode stats`. The point: the money is in the agent's context, not in the analysis – fresh sessions and quiet output (AGENTS.md: “Keep output short”) are the main cost levers. The expensive part is your time when the agent goes wrong.
