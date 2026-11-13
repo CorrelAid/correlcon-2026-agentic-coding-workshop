@@ -1,9 +1,12 @@
 project:
-  type: default
+  type: website
   output-dir: _site
   render:
     - index.qmd
     - workshop.qmd
+
+website:
+  title: "Coding Agents – CorrelCon 2026"
 
 lang: en
 
