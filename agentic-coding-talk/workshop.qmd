@@ -114,7 +114,7 @@ Transition: that is why the workshop setup looks the way it does.
 ~2 min.
 - Two models, two jobs: the coding agent (Qwen3-Coder-Next) writes code; the code the agent writes calls a second model (gpt-oss-120b) for the actual analysis. Both on IONOS: one provider, one key, German data centres, no training on the data.
 - The agent never sees personal data: raw and interim data are blocked by policy and hooks; it writes code that processes the data and prints counts. You run the pipeline scripts – they call a paid API on real data.
-- Why IONOS and not Scaleway/GLM? Scaleway limits tokens per minute per organisation; 20 people with an agent need more. IONOS limits requests (5/s per model) instead. Details: example/docs/infrastructure.md.
+- Why IONOS and not Scaleway? Measured on 13 Nov: Scaleway allows 200k tokens/min per model on our account – 4 parallel agents already got rate-limited. IONOS (5 requests/s per model) ran 20 simulated agents with zero errors. Details: example/docs/infrastructure.md.
 :::
 
 ## Setup – three steps
@@ -226,7 +226,7 @@ From `prompts/0N_*.md`. Start a **fresh session** per step – old context costs
 ::: {.card .accent}
 [2 · Let it work]{.ct}
 
-The agent fills the stub in `src/project/`, runs tests & ruff, and tells you the command to run.
+The agent fills the stub in `src/project/`, runs the smoke test & ruff, and tells you the command to run.
 :::
 ::: {.card .accent}
 [3 · Run it & look]{.ct}
@@ -241,7 +241,7 @@ The agent fills the stub in `src/project/`, runs tests & ruff, and tells you the
 - Ask for at most 10 neutral categories, in German, each with a description.
 - Validate with pydantic, save data/processed/categories_v1.json.
 - End the script with sanity checks on its own output. No tests that mock the LLM.
-Then tell me the command to run the step.
+Run `uv run pytest -q` (checks that everything imports), then tell me the command.
 ```
 
 ::: notes
@@ -251,7 +251,7 @@ Then tell me the command to run the step.
 ## Hands-on: steps 2 – 5
 
 ::: {.bigtable}
-| Step | Then run | Look at · best practice on show |
+| Step | Then run | Try this – and what you'll learn |
 |---|---|---|
 | **2 · Spam** *(optional)* | `scripts/02_spam.py --limit 100` | Ask “show me 5 raw rows” – the hook blocks it |
 | **3 · Topics** | `scripts/03_topics.py` | Read the categories together – edit `categories_v1.json` by hand |
@@ -283,7 +283,7 @@ Then tell me the command to run the step.
 ::: {.card .good}
 [~€40]{.stat .inline}
 
-[for 20 people today (typical) · the analysis model adds only cents]{.stat-label}
+[upper bound for 20 people today · clean runs ~€10 · analysis model: cents]{.stat-label}
 :::
 :::
 
@@ -318,9 +318,9 @@ Runs on CorrelAid's account and **expires tonight**. Don't commit it, don't post
 Read the diff before you commit. You own what you commit – not the agent.
 :::
 ::: {.card .accent}
-[“Blocked by policy”?]{.ct}
+[Blocked or stuck?]{.ct}
 
-Working as intended. Ask the agent for another way – or ask us.
+“Blocked by policy” is working as intended. Agent looping? **Esc**, fresh session – or take the step from `demo-solution`.
 :::
 :::
 

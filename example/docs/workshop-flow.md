@@ -1,6 +1,6 @@
 # Workshop flow (40 min)
 
-The hands-on part follows the pipeline in [`pipeline.md`](pipeline.md): six steps, each
+The hands-on part follows the pipeline in [`pipeline.md`](pipeline.md): five steps, each
 with a ready prompt in [`../prompts/`](../prompts/README.md). Participants paste the
 prompt into OpenCode, watch the agent fill the stub, run the script, look at the result.
 
