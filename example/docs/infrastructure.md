@@ -147,6 +147,24 @@ The simulation is harsher than reality (people read, think and type between task
 **the default limit is enough for 20 participants.** Session-title requests go to
 `Qwen3.5-9B` (`small_model`, OpenCode 1.x only) so they don't count against the coding model's limit.
 
+### Parallel agents: IONOS vs. Scaleway (2026-11-13)
+
+Simulated agents: each sends a request with ~20k tokens of context, then waits 4–8 s (tool
+execution), like OpenCode during a pipeline step. No retries, so every 429 is counted.
+
+| Parallel agents | IONOS (Qwen3-Coder-Next) | Scaleway (deepseek-v4-flash-0731) |
+|---|---|---|
+| 1 | 0 errors, 158k tokens/min | 0 errors |
+| 2 | – | 0 errors, 309k tokens/min |
+| 4–5 | 0 errors, 780k tokens/min | **12 of 21 requests rate-limited** |
+| 10 | 0 errors, 1.4M tokens/min | – |
+| 20 | **0 errors, 2.9M tokens/min**, latency 0.3 s | – |
+
+Scaleway's response headers show the account limit: `x-ratelimit-limit-tokens: 200000` per
+minute (300 requests/min) for this model – enough for ~2 active agents. More needs identity
+verification or a quota request. Scaleway also reported `cached_tokens: 0` for repeated
+prefixes, so the advertised cached-input price did not apply in our test.
+
 ## Restricted user test (2026-10-23)
 
 Token of a user in a group with only "Access and manage AI Model Hub"
