@@ -3,6 +3,8 @@
 ```text
 Implement step 3 in src/project/topics.py
 (contracts in docs/pipeline.md).
+Read only these files (no need to explore other steps): src/project/topics.py,
+docs/pipeline.md, src/project/llm.py, src/project/paths.py.
 
 - Input: the valid answers – write load_valid_answers() in src/project/data.py:
   data/interim/02_spam.csv with is_spam == False if it exists, otherwise (step 2 is

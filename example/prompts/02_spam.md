@@ -3,6 +3,8 @@
 ```text
 Implement step 2 in src/project/spam.py (the stub describes the functions; the file
 contracts are in docs/pipeline.md).
+Read only these files (no need to explore other steps): src/project/spam.py,
+docs/pipeline.md, src/project/llm.py, src/project/paths.py.
 
 Read data/interim/01_prepared.csv with code – do not open the file yourself.
 A response is spam if it has no usable content: empty answers, "-", "xx", keyboard

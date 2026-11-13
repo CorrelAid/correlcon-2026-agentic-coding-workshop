@@ -3,6 +3,8 @@
 ```text
 Implement step 4 in src/project/classify.py
 (contracts in docs/pipeline.md).
+Read only these files (no need to explore other steps): src/project/classify.py,
+src/project/data.py, docs/pipeline.md, src/project/llm.py, src/project/paths.py.
 
 - Input: load_valid_answers() from src/project/data.py (step 3) and the reviewed
   data/processed/categories_v1.json.

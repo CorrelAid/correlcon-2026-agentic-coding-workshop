@@ -3,6 +3,8 @@
 ```text
 Implement step 5 in src/project/report.py: a self-contained HTML report
 outputs/report.html built with plotly (no server, works offline after creation).
+Read only these files (no need to explore other steps): src/project/report.py,
+docs/pipeline.md, src/project/paths.py, and get_stadtteile_gdf() in src/project/districts.py.
 
 Content:
 1. Key figures: responses, spam removed, answers classified.

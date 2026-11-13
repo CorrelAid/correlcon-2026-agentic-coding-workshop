@@ -23,6 +23,10 @@ Full data set (all 987 rows): run without `--limit` after the workshop.
 **Stuck?** Every step only needs the previous step's file (see `docs/pipeline.md`).
 Ask the agent: *"The step failed with this error: … – fix it."*
 
+**Saving tokens:** every agent step resends the whole session. A fresh session per step and
+short fix rounds keep it cheap (€0.08–0.15 per step); a long debugging session costs €1–3.
+After two failed fix attempts, take the finished step instead.
+
 **Still stuck? Take the finished step.** The branch `demo-solution` holds a complete run
 (code written by the agent + outputs). Copy one step from it and carry on with the next:
 
