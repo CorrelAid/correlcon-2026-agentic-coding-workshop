@@ -7,13 +7,13 @@
 <path d="M116,84 V108" stroke="#0f7c8c" stroke-width="2.5" marker-end="url(#f)"/>
 <text x="260" y="46" font-size="16" fill="#5b6577">Each step: <tspan font-weight="700" fill="#1d2433">paste prompt → agent fills the stub → you run it → look</tspan></text>
 <text x="260" y="74" font-size="16" fill="#5b6577">The agent writes code only. The <tspan font-style="italic">code</tspan> calls the analysis model.</text>
-<rect x="248" y="112" width="212" height="170" rx="14" fill="#fff4ea" stroke="#e07a2f" stroke-width="2.5"/>
-<text x="266" y="152" font-size="17" font-weight="800" fill="#e07a2f">then</text>
-<text x="266" y="188" font-size="21" font-weight="800" fill="#1d2433">Warm-up</text>
+<rect x="248" y="112" width="212" height="170" rx="14" fill="#fff" stroke="#0f7c8c" stroke-width="2.5"/>
+<text x="266" y="152" font-size="32" font-weight="800" fill="#0f7c8c">Test</text>
+<text x="266" y="188" font-size="21" font-weight="800" fill="#1d2433">Mask contacts</text>
 <text x="266" y="212" font-size="16" fill="#5b6577">src/project/text.py</text>
-<rect x="262" y="226" width="184" height="22" rx="11" fill="#ffe3cc"/>
-<text x="354" y="242" text-anchor="middle" font-size="14" font-weight="700" fill="#b65a17">agent writes</text>
-<text x="354" y="272" text-anchor="middle" font-size="14" fill="#5b6577">tests your setup</text>
+<rect x="262" y="226" width="184" height="22" rx="11" fill="#eef6f7"/>
+<text x="354" y="242" text-anchor="middle" font-size="14" font-weight="700" fill="#0f7c8c">agent writes</text>
+<text x="354" y="272" text-anchor="middle" font-size="14" fill="#5b6577">no LLM · checks setup</text>
 <rect x="10" y="112" width="212" height="170" rx="14" fill="#f3f5f8" stroke="#5b6577" stroke-width="2.5" stroke-dasharray="6 4"/>
 <text x="28" y="152" font-size="32" font-weight="800" fill="#5b6577">1</text>
 <text x="28" y="188" font-size="21" font-weight="800" fill="#1d2433">Prepare</text>
@@ -49,7 +49,7 @@
 <rect x="300" y="300" width="300" height="56" rx="12" fill="#fff" stroke="#0f7c8c" stroke-width="1.8" stroke-dasharray="6 4"/>
 <text x="318" y="324" font-size="16" font-weight="800" fill="#0f7c8c">2 · Spam <tspan font-weight="600" fill="#5b6577">– bonus at the end</tspan></text>
 <text x="318" y="345" font-size="13.5" fill="#5b6577">agent writes · gpt-oss · optional filter</text>
-<path d="M116,282 V328 H296" stroke="#5b6577" stroke-width="2" stroke-dasharray="4 4" fill="none" marker-end="url(#g)"/>
+<path d="M354,282 V296" stroke="#5b6577" stroke-width="2" stroke-dasharray="4 4" fill="none" marker-end="url(#g)"/>
 <path d="M560,300 V286" stroke="#5b6577" stroke-width="2" stroke-dasharray="4 4" fill="none" marker-end="url(#g)"/>
-<text x="10" y="390" font-size="15" fill="#5b6577">Order today: step 1 (in setup) → warm-up → 3 → 4 → 5 → step 2 if time is left. Stuck? Take the step from demo-solution.</text>
+<text x="10" y="390" font-size="15" fill="#5b6577">Order today: step 1 (in setup) → test → 3 → 4 → 5 → step 2 if time is left. Stuck? Take the step from demo-solution.</text>
 </svg>

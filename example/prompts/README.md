@@ -2,11 +2,9 @@
 
 Start OpenCode **inside `example/`**: `uv run agent`.
 
-**Order:** setup (incl. `get_data.py` and step 1, see `SETUP.md`) → warm-up → 3 → 4 → 5 → step 2
+**Order:** setup (incl. `get_data.py` and step 1, see `SETUP.md`) → test → 3 → 4 → 5 → step 2
 (spam) as a bonus if time is left.
 
-**Warm-up** (tests your setup, ≈ 45 s, ≈ €0.02): *"Write a function in src/project/text.py that
-masks email addresses and phone numbers, add tests and run them."*
 Then, step by step: paste the prompt, watch the agent fill the stub in `src/project/`,
 run the command it tells you, look at the result.
 
@@ -14,6 +12,7 @@ run the command it tells you, look at the result.
 |---|---|---|---|---|
 | 0 | – | `uv run python scripts/get_data.py` | 1 min | – |
 | 1 | – (ready-made) | `uv run python scripts/01_prepare.py` | 1 min | – |
+| Test | [01_warmup.md](01_warmup.md) | – (the agent runs the tests) | 2 min | – |
 | 2 | [02_spam.md](02_spam.md) *(optional)* | `uv run python scripts/02_spam.py --limit 100` | 8 min | < €0.01 |
 | 3 | [03_topics.md](03_topics.md) | `uv run python scripts/03_topics.py` | 8 min | < €0.01 |
 | 4 | [04_classify.md](04_classify.md) | `uv run python scripts/04_classify.py --limit 100` | 8 min | ~€0.01 |
