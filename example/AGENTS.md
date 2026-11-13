@@ -60,6 +60,8 @@ Raw columns (you do not need to open the file to know them): `ID`, `Date Created
 
 ## Commands
 
+Run commands from `example/` (your working directory) – no `cd … &&` prefix needed.
+
 - Dependencies: `uv sync` · add a package: `uv add <package>`
 - Tests: `uv run pytest -q` – includes a smoke test that every module imports; run it before
   handing over (you cannot run the pipeline scripts yourself).
