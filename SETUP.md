@@ -129,8 +129,8 @@ IONOS has **no self-service hard spending cap** (as of Oct 2026). Do this instea
 4. Ask the IONOS account manager about a contractual cost limit (mentioned in their FAQ).
 
 Expected workshop cost (measured ~€0.01 per agent step, see
-[`infrastructure.md`](example/docs/infrastructure.md#workshop-20-people-hands-on-part)):
-**~€40 typical, ~€65 heavy** for 20 people; the analysis model adds only cents.
+[`infrastructure.md`](example/docs/infrastructure.md#what-this-means)):
+**~€10 if steps run cleanly, ~€40 upper bound** for 20 people; the analysis model adds only cents.
 
 ### 2.4 Smoke test (no Python needed)
 
@@ -170,7 +170,6 @@ Supporting code:
 - `src/project/llm.py` – the only way project code talks to an LLM (the analysis model, set in
   `.env`); refuses non-approved (non-EU) endpoints.
 - `scripts/check_setup.py` – checks both models incl. tool calling (< €0.01).
-- `scripts/costs.py` – cost calculator for workshop, projects and batch runs.
 
 **Why OpenCode restricts providers:** OpenCode offers its own "Zen" models and any provider it
 finds credentials for (e.g. AWS keys in your environment). The policy `provider.use: * → deny,

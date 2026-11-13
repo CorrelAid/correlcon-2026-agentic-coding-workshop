@@ -39,7 +39,7 @@ opencode.json                     IONOS only, permissions, sharing off
 prompts/                          copy-paste prompts for steps 2–5
 src/project/                      prepare.py + districts.py (ready), stubs for steps 2–5,
                                   llm.py (single LLM access point, EU endpoints only)
-scripts/                          get_data.py, 01_prepare.py … 05_report.py, check_setup.py, costs.py
+scripts/                          get_data.py, 01_prepare.py … 05_report.py, check_setup.py
 data/raw/, data/interim/          blocked for the agent, not in git
 data/processed/                   sample, categories, results – the agent may look here
 ```

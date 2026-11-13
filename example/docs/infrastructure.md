@@ -39,7 +39,7 @@ servers, no base fee.
 
 A coding agent resends the whole conversation with every step (tool call), so **input
 tokens dominate**. IONOS has no prompt caching (`opencode stats`: cached input 0 %), so every
-step pays for the full context. Providers with caching would be cheaper than shown below.
+step pays for the full context. Providers with working prompt caching would be cheaper.
 
 **Measured** (`opencode stats --cost`, IONOS, Qwen3-Coder-Next, fresh session per pipeline step):
 
@@ -54,7 +54,7 @@ sessions with debugging and rework. **A clean run of one pipeline step costs €
 (2026-10-26, step 4 run twice from a fresh session: 23 and 30 agent steps, context growing from
 7k to 28–35k tokens, €0.08 and €0.12; step 3 in the full run: €0.15). A step where the agent
 struggles with errors can cost €1–3. A participant with smooth steps 2–5 therefore costs ~€0.50,
-20 people ~€10; the estimates below are the upper bound when many get stuck.
+20 people ~€10.
 
 A lower context limit (64k instead of 256k, so OpenCode compacts earlier) made no difference:
 clean runs never got near it.
@@ -64,52 +64,17 @@ measured with a mock server). The rest is file contents, test and command output
 up within a session. Levers: a fresh session per pipeline step, short outputs (`pytest -q`),
 reading only the files needed.
 
-### Workshop: 20 people, hands-on part
+### What this means
 
-Assumption: 100 / 200 / 350 agent steps per person. Time caps it: at ~5–10 s per step, 40 min of
-active work is at most ~250–350 steps.
+- **Workshop, 20 people:** ~€10 if most steps run cleanly; ~€40 as an upper bound when many
+  participants get stuck in long fix loops. Time caps it – at ~5–10 s per agent step, 40 min
+  of active work is at most ~250–350 steps per person.
+- **NGO project:** ≈ €8–9 per 1,000 agent steps. A few volunteers with a few sessions a month
+  stay in the single-digit euros.
+- **Analysis model** (gpt-oss-120b, all 987 responses): cents. The money goes into the agent's
+  context, not into the analysis.
 
-| Provider | Model | In/Out per 1M | Workshop light | Workshop typical | Workshop heavy |
-|---|---|---|---|---|---|
-| IONOS (DE) | Qwen3-Coder-Next 80B | €0.15 / €0.80 | €18.48 | €36.96 | €64.68 |
-| IONOS (DE) | gpt-oss-120b | €0.15 / €0.65 | €18.39 | €36.78 | €64.36 |
-| IONOS (DE) | Qwen3.5-397B-A17B | €0.60 / €3.60 | €74.16 | €148.32 | €259.56 |
-| STACKIT (DE) | Qwen3.8 27B | €0.45 / €0.65 | €54.39 | €108.78 | €190.37 |
-| STACKIT (DE) | gpt-oss-120b | €0.45 / €0.65 | €54.39 | €108.78 | €190.37 |
-| Scaleway (FR) | qwen3.6-35b-a3b | €0.25 / €1.50 | €30.90 | €61.80 | €108.15 |
-| Scaleway (FR) | glm-5.3 | €1.80 / €5.50 | €219.30 | €438.60 | €767.55 |
-| OVHcloud (FR) | gpt-oss-120b | €0.08 / €0.40 | €9.84 | €19.68 | €34.44 |
-| OVHcloud (FR) | Qwen3.5-397B-A17B | €0.60 / €3.60 | €74.16 | €148.32 | €259.56 |
-| Mistral (FR) | Devstral 2 | $0.40 / $2.00 | $49.20 | $98.40 | $172.20 |
-
-**Budget:** ~€40 typical, **€65** covers the heavy scenario. The analysis model (gpt-oss-120b on
-IONOS, steps 2–4 with `--limit 100`) adds only cents per person.
-
-### NGO project
-
-≈ **€8.50 per 1,000 agent steps** on IONOS. Three volunteers with ~300 steps each per month
-(a few focused sessions) ≈ €8/month; heavy use (1,000 steps each) ≈ €25/month.
-
-### Analysis: LLM categorisation (Babylotse survey)
-
-987 responses × 2 free-text fields = 1,974 texts, ~800 input + 40 output tokens each:
-
-| Provider | Model | Cost |
-|---|---|---|
-| IONOS (DE) | Qwen3-Coder-Next 80B | €0.30 |
-| IONOS (DE) | gpt-oss-120b | €0.29 |
-| IONOS (DE) | Qwen3.5-397B-A17B | €1.23 |
-| STACKIT (DE) | Qwen3.8 27B | €0.76 |
-| STACKIT (DE) | gpt-oss-120b | €0.76 |
-| Scaleway (FR) | qwen3.6-35b-a3b | €0.51 |
-| Scaleway (FR) | glm-5.3 | €3.28 |
-| OVHcloud (FR) | gpt-oss-120b | €0.16 |
-| OVHcloud (FR) | Qwen3.5-397B-A17B | €1.23 |
-| Mistral (FR) | Devstral 2 | $0.79 |
-
-The analysis itself costs cents – the money goes into interactive agent work.
-
-Regenerate these tables: `uv run python scripts/costs.py --markdown --texts 1974`.
+Check real usage with `opencode stats --cost` and the IONOS cost dashboard, not with estimates.
 
 ## IONOS test results (2026-10-23, 1-hour test token, total test cost < €1)
 

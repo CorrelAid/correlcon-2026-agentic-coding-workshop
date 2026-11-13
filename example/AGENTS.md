@@ -67,7 +67,6 @@ Run commands from `example/` (your working directory) – no `cd … &&` prefix 
   handing over (you cannot run the pipeline scripts yourself).
 - Lint/format: `uv run ruff check --fix -q . && uv run ruff format -q .`
 - Check setup: `uv run python scripts/check_setup.py`
-- Estimate costs: `uv run python scripts/costs.py`
 
 ## Keep output short (everything you read is resent with every step)
 
@@ -94,6 +93,5 @@ Run commands from `example/` (your working directory) – no `cd … &&` prefix 
 - `prompts/` holds the workshop prompts for you – read-only. Analysis-model prompts go into
   `src/project/prompts.py`.
 - Never run the pipeline scripts (`scripts/0N_*.py`) yourself – they call paid APIs on real
-  data (blocked by policy). Tell the user the exact command (first run
-  with `--limit`) and the estimated cost (`scripts/costs.py`).
+  data (blocked by policy). Tell the user the exact command (first run with `--limit`).
 - If unsure, ask instead of guessing.

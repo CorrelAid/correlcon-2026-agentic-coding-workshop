@@ -85,7 +85,6 @@
     { "action": "shell", "resource": "cd * && uv add *", "effect": "allow" },
     { "action": "shell", "resource": "uv run ruff*", "effect": "allow" },
     { "action": "shell", "resource": "uv run python scripts/check_setup.py*", "effect": "allow" },
-    { "action": "shell", "resource": "uv run python scripts/costs.py*", "effect": "allow" },
     { "action": "shell", "resource": "uv sync*", "effect": "allow" },
     { "action": "shell", "resource": "uv add *", "effect": "allow" },
     { "action": "shell", "resource": "git status *", "effect": "allow" },
