@@ -37,7 +37,7 @@ What keeps the agent away from personal data – and what one pipeline step real
 | Time | What |
 |---|---|
 | **11:30** | Coding agents in 5 minutes · why this setup |
-| **11:40** | Setup check: `uv run agent`, first prompt |
+| **11:40** | Setup check: `uv run agent`, warm-up prompt (`text.py`) |
 | **11:50** | Hands-on: steps 3 – 5, one prompt each · step 2 as bonus (pairs welcome) |
 | **12:20** | Costs, trust, what worked and what didn't |
 | **12:30** | End |
@@ -147,7 +147,7 @@ uv run agent
 :::
 
 ::: {.card .accent}
-**First prompt to try:** *“Write a function in src/project/text.py that masks email addresses and phone numbers, add tests and run them.”*<br>≈ 45 s · ≈ €0.02
+**Warm-up prompt** – tests your setup: *“Write a function in src/project/text.py that masks email addresses and phone numbers, add tests and run them.”*<br>≈ 45 s · ≈ €0.02
 :::
 
 ::: {.card}
@@ -215,7 +215,7 @@ The agent never reads raw answers. It writes code that does – and prints only 
 ![](img/workshop-flow.svg){.full}
 
 ::: notes
-~1.5 min. Each step reads the previous step's file and writes its own – steps can be re-run independently. Contracts in docs/pipeline.md.
+~1.5 min. Order today: warm-up (text.py, tests the setup) → step 1 ready-made, run once → 3 → 4 → 5 → step 2 only if time is left. Each step reads the previous step's file and writes its own – steps can be re-run independently. Without step 2, steps 3–5 use the district check from step 1 as a spam filter. Contracts in docs/pipeline.md.
 :::
 
 ## One step, start to finish

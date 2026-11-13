@@ -2,7 +2,10 @@
 
 Start OpenCode **inside `example/`**: `uv run agent`.
 
-**Start with step 3** – step 2 (spam) is a bonus if time is left.
+**Order:** warm-up → step 1 (ready-made) → 3 → 4 → 5 → step 2 (spam) as a bonus if time is left.
+
+**Warm-up** (tests your setup, ≈ 45 s, ≈ €0.02): *"Write a function in src/project/text.py that
+masks email addresses and phone numbers, add tests and run them."*
 Then, step by step: paste the prompt, watch the agent fill the stub in `src/project/`,
 run the command it tells you, look at the result.
 
