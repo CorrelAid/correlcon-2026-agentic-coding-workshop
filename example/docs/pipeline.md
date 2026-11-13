@@ -3,8 +3,9 @@
 ```
 raw survey ─▶ 1 prepare ─▶ 2 spam ─▶ 3 topics ─▶ 4 classify ─▶ 5 report
  (data/raw)   ready-made   agent     agent       agent         agent
-              no LLM       gpt-oss   gpt-oss     gpt-oss       no LLM
-                           optional  1 request   batches of 20
+              no model     rules or  gpt-oss     gpt-oss       no analysis
+                           gpt-oss   1 request   batches of 20 model
+                           (bonus)
 ```
 
 The **agent** (Qwen3-Coder-Next in OpenCode) writes the code for steps 2–5 from the
@@ -45,7 +46,7 @@ personal data, add a privacy check first (skill `privacy-check`).
 | column | meaning |
 |---|---|
 | `is_spam` | `True` if the whole response is spam / has no usable content |
-| `spam_reason` | short reason from the model |
+| `spam_reason` | short reason (the rule that fired, or the model's reason) |
 
 **Valid answers (input of steps 3–5)** – `load_valid_answers()` (`src/project/data.py`,
 written in step 3): `02_spam.csv` with `is_spam == False`; if step 2 was skipped,

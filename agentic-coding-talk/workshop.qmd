@@ -259,7 +259,7 @@ Run `uv run pytest -q` (checks that everything imports), then tell me the comman
 | **3 · Topics** | `scripts/03_topics.py` | Read the categories together – edit `categories_v1.json` by hand. Ask “show me 5 raw rows” – the hook blocks it |
 | **4 · Classify** | `scripts/04_classify.py --limit 100` | Batches of 20, validation, caching – shared rate limits |
 | **5 · Report** | `scripts/05_report.py` | Open `outputs/report.html` – when are tests worth it in a pipeline? |
-| *2 · Spam (bonus)* | `scripts/02_spam.py --limit 100` | Time left? Let the LLM flag spam – how many does it find, do the reasons make sense? |
+| *2 · Spam (bonus)* | `scripts/02_spam.py --limit 100` | Time left? Rules, an NLP library or the LLM as judge – your choice. Compare with your neighbour |
 
 : {tbl-colwidths="[20,36,44]"}
 :::

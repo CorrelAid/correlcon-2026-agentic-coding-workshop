@@ -9,8 +9,8 @@ from __future__ import annotations
 import pandas as pd
 
 
-def classify_spam(texts: list[str]) -> list[dict]:
-    """Ask the topic model which answers are spam / non-answers (batches of ~20)."""
+def flag_spam(df: pd.DataFrame) -> pd.DataFrame:
+    """Add is_spam / spam_reason – via rules, an NLP library or the analysis model."""
     raise NotImplementedError("Step 2 – see prompts/02_spam.md")
 
 
