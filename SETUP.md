@@ -54,14 +54,22 @@ cp .env.example .env
 Open `.env` and paste the workshop key (you get it on site) after `IONOS_API_KEY=`. The coding
 agent and the code it writes both use it (`LLM_API_KEY=${IONOS_API_KEY}`).
 
-### Step 3 – Check and start
+### Step 3 – Check, get the data, start
 
 ```bash
 uv sync
 uv run python scripts/check_setup.py
 ```
 
-All green? Then start the agent:
+All green? Then download the survey and prepare it (step 1 of the pipeline, ready-made,
+no LLM, ~1 min):
+
+```bash
+uv run python scripts/get_data.py
+uv run python scripts/01_prepare.py
+```
+
+Then start the agent:
 
 ```bash
 uv run agent
