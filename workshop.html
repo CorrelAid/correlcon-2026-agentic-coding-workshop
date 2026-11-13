@@ -262,7 +262,7 @@ Michael Aydinbas &amp; Benjamin Fries · CorrelAid
 </tr>
 <tr class="even">
 <td><strong>11:40</strong></td>
-<td>Setup check: <code>uv run agent</code>, first prompt</td>
+<td>Setup check: <code>uv run agent</code>, first small test (<code>text.py</code>)</td>
 </tr>
 <tr class="odd">
 <td><strong>11:50</strong></td>
@@ -404,7 +404,7 @@ Michael Aydinbas &amp; Benjamin Fries · CorrelAid
 <p><strong>Start with <code>uv run agent</code></strong> – not plain <code>opencode</code>. Plain <code>opencode</code> doesn’t read <code>.env</code> → <code>401</code>.</p>
 </div>
 <div class="card accent">
-<p><strong>First prompt to try:</strong> <em>“Write a function in src/project/text.py that masks email addresses and phone numbers, add tests and run them.”</em><br>≈ 45 s · ≈ €0.02</p>
+<p><strong>First test</strong> (<code>prompts/01_warmup.md</code>): <em>“Write a function in src/project/text.py that masks email addresses and phone numbers, add tests and run them.”</em><br>≈ 45 s · ≈ €0.02</p>
 </div>
 <div class="card">
 <p>Windows: use WSL. Details &amp; troubleshooting: <strong><code>SETUP.md</code></strong></p>
@@ -521,7 +521,7 @@ Michael Aydinbas &amp; Benjamin Fries · CorrelAid
 <h2>The pipeline</h2>
 
 <img data-src="img/workshop-flow.svg" class="full r-stretch"><aside class="notes">
-<p>~1.5 min. Each step reads the previous step’s file and writes its own – steps can be re-run independently. Contracts in docs/pipeline.md.</p>
+<p>~1.5 min. Order today: setup (which already runs get_data and step 1) → warm-up (text.py, tests the agent) → 3 → 4 → 5 → step 2 only if time is left. The warm-up is not part of the data pipeline. Each step reads the previous step’s file and writes its own – steps can be re-run independently. Without step 2, steps 3–5 use the district check from step 1 as a spam filter. Contracts in docs/pipeline.md.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

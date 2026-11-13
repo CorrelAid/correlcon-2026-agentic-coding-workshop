@@ -1,49 +1,55 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="330" viewBox="0 0 1200 330" font-family="Inter, Helvetica, Arial, sans-serif">
-<defs><marker id="f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0f7c8c"/></marker></defs>
-<rect x="10" y="20" width="200" height="64" rx="10" fill="#fff4ea" stroke="#e07a2f" stroke-width="1.5" stroke-dasharray="5 4"/>
-<text x="110" y="47" text-anchor="middle" font-size="15" font-weight="700" fill="#1d2433">Survey 2024 · 987 answers</text>
-<text x="110" y="69" text-anchor="middle" font-size="12.5" fill="#b65a17">data/raw – blocked for the agent</text>
-<path d="M110,84 V108" stroke="#0f7c8c" stroke-width="2.5" marker-end="url(#f)"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400" font-family="Inter, Helvetica, Arial, sans-serif">
+<defs><marker id="f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0f7c8c"/></marker>
+<marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5b6577"/></marker></defs>
+<rect x="10" y="20" width="212" height="64" rx="10" fill="#fff4ea" stroke="#e07a2f" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="116" y="47" text-anchor="middle" font-size="15" font-weight="700" fill="#1d2433">Survey 2024 · 987 answers</text>
+<text x="116" y="69" text-anchor="middle" font-size="12.5" fill="#b65a17">data/raw – blocked for the agent</text>
+<path d="M116,84 V108" stroke="#0f7c8c" stroke-width="2.5" marker-end="url(#f)"/>
+<text x="260" y="46" font-size="16" fill="#5b6577">Each step: <tspan font-weight="700" fill="#1d2433">paste prompt → agent fills the stub → you run it → look</tspan></text>
+<text x="260" y="74" font-size="16" fill="#5b6577">The agent writes code only. The <tspan font-style="italic">code</tspan> calls the analysis model.</text>
+<rect x="248" y="112" width="212" height="170" rx="14" fill="#fff" stroke="#0f7c8c" stroke-width="2.5"/>
+<text x="266" y="152" font-size="32" font-weight="800" fill="#0f7c8c">Test</text>
+<text x="266" y="188" font-size="21" font-weight="800" fill="#1d2433">Mask contacts</text>
+<text x="266" y="212" font-size="16" fill="#5b6577">src/project/text.py</text>
+<rect x="262" y="226" width="184" height="22" rx="11" fill="#eef6f7"/>
+<text x="354" y="242" text-anchor="middle" font-size="14" font-weight="700" fill="#0f7c8c">agent writes</text>
+<text x="354" y="272" text-anchor="middle" font-size="14" fill="#5b6577">no LLM · checks setup</text>
 <rect x="10" y="112" width="212" height="170" rx="14" fill="#f3f5f8" stroke="#5b6577" stroke-width="2.5" stroke-dasharray="6 4"/>
 <text x="28" y="152" font-size="32" font-weight="800" fill="#5b6577">1</text>
 <text x="28" y="188" font-size="21" font-weight="800" fill="#1d2433">Prepare</text>
 <text x="28" y="212" font-size="16" fill="#5b6577">districts, masking</text>
 <rect x="24" y="226" width="184" height="22" rx="11" fill="#eef6f7"/>
-<text x="116.0" y="242" text-anchor="middle" font-size="14" font-weight="700" fill="#0f7c8c">ready-made</text>
-<text x="116.0" y="272" text-anchor="middle" font-size="14" fill="#5b6577">no LLM</text>
+<text x="116" y="242" text-anchor="middle" font-size="14" font-weight="700" fill="#0f7c8c">ready-made</text>
+<text x="116" y="272" text-anchor="middle" font-size="14" fill="#5b6577">no LLM · done in setup</text>
 <path d="M224,197 H244" stroke="#0f7c8c" stroke-width="3" marker-end="url(#f)"/>
-<rect x="248" y="112" width="212" height="170" rx="14" fill="#fff" stroke="#0f7c8c" stroke-width="2.5"/>
-<text x="266" y="152" font-size="32" font-weight="800" fill="#0f7c8c">2</text>
-<text x="266" y="188" font-size="21" font-weight="800" fill="#1d2433">Spam</text>
-<text x="266" y="212" font-size="16" fill="#5b6577">bonus</text>
-<rect x="262" y="226" width="184" height="22" rx="11" fill="#eef6f7"/>
-<text x="354.0" y="242" text-anchor="middle" font-size="14" font-weight="700" fill="#0f7c8c">agent writes</text>
-<text x="354.0" y="272" text-anchor="middle" font-size="14" fill="#5b6577">gpt-oss</text>
 <path d="M462,197 H482" stroke="#0f7c8c" stroke-width="3" marker-end="url(#f)"/>
 <rect x="486" y="112" width="212" height="170" rx="14" fill="#fff" stroke="#0f7c8c" stroke-width="2.5"/>
 <text x="504" y="152" font-size="32" font-weight="800" fill="#0f7c8c">3</text>
 <text x="504" y="188" font-size="21" font-weight="800" fill="#1d2433">Topics</text>
 <text x="504" y="212" font-size="16" fill="#5b6577">≤ 10 categories</text>
 <rect x="500" y="226" width="184" height="22" rx="11" fill="#eef6f7"/>
-<text x="592.0" y="242" text-anchor="middle" font-size="14" font-weight="700" fill="#0f7c8c">agent writes</text>
-<text x="592.0" y="272" text-anchor="middle" font-size="14" fill="#5b6577">gpt-oss · 1 call</text>
+<text x="592" y="242" text-anchor="middle" font-size="14" font-weight="700" fill="#0f7c8c">agent writes</text>
+<text x="592" y="272" text-anchor="middle" font-size="14" fill="#5b6577">gpt-oss · 1 call</text>
 <path d="M700,197 H720" stroke="#0f7c8c" stroke-width="3" marker-end="url(#f)"/>
 <rect x="724" y="112" width="212" height="170" rx="14" fill="#fff" stroke="#0f7c8c" stroke-width="2.5"/>
 <text x="742" y="152" font-size="32" font-weight="800" fill="#0f7c8c">4</text>
 <text x="742" y="188" font-size="21" font-weight="800" fill="#1d2433">Classify</text>
 <text x="742" y="212" font-size="16" fill="#5b6577">multi-label</text>
 <rect x="738" y="226" width="184" height="22" rx="11" fill="#eef6f7"/>
-<text x="830.0" y="242" text-anchor="middle" font-size="14" font-weight="700" fill="#0f7c8c">agent writes</text>
-<text x="830.0" y="272" text-anchor="middle" font-size="14" fill="#5b6577">gpt-oss · batches</text>
+<text x="830" y="242" text-anchor="middle" font-size="14" font-weight="700" fill="#0f7c8c">agent writes</text>
+<text x="830" y="272" text-anchor="middle" font-size="14" fill="#5b6577">gpt-oss · batches</text>
 <path d="M938,197 H958" stroke="#0f7c8c" stroke-width="3" marker-end="url(#f)"/>
 <rect x="962" y="112" width="212" height="170" rx="14" fill="#1d2433" stroke="#1d2433" stroke-width="2.5"/>
 <text x="980" y="152" font-size="32" font-weight="800" fill="#ffc79a">5</text>
 <text x="980" y="188" font-size="21" font-weight="800" fill="#fff">Report</text>
 <text x="980" y="212" font-size="16" fill="#cfd6e2">report.html</text>
 <rect x="976" y="226" width="184" height="22" rx="11" fill="#2c3547"/>
-<text x="1068.0" y="242" text-anchor="middle" font-size="14" font-weight="700" fill="#7fc4cd">agent writes</text>
-<text x="1068.0" y="272" text-anchor="middle" font-size="14" fill="#cfd6e2">no LLM</text>
-<text x="250" y="46" font-size="16" fill="#5b6577">Each step: <tspan font-weight="700" fill="#1d2433">paste prompt → agent fills the stub → you run the script → look at the result</tspan></text>
-<text x="250" y="74" font-size="16" fill="#5b6577">The agent writes code only. The <tspan font-style="italic">code</tspan> calls the analysis model – <tspan font-weight="700" fill="#1d2433">you</tspan> start it, with <tspan font-family="JetBrains Mono, monospace">--limit 100</tspan>.</text>
-<text x="10" y="318" font-size="15" fill="#5b6577">Steps 0 – 1 (download + prepare) are ready-made – run them once, then start with step 3. Stuck? Take the step from demo-solution.</text>
+<text x="1068" y="242" text-anchor="middle" font-size="14" font-weight="700" fill="#7fc4cd">agent writes</text>
+<text x="1068" y="272" text-anchor="middle" font-size="14" fill="#cfd6e2">no LLM</text>
+<rect x="300" y="300" width="300" height="56" rx="12" fill="#fff" stroke="#0f7c8c" stroke-width="1.8" stroke-dasharray="6 4"/>
+<text x="318" y="324" font-size="16" font-weight="800" fill="#0f7c8c">2 · Spam <tspan font-weight="600" fill="#5b6577">– bonus at the end</tspan></text>
+<text x="318" y="345" font-size="13.5" fill="#5b6577">agent writes · gpt-oss · optional filter</text>
+<path d="M354,282 V296" stroke="#5b6577" stroke-width="2" stroke-dasharray="4 4" fill="none" marker-end="url(#g)"/>
+<path d="M560,300 V286" stroke="#5b6577" stroke-width="2" stroke-dasharray="4 4" fill="none" marker-end="url(#g)"/>
+<text x="10" y="390" font-size="15" fill="#5b6577">Order today: step 1 (in setup) → test → 3 → 4 → 5 → step 2 if time is left. Stuck? Take the step from demo-solution.</text>
 </svg>

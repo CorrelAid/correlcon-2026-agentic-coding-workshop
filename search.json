@@ -11,7 +11,7 @@
     "href": "workshop.html#plan-for-the-hour",
     "title": "Coding Agents: Intro Workshop",
     "section": "Plan for the hour",
-    "text": "Plan for the hour\n\n\n\n\n\n\n\n\nTime\nWhat\n\n\n\n\n11:30\nCoding agents in 5 minutes · why this setup\n\n\n11:40\nSetup check: uv run agent, first prompt\n\n\n11:50\nHands-on: steps 3 – 5, one prompt each · step 2 as bonus (pairs welcome)\n\n\n12:20\nCosts, trust, what worked and what didn’t\n\n\n12:30\nEnd\n\n\n\n\n\n~1 min. If setup fails for someone: pair up with a neighbour – one laptop for two works well. We start with step 3; step 2 (spam) is a bonus at the end."
+    "text": "Plan for the hour\n\n\n\n\n\n\n\n\nTime\nWhat\n\n\n\n\n11:30\nCoding agents in 5 minutes · why this setup\n\n\n11:40\nSetup check: uv run agent, first small test (text.py)\n\n\n11:50\nHands-on: steps 3 – 5, one prompt each · step 2 as bonus (pairs welcome)\n\n\n12:20\nCosts, trust, what worked and what didn’t\n\n\n12:30\nEnd\n\n\n\n\n\n~1 min. If setup fails for someone: pair up with a neighbour – one laptop for two works well. We start with step 3; step 2 (spam) is a bonus at the end."
   },
   {
     "objectID": "workshop.html#a-coding-agent-in-one-picture",
@@ -39,7 +39,7 @@
     "href": "workshop.html#setup-three-steps",
     "title": "Coding Agents: Intro Workshop",
     "section": "Setup – three steps",
-    "text": "Setup – three steps\n\n\n\n\nterminal\n\n# 1 · install (ideally before the workshop)\ncurl -LsSf https://astral.sh/uv/install.sh | sh\ncurl -fsSL https://opencode.ai/v2/install | bash\n\n# 2 · code + key\ngit clone https://github.com/CorrelAid/\\\ncorrelcon-2026-agentic-coding-workshop\ncd correlcon-2026-agentic-coding-workshop/example\ncp .env.example .env\n# → paste the key after IONOS_API_KEY=\n\n# 3 · check, get the data, start\nuv sync\nuv run python scripts/check_setup.py\nuv run python scripts/get_data.py\nuv run python scripts/01_prepare.py\nuv run agent\n\n\n\nStart with uv run agent – not plain opencode. Plain opencode doesn’t read .env → 401.\n\n\nFirst prompt to try: “Write a function in src/project/text.py that masks email addresses and phone numbers, add tests and run them.”≈ 45 s · ≈ €0.02\n\n\nWindows: use WSL. Details & troubleshooting: SETUP.md\n\n\n\n~10 min incl. helping people. uv run agent starts OpenCode 2 from the example/ folder with the keys from .env and –standalone (OpenCode 2 otherwise talks to a shared background service that knows nothing about the project’s keys). check_setup.py tests both models incl. tool calling for less than one cent. get_data.py downloads the survey (pinned commit + checksum), 01_prepare.py is the ready-made step 1 (districts, masking) – both must run once before step 3, because step 3 reads data/interim/01_prepared.csv."
+    "text": "Setup – three steps\n\n\n\n\nterminal\n\n# 1 · install (ideally before the workshop)\ncurl -LsSf https://astral.sh/uv/install.sh | sh\ncurl -fsSL https://opencode.ai/v2/install | bash\n\n# 2 · code + key\ngit clone https://github.com/CorrelAid/\\\ncorrelcon-2026-agentic-coding-workshop\ncd correlcon-2026-agentic-coding-workshop/example\ncp .env.example .env\n# → paste the key after IONOS_API_KEY=\n\n# 3 · check, get the data, start\nuv sync\nuv run python scripts/check_setup.py\nuv run python scripts/get_data.py\nuv run python scripts/01_prepare.py\nuv run agent\n\n\n\nStart with uv run agent – not plain opencode. Plain opencode doesn’t read .env → 401.\n\n\nFirst test (prompts/01_warmup.md): “Write a function in src/project/text.py that masks email addresses and phone numbers, add tests and run them.”≈ 45 s · ≈ €0.02\n\n\nWindows: use WSL. Details & troubleshooting: SETUP.md\n\n\n\n~10 min incl. helping people. uv run agent starts OpenCode 2 from the example/ folder with the keys from .env and –standalone (OpenCode 2 otherwise talks to a shared background service that knows nothing about the project’s keys). check_setup.py tests both models incl. tool calling for less than one cent. get_data.py downloads the survey (pinned commit + checksum), 01_prepare.py is the ready-made step 1 (districts, masking) – both must run once before step 3, because step 3 reads data/interim/01_prepared.csv."
   },
   {
     "objectID": "workshop.html#five-layers-of-control",
@@ -60,7 +60,7 @@
     "href": "workshop.html#the-pipeline",
     "title": "Coding Agents: Intro Workshop",
     "section": "The pipeline",
-    "text": "The pipeline\n\n\n~1.5 min. Each step reads the previous step’s file and writes its own – steps can be re-run independently. Contracts in docs/pipeline.md."
+    "text": "The pipeline\n\n\n~1.5 min. Order today: setup (which already runs get_data and step 1) → warm-up (text.py, tests the agent) → 3 → 4 → 5 → step 2 only if time is left. The warm-up is not part of the data pipeline. Each step reads the previous step’s file and writes its own – steps can be re-run independently. Without step 2, steps 3–5 use the district check from step 1 as a spam filter. Contracts in docs/pipeline.md."
   },
   {
     "objectID": "workshop.html#one-step-start-to-finish",
