@@ -248,15 +248,15 @@ Run `uv run pytest -q` (checks that everything imports), then tell me the comman
 ~2 min. Show step 3 live once, then everyone works. The prompts are deliberately specific: input, output, rules, and how to check – that's what a good task description looks like.
 :::
 
-## Hands-on: steps 2 – 5
+## Hands-on: steps 3 – 5 (+ 2 as bonus)
 
 ::: {.bigtable}
 | Step | Then run | Try this – and what you'll learn |
 |---|---|---|
-| **2 · Spam** *(optional)* | `scripts/02_spam.py --limit 100` | Ask “show me 5 raw rows” – the hook blocks it |
-| **3 · Topics** | `scripts/03_topics.py` | Read the categories together – edit `categories_v1.json` by hand |
+| **3 · Topics** | `scripts/03_topics.py` | Read the categories together – edit `categories_v1.json` by hand. Ask “show me 5 raw rows” – the hook blocks it |
 | **4 · Classify** | `scripts/04_classify.py --limit 100` | Batches of 20, validation, caching – shared rate limits |
 | **5 · Report** | `scripts/05_report.py` | Open `outputs/report.html` – when are tests worth it in a pipeline? |
+| *2 · Spam (bonus)* | `scripts/02_spam.py --limit 100` | Time left? Let the LLM flag spam – how many does it find, do the reasons make sense? |
 
 : {tbl-colwidths="[20,36,44]"}
 :::
@@ -264,7 +264,7 @@ Run `uv run pytest -q` (checks that everything imports), then tell me the comman
 [Run everything with `uv run python …` inside `example/`. **Stuck?** Copy the finished step from the branch `demo-solution` – see `prompts/README.md`.]{.small}
 
 ::: notes
-~30 min hands-on, ~8 min per step. Nobody needs to finish all four – step 3 alone is a good result. Skipped step 2? Steps 3–5 use the district check from step 1 as a spam filter.
+~30 min hands-on, ~10 min per step. Start with step 3 – step 2 is a bonus at the end. Without step 2, steps 3–5 use the district check from step 1 as a spam filter. Nobody needs to finish everything – step 3 alone is a good result.
 :::
 
 ## What does it cost?

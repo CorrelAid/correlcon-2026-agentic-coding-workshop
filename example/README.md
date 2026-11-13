@@ -12,7 +12,7 @@ uv run python scripts/01_prepare.py
 uv run agent
 ```
 
-Workshop exercises: [`docs/workshop-flow.md`](docs/workshop-flow.md).
+Workshop exercises: [`prompts/README.md`](prompts/README.md) · slides: `../agentic-coding-talk/workshop.qmd`.
 
 ## Data
 

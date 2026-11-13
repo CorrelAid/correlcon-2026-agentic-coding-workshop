@@ -82,7 +82,6 @@ Run commands from `example/` (your working directory) – no `cd … &&` prefix 
 - `src/project/` – reusable code (functions with docstrings and type hints); absolute imports
   (`from project.llm import chat`, `from project import paths`)
 - `scripts/` – executable entry points
-- `notebooks/` – exploration; logic that stays moves to `src/`
 - `tests/` – pytest, only for tricky pure logic (parsing, masking, sampling) – this is a data
   pipeline, not a product
 

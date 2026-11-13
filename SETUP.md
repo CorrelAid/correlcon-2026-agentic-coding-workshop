@@ -20,7 +20,7 @@ Background (provider comparison, costs, load test, cost control):
 | **Analysis model** – spam check, categories, classification (called from project code) | `openai/gpt-oss-120b` | IONOS, Germany | fast, clean JSON answers; fractions of a cent per call |
 
 Both: open-weight models, EU data centres, no training on your data, pay per token, no GPU
-needed. Benchmark: [`benchmark/RESULTS.md`](benchmark/RESULTS.md).
+needed.
 
 ---
 

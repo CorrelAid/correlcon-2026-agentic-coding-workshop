@@ -1,6 +1,8 @@
 # Workshop prompts – copy, paste, run
 
 Start OpenCode **inside `example/`**: `uv run agent`.
+
+**Start with step 3** – step 2 (spam) is a bonus if time is left.
 Then, step by step: paste the prompt, watch the agent fill the stub in `src/project/`,
 run the command it tells you, look at the result.
 
