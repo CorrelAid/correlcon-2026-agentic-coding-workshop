@@ -360,7 +360,7 @@ Michael Aydinbas &amp; Benjamin Fries · CorrelAid
 <h2>Our setup: two models, two jobs, one key</h2>
 
 <img data-src="img/workshop-setup.svg" class="full r-stretch"><aside class="notes">
-<p>~2 min. - Two models, two jobs: the coding agent (Qwen3-Coder-Next) writes code; the code the agent writes calls a second model (gpt-oss-120b) for the actual analysis. Both on IONOS: one provider, one key, German data centres, no training on the data. - The agent never sees personal data: raw and interim data are blocked by policy and hooks; it writes code that processes the data and prints counts. You run the pipeline scripts – they call a paid API on real data. - Why IONOS and not Scaleway/GLM? Scaleway limits tokens per minute per organisation; 20 people with an agent need more. IONOS limits requests (5/s per model) instead. Details: example/docs/infrastructure.md.</p>
+<p>~2 min. - Two models, two jobs: the coding agent (Qwen3-Coder-Next) writes code; the code the agent writes calls a second model (gpt-oss-120b) for the actual analysis. Both on IONOS: one provider, one key, German data centres, no training on the data. - The agent never sees personal data: raw and interim data are blocked by policy and hooks; it writes code that processes the data and prints counts. You run the pipeline scripts – they call a paid API on real data. - Why IONOS and not Scaleway? Measured on 13 Nov: Scaleway allows 200k tokens/min per model on our account – 4 parallel agents already got rate-limited. IONOS (5 requests/s per model) ran 20 simulated agents with zero errors. Details: example/docs/infrastructure.md.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -541,7 +541,7 @@ Michael Aydinbas &amp; Benjamin Fries · CorrelAid
 </div>
 <div class="card accent">
 <p><span class="ct">2 · Let it work</span></p>
-<p>The agent fills the stub in <code>src/project/</code>, runs tests &amp; ruff, and tells you the command to run.</p>
+<p>The agent fills the stub in <code>src/project/</code>, runs the smoke test &amp; ruff, and tells you the command to run.</p>
 </div>
 <div class="card accent">
 <p><span class="ct">3 · Run it &amp; look</span></p>
@@ -557,7 +557,7 @@ Michael Aydinbas &amp; Benjamin Fries · CorrelAid
 - Ask for at most 10 neutral categories, in German, each with a description.
 - Validate with pydantic, save data/processed/categories_v1.json.
 - End the script with sanity checks on its own output. No tests that mock the LLM.
-Then tell me the command to run the step.</code></pre>
+Run `uv run pytest -q` (checks that everything imports), then tell me the command.</code></pre>
 </div>
 <aside class="notes">
 <p>~2 min. Show step 3 live once, then everyone works. The prompts are deliberately specific: input, output, rules, and how to check – that’s what a good task description looks like.</p>
@@ -573,8 +573,8 @@ Then tell me the command to run the step.</code></pre>
           display:block!important;
       }</style></aside>
 </section>
-<section id="hands-on-steps-2-5" class="slide level2">
-<h2>Hands-on: steps 2 – 5</h2>
+<section id="hands-on-steps-3-5-2-as-bonus" class="slide level2">
+<h2>Hands-on: steps 3 – 5 (+ 2 as bonus)</h2>
 <div class="bigtable">
 <table class="caption-top">
 <colgroup>
@@ -591,31 +591,31 @@ Then tell me the command to run the step.</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>2 · Spam</strong> <em>(optional)</em></td>
-<td><code>scripts/02_spam.py --limit 100</code></td>
-<td>Ask “show me 5 raw rows” – the hook blocks it</td>
-</tr>
-<tr class="even">
 <td><strong>3 · Topics</strong></td>
 <td><code>scripts/03_topics.py</code></td>
-<td>Read the categories together – edit <code>categories_v1.json</code> by hand</td>
+<td>Read the categories together – edit <code>categories_v1.json</code> by hand. Ask “show me 5 raw rows” – the hook blocks it</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><strong>4 · Classify</strong></td>
 <td><code>scripts/04_classify.py --limit 100</code></td>
 <td>Batches of 20, validation, caching – shared rate limits</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><strong>5 · Report</strong></td>
 <td><code>scripts/05_report.py</code></td>
 <td>Open <code>outputs/report.html</code> – when are tests worth it in a pipeline?</td>
+</tr>
+<tr class="even">
+<td><em>2 · Spam (bonus)</em></td>
+<td><code>scripts/02_spam.py --limit 100</code></td>
+<td>Time left? Let the LLM flag spam – how many does it find, do the reasons make sense?</td>
 </tr>
 </tbody>
 </table>
 </div>
 <p><span class="small">Run everything with <code>uv run python …</code> inside <code>example/</code>. <strong>Stuck?</strong> Copy the finished step from the branch <code>demo-solution</code> – see <code>prompts/README.md</code>.</span></p>
 <aside class="notes">
-<p>~30 min hands-on, ~8 min per step. Nobody needs to finish all four – step 3 alone is a good result. Skipped step 2? Steps 3–5 use the district check from step 1 as a spam filter.</p>
+<p>~30 min hands-on, ~10 min per step. Start with step 3 – step 2 is a bonus at the end. Without step 2, steps 3–5 use the district check from step 1 as a spam filter. Nobody needs to finish everything – step 3 alone is a good result.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -641,7 +641,7 @@ Then tell me the command to run the step.</code></pre>
 </div>
 <div class="card good">
 <p><span class="stat inline">~€40</span></p>
-<p><span class="stat-label">for 20 people today (typical) · the analysis model adds only cents</span></p>
+<p><span class="stat-label">upper bound for 20 people today · clean runs ~€10 · analysis model: cents</span></p>
 </div>
 </div>
 <p><br></p>
@@ -681,8 +681,8 @@ Then tell me the command to run the step.</code></pre>
 <p>Read the diff before you commit. You own what you commit – not the agent.</p>
 </div>
 <div class="card accent">
-<p><span class="ct">“Blocked by policy”?</span></p>
-<p>Working as intended. Ask the agent for another way – or ask us.</p>
+<p><span class="ct">Blocked or stuck?</span></p>
+<p>“Blocked by policy” is working as intended. Agent looping? <strong>Esc</strong>, fresh session – or take the step from <code>demo-solution</code>.</p>
 </div>
 </div>
 <aside class="notes">
